@@ -1,0 +1,45 @@
+{
+  "name": "griddle-render",
+  "version": "0.0.0",
+  "description": "The rendered component code used in the griddle-react grid. ",
+  "main": "index.js",
+  "scripts": {
+    "test": "karma start --browsers PhantomJS",
+    "start": "node server.js",
+    "test-debug": "karma start --browsers Chrome",
+    "lint": "./node_modules/.bin/eslint js"
+  },
+  "author": "Ryan Lanciaux && Joel Lanciaux",
+  "license": "MIT",
+  "devDependencies": {
+    "babel": "~4.7.16",
+    "babel-core": "~4.7.16",
+    "babel-eslint": "^3.1.1",
+    "babel-loader": "~4.2.0",
+    "coffee-script": "^1.9.2",
+    "eslint": "^0.20.0",
+    "eslint-plugin-react": "^2.2.0",
+    "jasmine-core": "^2.2.0",
+    "jsx-loader": "~0.12.2",
+    "karma": "^0.12.31",
+    "karma-babel-preprocessor": "^5.0.1",
+    "karma-chrome-launcher": "^0.1.8",
+    "karma-jasmine": "^0.3.5",
+    "karma-phantomjs-launcher": "^0.1.4",
+    "karma-webpack": "^1.5.0",
+    "phantomjs": "^1.9.16",
+    "phantomjs-polyfill": "0.0.1",
+    "react-draggable": "^0.6.0",
+    "react-hot-loader": "~1.2.3",
+    "rewire": "^2.3.1",
+    "rewire-webpack": "^1.0.0",
+    "webpack": "~1.7.3",
+    "webpack-dev-server": "~1.7.0"
+  },
+  "dependencies": {
+    "react": "~0.13.1",
+    "flux": "~2.0.1",
+    "eventemitter3": "~0.1.6",
+    "object-assign": "~2.0.0"
+  }
+}
