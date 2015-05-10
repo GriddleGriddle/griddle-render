@@ -3,6 +3,11 @@
 import React from 'react';
 import Flux from 'flux';
 import DefaultGridWrapper from './gridWrapper';
+import DefaultGridHeader from './gridHeader';
+import DefaultGridContent from './gridTable';
+import DefaultGridItem from './gridRow';
+import DefaultGridProperty from './gridColumn';
+import DefaultGridFooter from './gridFooter';
 
 class Griddle extends React.Component {
   constructor(props){
@@ -35,26 +40,52 @@ class Griddle extends React.Component {
     }];
     if(data.length === 0) { return <h1>NOTHING!</h1>}
 
-    var rows =
-      data.map(item => (<tr>
-            {Object.keys(item).map(key => 
-              (<td>{item[key]}</td>)
-            )}
-          </tr>)
-      );
-
     return (
       <this.props.gridWrapper>
-        <table>
-          {rows}
-        </table>
-      </this.props.gridWrapper>);
+        <this.props.gridHeader/>
+          <this.props.gridContent>
+            {data.map(item => (
+              <this.props.gridItem>
+                {Object.keys(item).map(key => (
+                  <this.props.gridProperty>{item[key]}</this.props.gridProperty>
+                  )
+                )}
+              </this.props.gridItem>)
+            )}
+          </this.props.gridContent>
+        <this.props.gridFooter />
+      </this.props.gridWrapper>
+    );
 
+    /*
+    return (
+      <this.props.gridWrapper>
+        <this.props.gridHeader/>
+        <this.props.gridContent>
+          {data.map(item => (
+            <this.props.gridItem />
+              {Object.keys(item).map(key => (
+                <this.props.gridProperty>{item[key]}</this.props.gridProperty>
+                )
+              )}
+            </this.props.gridItem>)
+          )}
+        </this.props.gridContent>
+        <this.props.gridFooter />
+      </this.props.gridWrapper>
+    );
+    */
   }
 }
-// Configure the default props.
+
+// Configure the default components that will be used for each component.
 Griddle.defaultProps = {
-  gridWrapper: DefaultGridWrapper
+  gridWrapper: DefaultGridWrapper,
+  gridHeader: DefaultGridHeader,
+  gridContent: DefaultGridContent,
+  gridItem: DefaultGridItem,
+  gridProperty: DefaultGridProperty,
+  gridFooter: DefaultGridFooter
 };
 
 export default Griddle;

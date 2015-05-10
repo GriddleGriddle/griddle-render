@@ -2,18 +2,16 @@
 
 import React from 'react';
 
-class GridTable extends React.Component {
+class GridColumn extends React.Component {
   constructor(props){
     super(props);
   }
 
   render() {
     return (
-      <table>
-        {this.props.children}
-      </table>
+      <td>{this.props.children}</td>
     );
   }
 }
 
-export default GridTable;
+export default GridColumn;

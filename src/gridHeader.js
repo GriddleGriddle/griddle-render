@@ -2,18 +2,16 @@
 
 import React from 'react';
 
-class GridTable extends React.Component {
+class GridHeader extends React.Component {
   constructor(props){
     super(props);
   }
 
   render() {
     return (
-      <table>
-        {this.props.children}
-      </table>
+      <div>This is a header</div>
     );
   }
 }
 
-export default GridTable;
+export default GridHeader;
