@@ -47,7 +47,7 @@ class Griddle extends React.Component {
             {data.map(item => (
               <this.props.gridItem>
                 {Object.keys(item).map(key => (
-                  <this.props.gridProperty>{item[key]}</this.props.gridProperty>
+                  <this.props.gridProperty value={item[key]} />
                   )
                 )}
               </this.props.gridItem>)
@@ -56,25 +56,6 @@ class Griddle extends React.Component {
         <this.props.gridFooter />
       </this.props.gridWrapper>
     );
-
-    /*
-    return (
-      <this.props.gridWrapper>
-        <this.props.gridHeader/>
-        <this.props.gridContent>
-          {data.map(item => (
-            <this.props.gridItem />
-              {Object.keys(item).map(key => (
-                <this.props.gridProperty>{item[key]}</this.props.gridProperty>
-                )
-              )}
-            </this.props.gridItem>)
-          )}
-        </this.props.gridContent>
-        <this.props.gridFooter />
-      </this.props.gridWrapper>
-    );
-    */
   }
 }
 

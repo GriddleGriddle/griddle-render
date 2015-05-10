@@ -9,7 +9,7 @@ class GridColumn extends React.Component {
 
   render() {
     return (
-      <td>{this.props.children}</td>
+      <td>{this.props.value}</td>
     );
   }
 }
