@@ -2,7 +2,7 @@
 
 import React from 'react';
 
-class GridTableHeader extends React.Component {
+class GridTableBody extends React.Component {
   constructor(props){
     super(props);
 
@@ -14,19 +14,19 @@ class GridTableHeader extends React.Component {
 
   render() {
     return (
-        <thead>
-          <tr>
-            {this.state.columns.map(column => (
-              <th>{column}</th>)
-            )}
-          </tr>
-        </thead>
+        <tbody>
+          {this.props.data.map(item => (
+            <this.props.register.gridItem item={item} register={this.props.register}/>
+            )
+          )}
+        </tbody>
     );
   }
 }
 // Configure the default props.
-GridTableHeader.defaultProps = {
+GridTableBody.defaultProps = {
+  data: null,
   register: null
 };
 
-export default GridTableHeader;
+export default GridTableBody;

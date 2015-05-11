@@ -1,7 +1,6 @@
 'use strict';
 
 import React from 'react';
-import DefaultTableHeader from './GridTableHeader';
 
 class GridTable extends React.Component {
   constructor(props){
@@ -9,19 +8,24 @@ class GridTable extends React.Component {
   }
 
   render() {
+
     return (
       <table>
-        <this.props.tableHeader />
+        <this.props.register.gridContentHeader />
         <tbody>
-          {this.props.children}
+          {this.props.data.map(item => (
+            <this.props.register.gridItem item={item} register={this.props.register}/>
+            )
+          )}
         </tbody>
       </table>
     );
   }
 }
-// Configure the default components.
+// Configure the default props.
 GridTable.defaultProps = {
-  tableHeader: DefaultTableHeader
+  data: null,
+  register: null
 };
 
 export default GridTable;

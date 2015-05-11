@@ -2,12 +2,7 @@
 
 import React from 'react';
 import Flux from 'flux';
-import DefaultGridWrapper from './gridWrapper';
-import DefaultGridHeader from './gridHeader';
-import DefaultGridContent from './gridTable';
-import DefaultGridItem from './gridRow';
-import DefaultGridProperty from './gridColumn';
-import DefaultGridFooter from './gridFooter';
+import ComponentRegister from './componentRegister';
 
 class Griddle extends React.Component {
   constructor(props){
@@ -15,7 +10,9 @@ class Griddle extends React.Component {
 
     this.dispatcher = new Flux.Dispatcher();
 
-    this.state = {};
+    this.state = {
+      register: new ComponentRegister(this.props.componentOverrides)
+    };
     
     // this.dataStore.addChangeListener(this.dataChange.bind(this));
   }
@@ -33,40 +30,48 @@ class Griddle extends React.Component {
   render() {
     const data = [{
       id: '1',
-      name: 'one'
+      name: 'one',
+      children: [{
+        id: '11',
+        name: 'eleven'
+      },{
+        id: '12',
+        name: 'twelve'
+      },{
+        id: '13',
+        name: 'thirteen'
+      }]
     }, {
       id: '2',
-      name: 'two'
+      name: 'two',
+      children: [{
+          id: '11',
+          name: 'eleven'
+        },{
+          id: '12',
+          name: 'twelve'
+        },{
+          id: '13',
+          name: 'thirteen'
+        }]
+    }, {
+      id: '3',
+      name: 'three',
     }];
     if(data.length === 0) { return <h1>NOTHING!</h1>}
 
     return (
-      <this.props.gridWrapper>
-        <this.props.gridHeader/>
-          <this.props.gridContent>
-            {data.map(item => (
-              <this.props.gridItem>
-                {Object.keys(item).map(key => (
-                  <this.props.gridProperty value={item[key]} />
-                  )
-                )}
-              </this.props.gridItem>)
-            )}
-          </this.props.gridContent>
-        <this.props.gridFooter />
-      </this.props.gridWrapper>
+      <this.state.register.gridWrapper register={this.state.register}>
+        <this.state.register.gridHeader register={this.state.register}/>
+        <this.state.register.gridContent data={data} register={this.state.register} />
+        <this.state.register.gridFooter />
+      </this.state.register.gridWrapper>
     );
   }
 }
-
-// Configure the default components that will be used for each component.
+// Configure the default props.
 Griddle.defaultProps = {
-  gridWrapper: DefaultGridWrapper,
-  gridHeader: DefaultGridHeader,
-  gridContent: DefaultGridContent,
-  gridItem: DefaultGridItem,
-  gridProperty: DefaultGridProperty,
-  gridFooter: DefaultGridFooter
+  componentOverrides: {}
 };
 
 export default Griddle;

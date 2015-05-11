@@ -13,5 +13,9 @@ class GridHeader extends React.Component {
     );
   }
 }
+// Configure the default props.
+GridHeader.defaultProps = {
+  register: null
+};
 
 export default GridHeader;

@@ -13,5 +13,10 @@ class GridFooter extends React.Component {
     );
   }
 }
+// Configure the default props.
+GridFooter.defaultProps = {
+  register: null
+};
+
 
 export default GridFooter;

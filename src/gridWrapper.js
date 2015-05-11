@@ -15,5 +15,9 @@ class GridWrapper extends React.Component {
     );
   }
 }
+// Configure the default props.
+GridWrapper.defaultProps = {
+  register: null
+};
 
 export default GridWrapper;

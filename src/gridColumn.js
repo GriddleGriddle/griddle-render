@@ -13,5 +13,9 @@ class GridColumn extends React.Component {
     );
   }
 }
+// Configure the default props.
+GridColumn.defaultProps = {
+  register: null
+};
 
 export default GridColumn;
