@@ -16,17 +16,21 @@ class GridTableBody extends React.Component {
     return (
         <tbody>
           {this.props.data.map(item => (
-            <this.props.register.gridItem item={item} register={this.props.register}/>
+            <this.context.register.gridItem item={item} register={this.props.register}/>
             )
           )}
         </tbody>
     );
   }
 }
+// Configure the context types.
+GridTableBody.contextTypes = {
+  register: React.PropTypes.object
+};
+
 // Configure the default props.
 GridTableBody.defaultProps = {
-  data: null,
-  register: null
+  data: null
 };
 
 export default GridTableBody;

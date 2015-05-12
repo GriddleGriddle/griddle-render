@@ -5,16 +5,22 @@ import Flux from 'flux';
 import ComponentRegister from './componentRegister';
 
 class Griddle extends React.Component {
-  constructor(props){
-    super(props);
+  constructor(props, context){
+    super(props, context);
 
     this.dispatcher = new Flux.Dispatcher();
-
     this.state = {
+    // Build a component register to allow for reasonable overrides
       register: new ComponentRegister(this.props.componentOverrides)
     };
     
     // this.dataStore.addChangeListener(this.dataChange.bind(this));
+  }
+
+  getChildContext() {
+    return {
+      register: this.state.register
+    };
   }
 
   componentDidMount() {
@@ -61,14 +67,18 @@ class Griddle extends React.Component {
     if(data.length === 0) { return <h1>NOTHING!</h1>}
 
     return (
-      <this.state.register.gridWrapper register={this.state.register}>
-        <this.state.register.gridHeader register={this.state.register}/>
-        <this.state.register.gridContent data={data} register={this.state.register} />
-        <this.state.register.gridFooter />
+      <this.state.register.gridWrapper>
+        <this.state.register.gridHeader/>
+        <this.state.register.gridContent data={data}/>
+        <this.state.register.gridFooter/>
       </this.state.register.gridWrapper>
     );
   }
 }
+// Configure the child context types.
+Griddle.childContextTypes = {
+  register: React.PropTypes.object
+};
 // Configure the default props.
 Griddle.defaultProps = {
   componentOverrides: {}

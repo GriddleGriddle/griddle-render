@@ -14,7 +14,7 @@ class GridRow extends React.Component {
     return (
       <tr>
         {nonChildrenValues.map(value => (
-            <this.props.register.gridProperty value={value} />
+            <this.context.register.gridProperty value={value} />
           )
         )}
         {childrenContent}
@@ -29,15 +29,19 @@ class GridRow extends React.Component {
   getItemChildrenContent(nonChildrenValues) {
     let childProperty = 'children'; // TODO: Load this from somewhere reasonable.
 
-    return (!!this.props.item[childProperty]) ? (
+    return (this.props.item[childProperty]) ? (
           <tr>
             <td colSpan={nonChildrenValues.length}>
-              <this.props.register.gridContent data={this.props.item[childProperty]} register={this.props.register} />
+              <this.context.register.gridContent data={this.props.item[childProperty]} register={this.props.register} />
             </td>
           </tr>
         ) : null;
   }
 }
+// Configure the context types.
+GridRow.contextTypes = {
+  register: React.PropTypes.object
+};
 // Configure the default props.
 GridRow.defaultProps = {
   item: null,

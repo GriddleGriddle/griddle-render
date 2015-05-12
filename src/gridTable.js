@@ -3,18 +3,18 @@
 import React from 'react';
 
 class GridTable extends React.Component {
-  constructor(props){
-    super(props);
+  constructor(props, context){
+    super(props, context);
   }
 
   render() {
 
     return (
       <table>
-        <this.props.register.gridContentHeader />
+        <this.context.register.gridContentHeader />
         <tbody>
           {this.props.data.map(item => (
-            <this.props.register.gridItem item={item} register={this.props.register}/>
+            <this.context.register.gridItem item={item} register={this.props.register}/>
             )
           )}
         </tbody>
@@ -22,10 +22,13 @@ class GridTable extends React.Component {
     );
   }
 }
+// Configure the context types.
+GridTable.contextTypes = {
+  register: React.PropTypes.object
+};
 // Configure the default props.
 GridTable.defaultProps = {
-  data: null,
-  register: null
+  data: null
 };
 
 export default GridTable;
