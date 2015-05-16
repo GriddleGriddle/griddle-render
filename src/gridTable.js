@@ -8,7 +8,6 @@ class GridTable extends React.Component {
   }
 
   render() {
-
     return (
       <table>
         <this.context.register.gridContentHeader />

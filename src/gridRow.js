@@ -8,7 +8,8 @@ class GridRow extends React.Component {
   }
 
   render() {
-    let columns = Object.keys(this.props.item);
+    debugger;
+    let columns = Object.keys(this.props.item.toJSON());
     let nonChildrenValues = this.getNonChildrenValues(columns);
     let childrenContent = this.getItemChildrenContent(nonChildrenValues);
     return (
@@ -23,16 +24,16 @@ class GridRow extends React.Component {
   }
 
   getNonChildrenValues(columns) {
-    return columns.map(column => this.props.item[column]).filter(value => typeof (value) !== 'object');
+    return columns.map(column => this.props.item.get(column)).filter(value => typeof (value) !== 'object');
   }
 
   getItemChildrenContent(nonChildrenValues) {
     let childProperty = 'children'; // TODO: Load this from somewhere reasonable.
 
-    return (this.props.item[childProperty]) ? (
+    return (this.props.item.get(childProperty)) ? (
           <tr>
             <td colSpan={nonChildrenValues.length}>
-              <this.context.register.gridContent data={this.props.item[childProperty]} register={this.props.register} />
+              <this.context.register.gridContent data={this.props.item.get(childProperty)} register={this.props.register} />
             </td>
           </tr>
         ) : null;

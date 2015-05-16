@@ -5,7 +5,7 @@ import React from 'react';
 class GridTableBody extends React.Component {
   constructor(props){
     super(props);
-
+debugger;
     // We're going to have to pretend until we get this all hooked up.
     let pretendColumnHeadersFromStore = ['id', 'name'];
 
@@ -13,6 +13,7 @@ class GridTableBody extends React.Component {
   }
 
   render() {
+    debugger;
     return (
         <tbody>
           {this.props.data.map(item => (
