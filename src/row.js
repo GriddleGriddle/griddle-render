@@ -6,6 +6,9 @@ import Column from './column';
 class Row extends React.Component {
   constructor(props, context) {
     super(props, context);
+
+    this._handleHover = this._handleHover.bind(this);
+    this._handleSelect = this._handleSelect.bind(this);
   }
 
   render() {
@@ -15,11 +18,24 @@ class Row extends React.Component {
     }
 
     return (
-      <tr>
+      <tr onMouseOver={this._handleHover} onClick={this._handleSelect}>
         {columns}
       </tr>
     );
   }
+
+  _handleHover(e) {
+    this.context.rowHover(this.props.rowData);
+  }
+
+  _handleSelect(e) {
+    this.context.rowSelect(this.props.rowData);
+  }
+}
+
+Row.contextTypes = {
+  rowHover: React.PropTypes.func,
+  rowSelect: React.PropTypes.func
 }
 
 export default Row;

@@ -22,7 +22,11 @@ class Griddle extends React.Component {
       getNextPage: this._nextPage,
       getPreviousPage: this._previousPage,
       getPage: this._getPage,
-			setFilter: this._filter
+			setFilter: this._filter,
+			rowHover: this._rowHover,
+			rowSelect: this._rowSelect,
+			columnHover: this._columnHover,
+			columnClick: this._columnClick
     };
   }
 
@@ -55,15 +59,15 @@ class Griddle extends React.Component {
 	}
 
 	_rowHover(rowId) {
-		debugger;
+		//console.log(rowId);
 	}
 
 	_rowSelect(rowId) {
-		debugger;
+		//debugger;
 	}
 
 	_columnHover(columnId, rowId) {
-		debugger;
+		console.log(columnId);
 	}
 
 	_columnClick(columnId, rowId) {
