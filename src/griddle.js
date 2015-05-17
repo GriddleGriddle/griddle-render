@@ -45,15 +45,19 @@ class Griddle extends React.Component {
   }
 
   _nextPage() {
+      !!this.props.events && this.props.events.getNextPage();
   }
 
   _previousPage() {
+      !!this.props.events && this.props.events.getPreviousPage();
   }
 
   _getPage(pageNumber) {
+    !!this.props.events && this.props.events.getPage(pageNumber);
   }
 
 	_filter(query) {
+    !!this.props.events && this.props.events.setFilter(query);
 	}
 
 	_rowHover(rowData) {
@@ -69,11 +73,9 @@ class Griddle extends React.Component {
 	}
 
   _columnHeadingClick(columnId) {
-    debugger;
   }
 
   _columnHeadingHover(columnId) {
-    debugger;
   }
 }
 // Configure the child context types.
@@ -95,5 +97,10 @@ Griddle.defaultProps = {
   resultsPerPage: 10,
   maxPage: 0
 };
+
+Griddle.propTypes = {
+  events: React.PropTypes.object,
+  data: React.PropTypes.object
+}
 
 export default Griddle;
