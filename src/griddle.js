@@ -26,7 +26,9 @@ class Griddle extends React.Component {
 			rowHover: this._rowHover,
 			rowSelect: this._rowSelect,
 			columnHover: this._columnHover,
-			columnClick: this._columnClick
+			columnClick: this._columnClick,
+      headingHover: this._columnHeadingHover,
+      headingClick: this._columnHeadingClick,
     };
   }
 
@@ -43,36 +45,36 @@ class Griddle extends React.Component {
   }
 
   _nextPage() {
-    debugger;
   }
 
   _previousPage() {
-    debugger;
   }
 
   _getPage(pageNumber) {
-    debugger;
   }
 
 	_filter(query) {
-		debugger;
 	}
 
-	_rowHover(rowId) {
-		//console.log(rowId);
+	_rowHover(rowData) {
 	}
 
-	_rowSelect(rowId) {
-		//debugger;
+	_rowSelect(rowData) {
 	}
 
-	_columnHover(columnId, rowId) {
-		console.log(columnId);
+	_columnHover(columnId, columnValue, rowIndex, rowData) {
 	}
 
-	_columnClick(columnId, rowId) {
-		debugger;
+	_columnClick(columnId, columnValue, rowIndex, rowData) {
 	}
+
+  _columnHeadingClick(columnId) {
+    debugger;
+  }
+
+  _columnHeadingHover(columnId) {
+    debugger;
+  }
 }
 // Configure the child context types.
 Griddle.childContextTypes = {
@@ -83,11 +85,14 @@ Griddle.childContextTypes = {
 	columnHover: React.PropTypes.func,
 	columnClick: React.PropTypes.func,
 	rowHover: React.PropTypes.func,
-	rowSelect: React.PropTypes.func
+	rowSelect: React.PropTypes.func,
+  headingHover: React.PropTypes.func,
+  headingClick: React.PropTypes.func
 };
 // Configure the default props.
 Griddle.defaultProps = {
   currentPage: 0,
+  resultsPerPage: 10,
   maxPage: 0
 };
 

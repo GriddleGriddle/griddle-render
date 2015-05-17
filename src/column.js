@@ -12,16 +12,16 @@ class Column extends React.Component {
 
   render() {
     return (
-      <td key={this.props.value} onClick={this._handleClick} onMouseOver={this._handleHover}>{this.props.value}</td>
+      <td key={this.props.dataKey} onClick={this._handleClick} onMouseOver={this._handleHover}>{this.props.value}</td>
     )
   }
 
   _handleClick(e) {
-    this.context.columnClick(this.props.value);
+    this.context.columnClick(this.props.dataKey, this.props.value, this.props.rowIndex, this.props.rowData);
   }
 
   _handleHover(e) {
-    this.context.columnHover(this.props.value);
+    this.context.columnHover(this.props.dataKey, this.props.value, this.props.rowIndex, this.props.rowData);
   }
 }
 

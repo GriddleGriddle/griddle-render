@@ -14,7 +14,7 @@ class Row extends React.Component {
   render() {
     let columns = [];
     for (var column in this.props.rowData) {
-      columns.push(<Column value={this.props.rowData[column]} />);
+      columns.push(<Column rowIndex={this.props.rowIndex} rowData={this.props.rowData} key={column} dataKey={column} value={this.props.rowData[column]} />);
     }
 
     return (
@@ -25,11 +25,11 @@ class Row extends React.Component {
   }
 
   _handleHover(e) {
-    this.context.rowHover(this.props.rowData);
+    this.context.rowHover(this.props.rowIndex, this.props.rowData);
   }
 
   _handleSelect(e) {
-    this.context.rowSelect(this.props.rowData);
+    this.context.rowSelect(this.props.rowIndex, this.props.rowData);
   }
 }
 
