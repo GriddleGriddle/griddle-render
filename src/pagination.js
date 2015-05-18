@@ -25,8 +25,8 @@ class Pagination extends React.Component {
     //Make this nicer
     var options = [];
 
-    for(var i = 1; i <= this.props.maxPage; i++) {
-      options.push(<option value={i} key={i}>{i}</option>)
+    for(var i = 1; i <= this.props.pageProperties.maxPage; i++) {
+      options.push(<option value={i} key={i} selected={this.props.pageProperties.currentPage === i}>{i}</option>)
     }
 
     return <select onChange={this._handleChange}>{options}</select>

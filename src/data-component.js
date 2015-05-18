@@ -13,10 +13,7 @@ function AddLocalDataStore(ComposedComponent) {
 
       this.dataStore.addChangeListener(this._dataChange.bind(this));
 
-      this.state = {};
-      this.state.data = this.dataStore.getVisibleData();
-      this.state.hasNext = false;
-      this.state.hasPrevious = false;
+      this.state = this._getStateFromStore();
     }
 
     componentDidMount() {
@@ -28,17 +25,22 @@ function AddLocalDataStore(ComposedComponent) {
     render() {
       return <ComposedComponent
           {...this.props}
-          data={this.state.data.toJSON()}
+          {...this.state}
           events={this.events}
         />;
     }
 
-    _dataChange() {
-      this.setState({
-        data: this.dataStore.getVisibleData(),
+    _getStateFromStore() {
+      return {
+        data: this.dataStore.getVisibleData().toJSON(),
         hasNext: this.dataStore.hasNext(),
-        hasPrevious: this.dataStore.hasPrevious()
-      });
+        hasPrevious: this.dataStore.hasPrevious(),
+        pageProperties: this.dataStore.getPageProperties().toJSON()
+      };
+    }
+
+    _dataChange() {
+      this.setState(this._getStateFromStore());
     }
 
   }
