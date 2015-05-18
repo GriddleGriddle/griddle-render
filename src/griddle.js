@@ -1,87 +1,107 @@
-"use strict";
+'use strict';
 
 import React from 'react';
-import Flux from 'flux';
-import ComponentRegister from './componentRegister';
+import FakeData from './fake-data';
+import Pagination from './pagination';
+import Filter from './filter';
+import Table from './table';
 
 class Griddle extends React.Component {
   constructor(props, context){
     super(props, context);
 
-    this.dispatcher = new Flux.Dispatcher();
-    this.state = {
-    // Build a component register to allow for reasonable overrides
-      register: new ComponentRegister(this.props.componentOverrides)
-    };
-    
-    // this.dataStore.addChangeListener(this.dataChange.bind(this));
+    this.state = {};
+
+    this._nextPage = this._nextPage.bind(this);
+    this._previousPage = this._previousPage.bind(this);
+    this._getPage = this._getPage.bind(this);
+    this._filter = this._filter.bind(this);
   }
 
   getChildContext() {
     return {
-      register: this.state.register
+      getNextPage: this._nextPage,
+      getPreviousPage: this._previousPage,
+      getPage: this._getPage,
+			setFilter: this._filter,
+			rowHover: this._rowHover,
+			rowSelect: this._rowSelect,
+			columnHover: this._columnHover,
+			columnClick: this._columnClick,
+      headingHover: this._columnHeadingHover,
+      headingClick: this._columnHeadingClick,
     };
   }
 
-  componentDidMount() {
-    //if (this.props.data){
-    //  this.localActions.loadData(this.props.data);
-    //}
-  }
-
-  dataChange() {
-    // this.setState({dataState: this.dataStore.getState()});
-  }
-
   render() {
-    const data = [{
-      id: '1',
-      name: 'one',
-      children: [{
-        id: '11',
-        name: 'eleven'
-      },{
-        id: '12',
-        name: 'twelve'
-      },{
-        id: '13',
-        name: 'thirteen'
-      }]
-    }, {
-      id: '2',
-      name: 'two',
-      children: [{
-          id: '11',
-          name: 'eleven'
-        },{
-          id: '12',
-          name: 'twelve'
-        },{
-          id: '13',
-          name: 'thirteen'
-        }]
-    }, {
-      id: '3',
-      name: 'three',
-    }];
-    if(data.length === 0) { return <h1>NOTHING!</h1>}
+    if(this.state.data && this.state.data.length === 0) { return <h1>NOTHING!</h1>}
 
     return (
-      <this.state.register.gridWrapper>
-        <this.state.register.gridHeader/>
-        <this.state.register.gridContent data={data}/>
-        <this.state.register.gridFooter/>
-      </this.state.register.gridWrapper>
-    );
+			<div>
+				<Filter />
+				<Table {...this.props} />
+				<Pagination {...this.props} />
+			</div>
+		);
+  }
+
+  _nextPage() {
+      !!this.props.events && this.props.events.getNextPage();
+  }
+
+  _previousPage() {
+      !!this.props.events && this.props.events.getPreviousPage();
+  }
+
+  _getPage(pageNumber) {
+    !!this.props.events && this.props.events.getPage(pageNumber);
+  }
+
+  _filter(query) {
+    !!this.props.events && this.props.events.setFilter(query);
+	}
+
+	_rowHover(rowData) {
+	}
+
+	_rowSelect(rowData) {
+	}
+
+	_columnHover(columnId, columnValue, rowIndex, rowData) {
+	}
+
+	_columnClick(columnId, columnValue, rowIndex, rowData) {
+	}
+
+  _columnHeadingClick(columnId) {
+  }
+
+  _columnHeadingHover(columnId) {
   }
 }
 // Configure the child context types.
 Griddle.childContextTypes = {
-  register: React.PropTypes.object
+  getNextPage: React.PropTypes.func,
+  getPreviousPage: React.PropTypes.func,
+  getPage: React.PropTypes.func,
+	setFilter: React.PropTypes.func,
+	columnHover: React.PropTypes.func,
+	columnClick: React.PropTypes.func,
+	rowHover: React.PropTypes.func,
+	rowSelect: React.PropTypes.func,
+  headingHover: React.PropTypes.func,
+  headingClick: React.PropTypes.func
 };
 // Configure the default props.
 Griddle.defaultProps = {
-  componentOverrides: {}
+  currentPage: 0,
+  resultsPerPage: 10,
+  maxPage: 0
 };
+
+Griddle.propTypes = {
+  events: React.PropTypes.object,
+  data: React.PropTypes.object
+}
 
 export default Griddle;

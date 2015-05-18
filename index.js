@@ -1,5 +1,8 @@
 var Griddle = require('./src/griddle');
+var FakeData = require('./src/fake-data');
 var React = require('react');
+var DataComponent = require('./src/data-component');
 
-React.render(<Griddle/>, document.getElementById('main'));
-//React.render(<Griddle />, document.getElementById('secondary'));
+let ComposedComponent = DataComponent(Griddle);
+
+React.render(<ComposedComponent data={FakeData} />, document.getElementById('main'));
