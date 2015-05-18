@@ -15,6 +15,7 @@ class Griddle extends React.Component {
     this._nextPage = this._nextPage.bind(this);
     this._previousPage = this._previousPage.bind(this);
     this._getPage = this._getPage.bind(this);
+    this._filter = this._filter.bind(this);
   }
 
   getChildContext() {
@@ -56,7 +57,7 @@ class Griddle extends React.Component {
     !!this.props.events && this.props.events.getPage(pageNumber);
   }
 
-	_filter(query) {
+  _filter(query) {
     !!this.props.events && this.props.events.setFilter(query);
 	}
 

@@ -18,7 +18,7 @@ class Pagination extends React.Component {
   }
 
   _handleChange(e) {
-    this.context.getPage(e.target.value);
+    this.context.getPage(parseInt(e.target.value));
   }
 
   _getSelect() {
@@ -26,10 +26,10 @@ class Pagination extends React.Component {
     var options = [];
 
     for(var i = 1; i <= this.props.pageProperties.maxPage; i++) {
-      options.push(<option value={i} key={i} selected={this.props.pageProperties.currentPage === i}>{i}</option>)
+      options.push(<option value={i} key={i}>{i}</option>)
     }
 
-    return <select onChange={this._handleChange}>{options}</select>
+    return <select onChange={this._handleChange} value={this.props.pageProperties.currentPage}>{options}</select>
   }
 }
 
