@@ -11,9 +11,9 @@ class Pagination extends React.Component {
 
   render() {
     return (<div className="pagination">
-      <button onClick={this.context.getPreviousPage}>Next</button>
+      {this.props.hasPrevious ? <button onClick={this.context.getPreviousPage}>Previous</button> : null }
       {this._getSelect()}
-      <button onClick={this.context.getNextPage}>Next</button>
+      {this.props.hasNext ? <button onClick={this.context.getNextPage}>Next</button> : null }
     </div>);
   }
 
