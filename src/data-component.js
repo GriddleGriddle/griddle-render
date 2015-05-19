@@ -7,6 +7,7 @@ import LocalEvents from './local-events';
 function AddLocalDataStore(ComposedComponent) {
   return class extends React.Component {
     constructor(props) {
+      super(props);
       this.dispatcher = new Flux.Dispatcher();
       this.dataStore = new DataStore(this.dispatcher, [LocalDataPlugin]);
       this.events = LocalEvents(new LocalActions(this.dispatcher));
