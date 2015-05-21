@@ -10,7 +10,8 @@ import Row from './row';
 import Table from './table';
 import TableBody from './table-body';
 import TableHeading from './table-heading';
-
+import RowDefinition from './row-definition'
+import ColumnDefinition from './row-definition'
 const defaultComponents = {
   column: Column,
   filter: Filter,
@@ -54,10 +55,16 @@ class Griddle extends React.Component {
   render() {
     if(this.state.data && this.state.data.length === 0) { return <h1>NOTHING!</h1>}
 
+    if(this.props.children) { return this.props.children; }
+
     return (
 			<div>
 				<this.components.filter />
-				<this.components.table {...this.props} />
+				<this.components.table {...this.props}>
+          <RowDefinition keyColumn="id">
+            <ColumnDefinition id="name" />
+          </RowDefinition>
+        </this.components.table>
 				<this.components.pagination {...this.props} />
 			</div>
 		);
