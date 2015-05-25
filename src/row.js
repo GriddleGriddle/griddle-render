@@ -17,7 +17,13 @@ class Row extends React.Component {
     for (var column in this.props.rowData) {
       //render the column if there are no properties, there are properties and the column is in the collection OR there are properties and no column properties.
       if(this.props.tableProperties === null || ColumnHelper.isColumnVisible(this.props.tableProperties.columnProperties, column)) {
-        columns.push(<Column rowIndex={this.props.rowIndex} rowData={this.props.rowData} key={column} dataKey={column} value={this.props.rowData[column]} />);
+        columns.push(<Column
+          rowIndex={this.props.rowIndex}
+          rowData={this.props.rowData}
+          key={column}
+          dataKey={column}
+          value={this.props.rowData[column]}
+          columnProperties={ColumnHelper.getColumnProperty(this.props.tableProperties.columnProperties, column)} />);
       }
     }
 

@@ -12,7 +12,13 @@ class Column extends React.Component {
 
   render() {
     return (
-      <td key={this.props.dataKey} onClick={this._handleClick} onMouseOver={this._handleHover}>{this.props.value}</td>
+      <td
+        key={this.props.dataKey}
+        onClick={this._handleClick}
+        onMouseOver={this._handleHover}
+        className={this.props.columnProperties ? this.props.columnProperties.cssClassName : null}>
+          {this.props.value}
+      </td>
     )
   }
 
@@ -24,6 +30,12 @@ class Column extends React.Component {
     this.context.columnHover(this.props.dataKey, this.props.value, this.props.rowIndex, this.props.rowData);
   }
 }
+
+Column.defaultProps = {
+  columnProperties: {
+    cssClassName: ''
+  }
+};
 
 Column.contextTypes = {
   columnHover: React.PropTypes.func,
