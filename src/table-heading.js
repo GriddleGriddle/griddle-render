@@ -1,6 +1,7 @@
 'use strict';
 
 import React from 'react';
+import ColumnHelper from './utils/column-helper';
 
 class TableHeadingCell extends React.Component {
   constructor(props, context) {
@@ -47,7 +48,7 @@ class TableHeading extends React.Component {
   render() {
     //todo: We will want to look up the value for events metadata instead of using the display value-- we don't have this concept defined yet, though.
     //The logic to get columns should be abstracted
-    const headings = this.props.columns.map(column => this.props.columnProperties && this.props.columnProperties.hasOwnProperty(column) ? <TableHeadingCell column={column} /> : null);
+    const headings = this.props.columns.map(column => ColumnHelper.isColumnVisible(this.props.columnProperties, column) ? <TableHeadingCell column={column} /> : null);
 
     return this.props.columns.length > 0 ? (
       <thead>
