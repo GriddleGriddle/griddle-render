@@ -17,9 +17,11 @@ class Column extends React.Component {
         onClick={this._handleClick}
         onMouseOver={this._handleHover}
         className={this.props.columnProperties ? this.props.columnProperties.cssClassName : null}>
-          {this.props.value}
+          {this.props.columnProperties.hasOwnProperty('customComponent') ?
+            <this.props.columnProperties.customComponent data={this.props.value} rowData={this.props.rowData} /> :
+            this.props.value}
       </td>
-    )
+    );
   }
 
   _handleClick(e) {

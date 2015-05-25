@@ -22,6 +22,14 @@ const defaultComponents = {
   tableHeading: TableHeading
 };
 
+class Temp extends React.Component {
+  render() {
+    return (<div>
+      <strong>{this.props.data}</strong>
+      <small>{this.props.rowData}</small>
+    </div>);
+  }
+}
 class Griddle extends React.Component {
   constructor(props, context){
     super(props, context);
@@ -63,7 +71,7 @@ class Griddle extends React.Component {
 				<this.components.table {...this.props}>
           <RowDefinition keyColumn="id">
             <ColumnDefinition id="name" displayName="Name" cssClassName="name-class" />
-            <ColumnDefinition id="state" displayName="State of Residence" cssClassName="state-class" />
+            <ColumnDefinition id="state" displayName="State of Residence" customComponent={Temp} />
           </RowDefinition>
         </this.components.table>
 				<this.components.pagination {...this.props} />
