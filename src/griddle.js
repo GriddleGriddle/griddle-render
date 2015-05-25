@@ -62,8 +62,8 @@ class Griddle extends React.Component {
 				<this.components.filter />
 				<this.components.table {...this.props}>
           <RowDefinition keyColumn="id">
-            <ColumnDefinition id="name" />
-            <ColumnDefinition id="state" hidden={true}/>
+            <ColumnDefinition id="name" displayName="Name"/>
+            <ColumnDefinition id="state" displayName="State of Residence" />
           </RowDefinition>
         </this.components.table>
 				<this.components.pagination {...this.props} />

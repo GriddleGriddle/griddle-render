@@ -12,7 +12,13 @@ class TableHeadingCell extends React.Component {
   }
 
   render() {
-    return (<th key={this.props.column} onMouseOver={this._handleHover} onClick={this._handleClick}>{this.props.column}</th>);
+    return (<th key={this.props.column} onMouseOver={this._handleHover} onClick={this._handleClick}>{this._getColumnTitle()}</th>);
+  }
+
+  _getColumnTitle() {
+    return !!this.props.columnProperties && !!this.props.columnProperties.displayName ?
+      this.props.columnProperties.displayName :
+      this.props.column;
   }
 
   _handleHover() {
@@ -48,7 +54,9 @@ class TableHeading extends React.Component {
   render() {
     //todo: We will want to look up the value for events metadata instead of using the display value-- we don't have this concept defined yet, though.
     //The logic to get columns should be abstracted
-    const headings = this.props.columns.map(column => ColumnHelper.isColumnVisible(this.props.columnProperties, column) ? <TableHeadingCell column={column} /> : null);
+    const headings = this.props.columns.map(column => ColumnHelper.isColumnVisible(this.props.columnProperties, column) ?
+      <TableHeadingCell column={column} columnProperties={ColumnHelper.getColumnProperty(this.props.columnProperties, column)} /> :
+        null);
 
     return this.props.columns.length > 0 ? (
       <thead>
