@@ -14,11 +14,12 @@ class Table extends React.Component {
 
   render() {
     //translate the definition object to props for Heading / Body
+    var tableProperties = Table.propertiesToJS(this.props.children);
     return this.props.data.length > 0 ?
       (
         <table>
-          <TableHeading columns={Object.keys(this.props.data[0])} />
-          <TableBody {...this.props} definitions={Table.propertiesToJS(this.props.children)}/>
+          <TableHeading columns={Object.keys(this.props.data[0])} columnProperties={tableProperties.columnProperties}/>
+          <TableBody {...this.props} tableProperties={tableProperties}/>
         </table>
       ) : null;
   }
@@ -32,18 +33,18 @@ class Table extends React.Component {
       };
     }
 
-    let columnProperties = [];
+    let columnProperties = {};
 
     //if an array
     if(!!row.props.children && Array.isArray(row.props.children)) {
-      row.props.children.forEach(child => columnProperties.push(child.props));
+      row.props.children.forEach(child => columnProperties[child.props.id] = child.props);
     } else if (row.props.children) {
     //if just an object
-      columnProperties.push(row.props.children.props);
+      columnProperties[row.props.children.props.id] = row.props.children.props;
     }
 
     var rowProps = Object.assign({}, row.props);
-    delete(rowProps.children);
+    delete rowProps.children;
 
     return {
       rowProperties: rowProps,
@@ -53,18 +54,15 @@ class Table extends React.Component {
 
 }
 
-
-
-
 Table.propTypes = {
   children: React.PropTypes.oneOfType([
-    React.PropTypes.instanceOf(RowDefinition),
+    React.PropTypes.instanceOf(RowDefinition)
     // React.PropTypes.arrayOf(React.PropTypes.instanceOf(ColumnDefinition))
   ])
-}
+};
 
 Table.contextTypes = {
   data: React.PropTypes.array
-}
+};
 
 export default Table;

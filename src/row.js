@@ -13,8 +13,12 @@ class Row extends React.Component {
 
   render() {
     let columns = [];
+    //render just the columns that are contained in the metdata
     for (var column in this.props.rowData) {
-      columns.push(<Column rowIndex={this.props.rowIndex} rowData={this.props.rowData} key={column} dataKey={column} value={this.props.rowData[column]} />);
+
+      if(this.props.tableProperties && this.props.tableProperties.columnProperties.hasOwnProperty(column)) {
+        columns.push(<Column rowIndex={this.props.rowIndex} rowData={this.props.rowData} key={column} dataKey={column} value={this.props.rowData[column]} />);
+      }
     }
 
     return (
