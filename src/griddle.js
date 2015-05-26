@@ -2,13 +2,30 @@
 
 import React from 'react';
 import FakeData from './fake-data';
-import Pagination from './pagination';
+
+import Column from './column';
 import Filter from './filter';
+import Pagination from './pagination';
+import Row from './row';
 import Table from './table';
+import TableBody from './table-body';
+import TableHeading from './table-heading';
+
+const defaultComponents = {
+  column: Column,
+  filter: Filter,
+  pagination: Pagination,
+  row: Row,
+  table: Table,
+  tableBody: TableBody,
+  tableHeading: TableHeading
+};
 
 class Griddle extends React.Component {
   constructor(props, context){
     super(props, context);
+
+    this.components = Object.assign({}, defaultComponents, this.props.components);
 
     this.state = {};
 
@@ -16,6 +33,7 @@ class Griddle extends React.Component {
     this._previousPage = this._previousPage.bind(this);
     this._getPage = this._getPage.bind(this);
     this._filter = this._filter.bind(this);
+
   }
 
   getChildContext() {
@@ -29,36 +47,47 @@ class Griddle extends React.Component {
 			columnHover: this._columnHover,
 			columnClick: this._columnClick,
       headingHover: this._columnHeadingHover,
-      headingClick: this._columnHeadingClick,
+      headingClick: this._columnHeadingClick
     };
   }
 
   render() {
-    if(this.state.data && this.state.data.length === 0) { return <h1>NOTHING!</h1>}
+    if(this.props.data && this.props.data.length === 0) {
+      return <h1>NOTHING!</h1>;
+    }
 
     return (
 			<div>
-				<Filter />
-				<Table {...this.props} />
-				<Pagination {...this.props} />
+				<this.components.filter />
+				<this.components.table {...this.props}>
+        </this.components.table>
+				<this.components.pagination {...this.props} />
 			</div>
 		);
   }
 
   _nextPage() {
-      !!this.props.events && this.props.events.getNextPage();
+      if(this.props.events) {
+        this.props.events.getNextPage();
+      }
   }
 
   _previousPage() {
-      !!this.props.events && this.props.events.getPreviousPage();
+      if(this.props.events) {
+        this.props.events.getPreviousPage();
+      }
   }
 
   _getPage(pageNumber) {
-    !!this.props.events && this.props.events.getPage(pageNumber);
+    if(this.props.events) {
+      this.props.events.getPage(pageNumber);
+    }
   }
 
   _filter(query) {
-    !!this.props.events && this.props.events.setFilter(query);
+    if(this.props.events) {
+      this.props.events.setFilter(query);
+    }
 	}
 
 	_rowHover(rowData) {
@@ -101,7 +130,8 @@ Griddle.defaultProps = {
 
 Griddle.propTypes = {
   events: React.PropTypes.object,
-  data: React.PropTypes.object
+  data: React.PropTypes.object,
+  components: React.PropTypes.object
 }
 
 export default Griddle;

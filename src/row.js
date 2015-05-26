@@ -2,7 +2,7 @@
 
 import React from 'react';
 import Column from './column';
-
+import {ColumnHelper} from 'griddle-core';
 class Row extends React.Component {
   constructor(props, context) {
     super(props, context);
@@ -13,8 +13,18 @@ class Row extends React.Component {
 
   render() {
     let columns = [];
+    //render just the columns that are contained in the metdata
     for (var column in this.props.rowData) {
-      columns.push(<Column rowIndex={this.props.rowIndex} rowData={this.props.rowData} key={column} dataKey={column} value={this.props.rowData[column]} />);
+      //render the column if there are no properties, there are properties and the column is in the collection OR there are properties and no column properties.
+      if(this.props.tableProperties === null || this.props.tableProperties.columnProperties.length === 0 || ColumnHelper.isColumnVisible(this.props.tableProperties.columnProperties, column)) {
+        columns.push(<Column
+          rowIndex={this.props.rowIndex}
+          rowData={this.props.rowData}
+          key={column}
+          dataKey={column}
+          value={this.props.rowData[column]}
+          columnProperties={ColumnHelper.getColumnProperty(this.props.tableProperties.columnProperties, column)} />);
+      }
     }
 
     return (

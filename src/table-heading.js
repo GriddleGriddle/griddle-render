@@ -1,6 +1,7 @@
-"use strict";
+'use strict';
 
 import React from 'react';
+import {ColumnHelper} from 'griddle-core';
 
 class TableHeadingCell extends React.Component {
   constructor(props, context) {
@@ -11,14 +12,14 @@ class TableHeadingCell extends React.Component {
   }
 
   render() {
-    return (<th key={this.props.column} onMouseOver={this._handleHover} onClick={this._handleClick}>{this.props.column}</th>);
+    return (<th key={this.props.column} onMouseOver={this._handleHover} onClick={this._handleClick}>{this.props.title}</th>);
   }
 
-  _handleHover(e) {
+  _handleHover() {
     this.context.headingHover(this.props.column);
   }
 
-  _handleClick(e) {
+  _handleClick() {
     this.context.headingClick(this.props.column);
   }
 }
@@ -26,11 +27,11 @@ class TableHeadingCell extends React.Component {
 TableHeadingCell.contextTypes = {
   headingHover: React.PropTypes.func,
   headingClick: React.PropTypes.func
-}
+};
 
 TableHeadingCell.propTypes = {
   column: React.PropTypes.string
-}
+};
 
 class TableHeading extends React.Component {
   constructor(props, context) {
@@ -39,14 +40,18 @@ class TableHeading extends React.Component {
     this.state = {};
   }
 
-  shouldComponentUpdate(nextProps, nextState) {
+  shouldComponentUpdate(nextProps) {
     //TODO: Verify that this is correct
     return this.props.columns !== nextProps.columns;
   }
 
   render() {
-    //todo: We will want to look up the value for events metadata instead of using the display value-- we don't have this concept defined yet, though.
-    const headings = this.props.columns.map(column => <TableHeadingCell column={column} />);
+    const headings = this.props.columns.map(column =>
+      <TableHeadingCell
+        column={column}
+        title={this.props.columnTitles[column] ?
+          this.props.columnTitles[column] :
+          column} />);
 
     return this.props.columns.length > 0 ? (
       <thead>
