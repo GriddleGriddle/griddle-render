@@ -39,7 +39,8 @@ function AddLocalDataStore(ComposedComponent) {
         data: this.dataStore.getVisibleData().toJSON(),
         hasNext: this.dataStore.hasNext(),
         hasPrevious: this.dataStore.hasPrevious(),
-        pageProperties: this.dataStore.getPageProperties().toJSON()
+        pageProperties: this.dataStore.getPageProperties().toJSON(),
+        columnTitles: this.dataStore.getColumnTitles()
       };
     }
 
