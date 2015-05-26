@@ -1,7 +1,10 @@
+'use strict';
+
 import React from 'react';
 import Flux from 'flux';
 import {LocalActions, LocalDataPlugin, DataStore} from 'griddle-core';
 import LocalEvents from './local-events';
+import PropertyHelper from './utils/property-helper';
 
 //heavily influenced by https://gist.github.com/sebmarkbage/ef0bf1f338a7182b6775ter)
 function AddLocalDataStore(ComposedComponent) {
@@ -19,13 +22,13 @@ function AddLocalDataStore(ComposedComponent) {
 
     componentDidMount() {
       if (this.props.data){
-        this.events.loadData(this.props.data);
+        var properties = PropertyHelper.propertiesToJS(this.props.children);
+        this.events.loadData(this.props.data, properties);
       }
     }
 
     render() {
       return <ComposedComponent
-          {...this.props}
           {...this.state}
           events={this.events}
         />;
@@ -43,8 +46,7 @@ function AddLocalDataStore(ComposedComponent) {
     _dataChange() {
       this.setState(this._getStateFromStore());
     }
-
-  }
+  };
 }
 
-export default AddLocalDataStore
+export default AddLocalDataStore;

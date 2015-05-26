@@ -14,44 +14,14 @@ class Table extends React.Component {
 
   render() {
     //translate the definition object to props for Heading / Body
-    var tableProperties = Table.propertiesToJS(this.props.children);
     return this.props.data.length > 0 ?
       (
         <table>
-          <TableHeading columns={Object.keys(this.props.data[0])} columnProperties={tableProperties.columnProperties}/>
-          <TableBody {...this.props} tableProperties={tableProperties}/>
+          <TableHeading columns={Object.keys(this.props.data[0])} />
+          <TableBody {...this.props} />
         </table>
       ) : null;
   }
-
-  static propertiesToJS(row) {
-    //if we don't have children return an empty metatdata object
-    if(!row) {
-      return {
-        rowProperties: null,
-        columnProperties: []
-      };
-    }
-
-    let columnProperties = {};
-
-    //if an array
-    if(!!row.props.children && Array.isArray(row.props.children)) {
-      row.props.children.forEach(child => columnProperties[child.props.id] = child.props);
-    } else if (row.props.children) {
-    //if just an object
-      columnProperties[row.props.children.props.id] = row.props.children.props;
-    }
-
-    var rowProps = Object.assign({}, row.props);
-    delete rowProps.children;
-
-    return {
-      rowProperties: rowProps,
-      columnProperties
-    };
-  }
-
 }
 
 Table.propTypes = {
@@ -63,6 +33,13 @@ Table.propTypes = {
 
 Table.contextTypes = {
   data: React.PropTypes.array
+};
+
+Table.defaultProps = {
+  tableProperties: {
+    rowProperties: {},
+    columnProperties: []
+  }
 };
 
 export default Table;

@@ -1,7 +1,7 @@
 'use strict';
 
 import React from 'react';
-import ColumnHelper from './utils/column-helper';
+import {ColumnHelper} from 'griddle-core';
 
 class TableHeadingCell extends React.Component {
   constructor(props, context) {

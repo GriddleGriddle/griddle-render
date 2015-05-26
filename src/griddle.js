@@ -10,8 +10,7 @@ import Row from './row';
 import Table from './table';
 import TableBody from './table-body';
 import TableHeading from './table-heading';
-import RowDefinition from './row-definition'
-import ColumnDefinition from './row-definition'
+
 const defaultComponents = {
   column: Column,
   filter: Filter,
@@ -22,14 +21,6 @@ const defaultComponents = {
   tableHeading: TableHeading
 };
 
-class Temp extends React.Component {
-  render() {
-    return (<div>
-      <strong>{this.props.data}</strong>
-      <small>{this.props.rowData}</small>
-    </div>);
-  }
-}
 class Griddle extends React.Component {
   constructor(props, context){
     super(props, context);
@@ -56,23 +47,19 @@ class Griddle extends React.Component {
 			columnHover: this._columnHover,
 			columnClick: this._columnClick,
       headingHover: this._columnHeadingHover,
-      headingClick: this._columnHeadingClick,
+      headingClick: this._columnHeadingClick
     };
   }
 
   render() {
-    if(this.state.data && this.state.data.length === 0) { return <h1>NOTHING!</h1>}
-
-    if(this.props.children) { return this.props.children; }
+    if(this.props.data && this.props.data.length === 0) {
+      return <h1>NOTHING!</h1>;
+    }
 
     return (
 			<div>
 				<this.components.filter />
 				<this.components.table {...this.props}>
-          <RowDefinition keyColumn="id">
-            <ColumnDefinition id="name" displayName="Name" cssClassName="name-class" />
-            <ColumnDefinition id="state" displayName="State of Residence" customComponent={Temp} />
-          </RowDefinition>
         </this.components.table>
 				<this.components.pagination {...this.props} />
 			</div>
@@ -80,19 +67,27 @@ class Griddle extends React.Component {
   }
 
   _nextPage() {
-      !!this.props.events && this.props.events.getNextPage();
+      if(this.props.events) {
+        this.props.events.getNextPage();
+      }
   }
 
   _previousPage() {
-      !!this.props.events && this.props.events.getPreviousPage();
+      if(this.props.events) {
+        this.props.events.getPreviousPage();
+      }
   }
 
   _getPage(pageNumber) {
-    !!this.props.events && this.props.events.getPage(pageNumber);
+    if(this.props.events) {
+      this.props.events.getPage(pageNumber);
+    }
   }
 
   _filter(query) {
-    !!this.props.events && this.props.events.setFilter(query);
+    if(this.props.events) {
+      this.props.events.setFilter(query);
+    }
 	}
 
 	_rowHover(rowData) {
