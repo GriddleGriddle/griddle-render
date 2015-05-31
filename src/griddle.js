@@ -59,8 +59,7 @@ class Griddle extends React.Component {
     return (
 			<div>
 				<this.components.filter />
-				<this.components.table {...this.props}>
-        </this.components.table>
+				<this.components.table {...this.props} />
 				<this.components.pagination {...this.props} />
 			</div>
 		);

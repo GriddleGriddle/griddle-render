@@ -17,7 +17,7 @@ class Table extends React.Component {
     return this.props.data.length > 0 ?
       (
         <table>
-          <TableHeading columns={Object.keys(this.props.data[0])} columnTitles={this.props.columnTitles} />
+          <TableHeading columns={Object.keys(this.props.data[0])} {...this.props} />
           <TableBody {...this.props} />
         </table>
       ) : null;

@@ -1,7 +1,7 @@
 'use strict';
 
 import React from 'react';
-import {ColumnHelper} from 'griddle-core';
+import ColumnHelper from './utils/column-helper';
 
 class TableHeadingCell extends React.Component {
   constructor(props, context) {
@@ -12,7 +12,12 @@ class TableHeadingCell extends React.Component {
   }
 
   render() {
-    return (<th key={this.props.column} onMouseOver={this._handleHover} onClick={this._handleClick}>{this.props.title}</th>);
+    //TODO: merge this instead of setting it here
+    const style = this.props.headerAlignment ?
+      {textAlign: this.props.headerAlignment} :
+      null;
+
+    return (<th key={this.props.column} style={style} onMouseOver={this._handleHover} onClick={this._handleClick}>{this.props.title}</th>);
   }
 
   _handleHover() {
@@ -30,7 +35,8 @@ TableHeadingCell.contextTypes = {
 };
 
 TableHeadingCell.propTypes = {
-  column: React.PropTypes.string
+  column: React.PropTypes.string,
+  headerAlignment: React.PropTypes.oneOf(['left', 'right', 'center'])
 };
 
 class TableHeading extends React.Component {
@@ -46,12 +52,16 @@ class TableHeading extends React.Component {
   }
 
   render() {
-    const headings = this.props.columns.map(column =>
-      <TableHeadingCell
+    const headings = this.props.columns.map(column =>{
+      let columnProperties = ColumnHelper.getColumnPropertyObject(this.props.columnProperties, column);
+
+      return (<TableHeadingCell
         column={column}
         title={this.props.columnTitles[column] ?
           this.props.columnTitles[column] :
-          column} />);
+          column}
+          {...columnProperties} />);
+      });
 
     return this.props.columns.length > 0 ? (
       <thead>
