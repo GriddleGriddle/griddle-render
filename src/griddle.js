@@ -132,6 +132,6 @@ Griddle.propTypes = {
   events: React.PropTypes.object,
   data: React.PropTypes.object,
   components: React.PropTypes.object
-}
+};
 
 export default Griddle;

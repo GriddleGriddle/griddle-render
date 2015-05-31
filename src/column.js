@@ -16,7 +16,7 @@ class Column extends React.Component {
         key={this.props.dataKey}
         onClick={this._handleClick}
         onMouseOver={this._handleHover}
-        className={this.props.columnProperties ? this.props.columnProperties.cssClassName : null}>
+        className={this.props.cssClassName||null}>
           {this.props.columnProperties && this.props.columnProperties.hasOwnProperty('customComponent') ?
             <this.props.columnProperties.customComponent data={this.props.value} rowData={this.props.rowData} /> :
             this.props.value}

@@ -40,7 +40,8 @@ function AddLocalDataStore(ComposedComponent) {
         hasNext: this.dataStore.hasNext(),
         hasPrevious: this.dataStore.hasPrevious(),
         pageProperties: this.dataStore.getPageProperties().toJSON(),
-        columnTitles: this.dataStore.getColumnTitles()
+        columnTitles: this.dataStore.getColumnTitles(),
+        columnProperties: this.dataStore.getColumnProperties()
       };
     }
 
