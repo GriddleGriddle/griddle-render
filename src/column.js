@@ -12,8 +12,9 @@ class Column extends React.Component {
 
   render() {
     //TODO: this is temporary -- we'll need to merge styles or something
-    const styles = this.props.width ? {
-        width: this.props.width
+    const styles = this.props.width || this.props.alignment ? {
+        width: this.props.width || null,
+        textAlign: this.props.alignment
       } :
       null;
 
@@ -44,6 +45,10 @@ Column.defaultProps = {
   columnProperties: {
     cssClassName: ''
   }
+};
+
+Column.propTypes = {
+  alignment: React.PropTypes.oneOf(['left', 'right', 'center'])
 };
 
 Column.contextTypes = {

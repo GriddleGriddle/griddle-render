@@ -13,8 +13,8 @@ class TableHeadingCell extends React.Component {
 
   render() {
     //TODO: merge this instead of setting it here
-    const style = this.props.headerAlignment ?
-      {textAlign: this.props.headerAlignment} :
+    const style = this.props.alignment || this.props.headerAlignment ?
+      {textAlign: this.props.headerAlignment || this.props.alignment} :
       null;
 
     return (<th key={this.props.column} style={style} onMouseOver={this._handleHover} onClick={this._handleClick}>{this.props.title}</th>);
@@ -36,7 +36,8 @@ TableHeadingCell.contextTypes = {
 
 TableHeadingCell.propTypes = {
   column: React.PropTypes.string,
-  headerAlignment: React.PropTypes.oneOf(['left', 'right', 'center'])
+  headerAlignment: React.PropTypes.oneOf(['left', 'right', 'center']),
+  alignment: React.PropTypes.oneOf(['left', 'right', 'center'])
 };
 
 class TableHeading extends React.Component {
