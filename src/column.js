@@ -11,8 +11,15 @@ class Column extends React.Component {
   }
 
   render() {
+    //TODO: this is temporary -- we'll need to merge styles or something
+    const styles = this.props.width ? {
+        width: this.props.width
+      } :
+      null;
+
     return (
       <td
+        style={styles}
         key={this.props.dataKey}
         onClick={this._handleClick}
         onMouseOver={this._handleHover}

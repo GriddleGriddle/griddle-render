@@ -15,7 +15,7 @@ var Test = React.createClass({
     return (
       <ComposedComponent data={FakeData} >
         <RowDefinition keyColumn="id">
-          <ColumnDefinition id="name" displayName="Name" cssClassName="name-class" />
+          <ColumnDefinition id="name" displayName="Name" cssClassName="name-class" width="500"/>
           <ColumnDefinition id="state" />
         </RowDefinition>
       </ComposedComponent>
