@@ -21,7 +21,8 @@ class TableBody extends React.Component {
       <Row rowData={data}
         rowIndex={index}
         rowProperties={this.props.tableProperties.rowProperties}
-        tableProperties={this.props.tableProperties}/>
+        tableProperties={this.props.tableProperties}
+        columnProperties={this.props.columnProperties} key={keyColumn}/>
     );
 
     return (

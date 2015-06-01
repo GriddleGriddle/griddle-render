@@ -59,8 +59,7 @@ class Griddle extends React.Component {
     return (
 			<div>
 				<this.components.filter />
-				<this.components.table {...this.props}>
-        </this.components.table>
+				<this.components.table {...this.props} />
 				<this.components.pagination {...this.props} />
 			</div>
 		);
@@ -132,6 +131,6 @@ Griddle.propTypes = {
   events: React.PropTypes.object,
   data: React.PropTypes.object,
   components: React.PropTypes.object
-}
+};
 
 export default Griddle;

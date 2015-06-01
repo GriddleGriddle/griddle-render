@@ -1,3 +1,5 @@
+'use strict';
+
 var Griddle = require('./src/griddle');
 var FakeData = require('./src/fake-data');
 var React = require('react');
@@ -13,11 +15,11 @@ var Test = React.createClass({
     return (
       <ComposedComponent data={FakeData} >
         <RowDefinition keyColumn="id">
-          <ColumnDefinition id="name" displayName="Name" cssClassName="name-class" />
-          <ColumnDefinition id="state" />
+          <ColumnDefinition id="name" displayName="Name" cssClassName="name-class" width="500" headerAlignment="left" alignment="right" order={2} />
+          <ColumnDefinition id="state" width="200" alignment="right" order={1}/>
         </RowDefinition>
       </ComposedComponent>
-      );
+    );
   }
 });
 

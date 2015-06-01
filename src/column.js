@@ -11,12 +11,20 @@ class Column extends React.Component {
   }
 
   render() {
+    //TODO: this is temporary -- we'll need to merge styles or something
+    const styles = this.props.width || this.props.alignment ? {
+        width: this.props.width || null,
+        textAlign: this.props.alignment
+      } :
+      null;
+
     return (
       <td
+        style={styles}
         key={this.props.dataKey}
         onClick={this._handleClick}
         onMouseOver={this._handleHover}
-        className={this.props.columnProperties ? this.props.columnProperties.cssClassName : null}>
+        className={this.props.cssClassName||null}>
           {this.props.columnProperties && this.props.columnProperties.hasOwnProperty('customComponent') ?
             <this.props.columnProperties.customComponent data={this.props.value} rowData={this.props.rowData} /> :
             this.props.value}
@@ -37,6 +45,10 @@ Column.defaultProps = {
   columnProperties: {
     cssClassName: ''
   }
+};
+
+Column.propTypes = {
+  alignment: React.PropTypes.oneOf(['left', 'right', 'center'])
 };
 
 Column.contextTypes = {
