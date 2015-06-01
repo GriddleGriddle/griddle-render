@@ -15,8 +15,8 @@ var Test = React.createClass({
     return (
       <ComposedComponent data={FakeData} >
         <RowDefinition keyColumn="id">
-          <ColumnDefinition id="name" displayName="Name" cssClassName="name-class" width="500" headerAlignment="left" alignment="right"/>
-          <ColumnDefinition id="state" width="200" alignment="right"/>
+          <ColumnDefinition id="name" displayName="Name" cssClassName="name-class" width="500" headerAlignment="left" alignment="right" order={2} />
+          <ColumnDefinition id="state" width="200" alignment="right" order={1}/>
         </RowDefinition>
       </ComposedComponent>
     );
