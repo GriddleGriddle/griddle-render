@@ -17,7 +17,6 @@ class Column extends React.Component {
         textAlign: this.props.alignment
       } :
       null;
-
     return (
       <td
         style={styles}
@@ -25,8 +24,8 @@ class Column extends React.Component {
         onClick={this._handleClick}
         onMouseOver={this._handleHover}
         className={this.props.cssClassName||null}>
-          {this.props.columnProperties && this.props.columnProperties.hasOwnProperty('customComponent') ?
-            <this.props.columnProperties.customComponent data={this.props.value} rowData={this.props.rowData} /> :
+          {this.props.hasOwnProperty('customComponent') ?
+            <this.props.customComponent data={this.props.value} rowData={this.props.rowData} /> :
             this.props.value}
       </td>
     );
