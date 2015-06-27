@@ -22,7 +22,6 @@ function AddLocalDataStore(ComposedComponent) {
 
     componentDidMount() {
       if (this.props.data){
-        debugger;
         var properties = PropertyHelper.propertiesToJS(this.props.children, this.props.data.length > 0 ? Object.keys(this.props.data[0]) : []);
         this.events.loadData(this.props.data, properties);
       }

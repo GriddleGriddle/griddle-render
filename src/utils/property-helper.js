@@ -30,7 +30,7 @@ const PropertyHelper = {
     const hiddenColumns = allColumns.filter(column => visibleKeys.indexOf(column) < 0);
     let hiddenColumnProperties = {};
     hiddenColumns.forEach(column => hiddenColumnProperties[column] = {id: column});
-debugger;
+
     return {
       rowProperties: rowProps,
       columnProperties,
