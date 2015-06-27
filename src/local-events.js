@@ -6,8 +6,9 @@ const LocalEvents = (actions => {
     getNextPage: actions.loadNext.bind(actions),
     getPreviousPage: actions.loadPrevious.bind(actions),
     getPage: actions.loadPage.bind(actions),
-    setFilter: actions.filterData.bind(actions)
-  }
+    setFilter: actions.filterData.bind(actions),
+    toggleColumn: actions.toggleColumn.bind(actions)
+  };
 });
 
 export default LocalEvents;

@@ -1,7 +1,6 @@
 'use strict';
 
 import React from 'react';
-import FakeData from './fake-data';
 
 import Column from './column';
 import Filter from './filter';
@@ -10,6 +9,8 @@ import Row from './row';
 import Table from './table';
 import TableBody from './table-body';
 import TableHeading from './table-heading';
+import SettingsToggle from './settings-toggle';
+import Settings from './settings';
 
 const defaultComponents = {
   column: Column,
@@ -18,7 +19,9 @@ const defaultComponents = {
   row: Row,
   table: Table,
   tableBody: TableBody,
-  tableHeading: TableHeading
+  tableHeading: TableHeading,
+  settingsToggle: SettingsToggle,
+  settings: Settings
 };
 
 class Griddle extends React.Component {
@@ -28,12 +31,13 @@ class Griddle extends React.Component {
     this.components = Object.assign({}, defaultComponents, this.props.components);
 
     this.state = {};
-
+    this.state.showSettings = false;
     this._nextPage = this._nextPage.bind(this);
     this._previousPage = this._previousPage.bind(this);
     this._getPage = this._getPage.bind(this);
     this._filter = this._filter.bind(this);
-
+    this._showSettings = this._showSettings.bind(this);
+    this._toggleColumn = this._toggleColumn.bind(this);
   }
 
   getChildContext() {
@@ -41,13 +45,14 @@ class Griddle extends React.Component {
       getNextPage: this._nextPage,
       getPreviousPage: this._previousPage,
       getPage: this._getPage,
-			setFilter: this._filter,
-			rowHover: this._rowHover,
-			rowSelect: this._rowSelect,
-			columnHover: this._columnHover,
-			columnClick: this._columnClick,
+      setFilter: this._filter,
+      rowHover: this._rowHover,
+      rowSelect: this._rowSelect,
+      columnHover: this._columnHover,
+      columnClick: this._columnClick,
       headingHover: this._columnHeadingHover,
-      headingClick: this._columnHeadingClick
+      headingClick: this._columnHeadingClick,
+      toggleColumn: this._toggleColumn
     };
   }
 
@@ -57,24 +62,30 @@ class Griddle extends React.Component {
     }
 
     return (
-			<div>
-				<this.components.filter />
-				<this.components.table {...this.props} />
-				<this.components.pagination {...this.props} />
-			</div>
-		);
+      <div>
+        <this.components.filter />
+        <this.components.settingsToggle showSettings={this._showSettings} />
+        {this.state.showSettings ? <this.components.settings {...this.props} /> : null }
+        <this.components.table {...this.props} />
+        <this.components.pagination {...this.props} />
+      </div>
+    );
+  }
+
+  _showSettings(shouldShow) {
+    this.setState({showSettings: shouldShow});
   }
 
   _nextPage() {
-      if(this.props.events) {
-        this.props.events.getNextPage();
-      }
+    if(this.props.events) {
+      this.props.events.getNextPage();
+    }
   }
 
   _previousPage() {
-      if(this.props.events) {
-        this.props.events.getPreviousPage();
-      }
+    if(this.props.events) {
+      this.props.events.getPreviousPage();
+    }
   }
 
   _getPage(pageNumber) {
@@ -87,19 +98,25 @@ class Griddle extends React.Component {
     if(this.props.events) {
       this.props.events.setFilter(query);
     }
-	}
+  }
 
-	_rowHover(rowData) {
-	}
+  _toggleColumn(columnId) {
+    if(this.props.events) {
+      this.props.events.toggleColumn(columnId);
+    }
+  }
 
-	_rowSelect(rowData) {
-	}
+  _rowHover(rowData) {
+  }
 
-	_columnHover(columnId, columnValue, rowIndex, rowData) {
-	}
+  _rowSelect(rowData) {
+  }
 
-	_columnClick(columnId, columnValue, rowIndex, rowData) {
-	}
+  _columnHover(columnId, columnValue, rowIndex, rowData) {
+  }
+
+  _columnClick(columnId, columnValue, rowIndex, rowData) {
+  }
 
   _columnHeadingClick(columnId) {
   }
@@ -118,7 +135,8 @@ Griddle.childContextTypes = {
 	rowHover: React.PropTypes.func,
 	rowSelect: React.PropTypes.func,
   headingHover: React.PropTypes.func,
-  headingClick: React.PropTypes.func
+  headingClick: React.PropTypes.func,
+  toggleColumn: React.PropTypes.func
 };
 // Configure the default props.
 Griddle.defaultProps = {

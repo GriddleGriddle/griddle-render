@@ -22,7 +22,7 @@ function AddLocalDataStore(ComposedComponent) {
 
     componentDidMount() {
       if (this.props.data){
-        var properties = PropertyHelper.propertiesToJS(this.props.children);
+        var properties = PropertyHelper.propertiesToJS(this.props.children, this.props.data.length > 0 ? Object.keys(this.props.data[0]) : []);
         this.events.loadData(this.props.data, properties);
       }
     }
@@ -41,7 +41,9 @@ function AddLocalDataStore(ComposedComponent) {
         hasPrevious: this.dataStore.hasPrevious(),
         pageProperties: this.dataStore.getPageProperties().toJSON(),
         columnTitles: this.dataStore.getColumnTitles(),
-        columnProperties: this.dataStore.getColumnProperties()
+        columnProperties: this.dataStore.getColumnProperties(),
+        //this gets all the columns that are possible to display
+        allColumns: this.dataStore.getAllPossibleColumns().toJSON()
       };
     }
 

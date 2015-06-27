@@ -53,6 +53,6 @@ Column.propTypes = {
 Column.contextTypes = {
   columnHover: React.PropTypes.func,
   columnClick: React.PropTypes.func
-}
+};
 
 export default Column;
