@@ -38,6 +38,7 @@ class Griddle extends React.Component {
     this._filter = this._filter.bind(this);
     this._showSettings = this._showSettings.bind(this);
     this._toggleColumn = this._toggleColumn.bind(this);
+    this._columnHeadingClick = this._columnHeadingClick.bind(this);
   }
 
   getChildContext() {
@@ -58,6 +59,7 @@ class Griddle extends React.Component {
 
   render() {
     if(this.props.data && this.props.data.length === 0) {
+      //TODO: put in an actual empty message
       return <h1>NOTHING!</h1>;
     }
 
@@ -119,6 +121,9 @@ class Griddle extends React.Component {
   }
 
   _columnHeadingClick(columnId) {
+    if(this.props.events) {
+      this.props.events.sort(columnId);
+    }
   }
 
   _columnHeadingHover(columnId) {
