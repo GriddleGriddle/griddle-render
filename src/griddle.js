@@ -11,6 +11,7 @@ import TableBody from './table-body';
 import TableHeading from './table-heading';
 import SettingsToggle from './settings-toggle';
 import Settings from './settings';
+import NoResults from './no-results';
 
 const defaultComponents = {
   column: Column,
@@ -21,7 +22,8 @@ const defaultComponents = {
   tableBody: TableBody,
   tableHeading: TableHeading,
   settingsToggle: SettingsToggle,
-  settings: Settings
+  settings: Settings,
+  noResults: NoResults
 };
 
 class Griddle extends React.Component {
@@ -58,17 +60,16 @@ class Griddle extends React.Component {
   }
 
   render() {
-    if(this.props.data && this.props.data.length === 0) {
-      //TODO: put in an actual empty message
-      return <h1>NOTHING!</h1>;
-    }
-
     return (
       <div>
         <this.components.filter />
         <this.components.settingsToggle showSettings={this._showSettings} />
         {this.state.showSettings ? <this.components.settings {...this.props} /> : null }
-        <this.components.table {...this.props} />
+
+        {this.props.data && this.props.data.length > 0 ?
+          <this.components.table {...this.props} /> :
+          <this.components.noResults /> }
+
         <this.components.pagination {...this.props} />
       </div>
     );
