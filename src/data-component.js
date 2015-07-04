@@ -30,6 +30,7 @@ function AddLocalDataStore(ComposedComponent) {
     render() {
       return <ComposedComponent
           {...this.state}
+          {...this.props}
           events={this.events}
         />;
     }
