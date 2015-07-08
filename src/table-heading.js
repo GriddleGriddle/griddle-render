@@ -18,12 +18,15 @@ class TableHeading extends React.Component {
   render() {
     const headings = this.props.columns.map(column =>{
       let columnProperties = ColumnHelper.getColumnPropertyObject(this.props.columnProperties, column);
-      return (<this.context.components.tableHeadingCell
-        column={column}
-        title={this.props.columnTitles[column] ?
-          this.props.columnTitles[column] :
-          column}
-          {...columnProperties} />);
+      return (
+          <this.context.components.tableHeadingCell
+            column={column}
+            headingClick={this.context.headingClick}
+            headingHover={this.context.headingHover}
+            title={this.props.columnTitles[column] ?
+              this.props.columnTitles[column] :
+              column}
+            {...columnProperties} />);
       });
 
     return this.props.columns.length > 0 ? (

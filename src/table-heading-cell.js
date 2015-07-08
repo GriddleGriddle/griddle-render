@@ -21,11 +21,11 @@ class TableHeadingCell extends React.Component {
   }
 
   _handleHover() {
-    this.context.headingHover(this.props.column);
+    this.props.headingHover(this.props.column);
   }
 
   _handleClick() {
-    this.context.headingClick(this.props.column);
+    this.props.headingClick(this.props.column);
   }
 }
 
