@@ -12,6 +12,7 @@ import TableHeading from './table-heading';
 import SettingsToggle from './settings-toggle';
 import Settings from './settings';
 import NoResults from './no-results';
+import TableHeadingCell from './table-heading-cell';
 
 const defaultComponents = {
   column: Column,
@@ -21,15 +22,15 @@ const defaultComponents = {
   table: Table,
   tableBody: TableBody,
   tableHeading: TableHeading,
+  tableHeadingCell: TableHeadingCell,
   settingsToggle: SettingsToggle,
   settings: Settings,
   noResults: NoResults
 };
 
 class Griddle extends React.Component {
-  constructor(props, context){
+  constructor(props, context) {
     super(props, context);
-
     this.components = Object.assign({}, defaultComponents, this.props.components);
 
     this.state = {};
@@ -55,7 +56,8 @@ class Griddle extends React.Component {
       columnClick: this._columnClick,
       headingHover: this._columnHeadingHover,
       headingClick: this._columnHeadingClick,
-      toggleColumn: this._toggleColumn
+      toggleColumn: this._toggleColumn,
+      components: this.components
     };
   }
 
@@ -142,7 +144,8 @@ Griddle.childContextTypes = {
 	rowSelect: React.PropTypes.func,
   headingHover: React.PropTypes.func,
   headingClick: React.PropTypes.func,
-  toggleColumn: React.PropTypes.func
+  toggleColumn: React.PropTypes.func,
+  components: React.PropTypes.object
 };
 // Configure the default props.
 Griddle.defaultProps = {

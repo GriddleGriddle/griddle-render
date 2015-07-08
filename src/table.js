@@ -1,8 +1,6 @@
 'use strict';
 
 import React from 'react';
-import TableHeading from './table-heading';
-import TableBody from './table-body';
 import RowDefinition from './row-definition';
 
 class Table extends React.Component {
@@ -17,8 +15,8 @@ class Table extends React.Component {
     return this.props.data.length > 0 ?
       (
         <table>
-          <TableHeading columns={Object.keys(this.props.data[0])} {...this.props} />
-          <TableBody {...this.props} />
+          <this.context.components.tableHeading columns={Object.keys(this.props.data[0])} {...this.props} />
+          <this.context.components.tableBody {...this.props} />
         </table>
       ) : null;
   }
@@ -32,7 +30,8 @@ Table.propTypes = {
 };
 
 Table.contextTypes = {
-  data: React.PropTypes.array
+  data: React.PropTypes.array,
+  components: React.PropTypes.object
 };
 
 Table.defaultProps = {
