@@ -40,7 +40,9 @@ class TableHeading extends React.Component {
 }
 
 TableHeading.contextTypes = {
-  components: React.PropTypes.object
+  components: React.PropTypes.object,
+  headingClick: React.PropTypes.func,
+  headingHover: React.PropTypes.func
 }
 
 export default TableHeading;

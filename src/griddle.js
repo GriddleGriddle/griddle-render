@@ -29,7 +29,7 @@ const defaultComponents = {
 };
 
 class Griddle extends React.Component {
-  constructor(props, context){
+  constructor(props, context) {
     super(props, context);
     this.components = Object.assign({}, defaultComponents, this.props.components);
 

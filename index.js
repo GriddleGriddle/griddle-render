@@ -17,13 +17,13 @@ var Something = React.createClass({
 
 var CustomHeadingCell = React.createClass({
   render() {
-    return <th onClick={this._handleHover}>
+    return <th onClick={this._handleClick}>
       <div style={{backgroundColor: "#FAB"}}>{this.props.title}</div>
-      </th> 
+      </th>
   },
 
-  _handleHover() {
-    this.props.headingHover(this.props.column);
+  _handleClick() {
+    this.props.headingClick(this.props.column);
   }
 
 });
@@ -32,7 +32,7 @@ var Test = React.createClass({
 
   render() {
     return (
-      <ComposedComponent data={FakeData}>
+      <ComposedComponent data={FakeData} components={{tableHeadingCell: CustomHeadingCell}}>
         <RowDefinition keyColumn="id">
           <ColumnDefinition id="name" displayName="Name" cssClassName="name-class" width="500" headerAlignment="left" alignment="right" />
           <ColumnDefinition id="state" width="200" alignment="right" customComponent={Something} order={1} />
