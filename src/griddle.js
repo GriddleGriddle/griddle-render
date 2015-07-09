@@ -43,6 +43,7 @@ class Griddle extends React.Component {
       getPreviousPage: this._previousPage,
       getPage: this._getPage,
       setFilter: this._filter,
+      setPageSize: this._setPageSize,
       rowHover: this._rowHover,
       rowSelect: this._rowSelect,
       columnHover: this._columnHover,
@@ -102,6 +103,12 @@ class Griddle extends React.Component {
   _filter = (query) => {
     if(this.props.events) {
       this.props.events.setFilter(query);
+    }
+  }
+
+  _setPageSize = (size) => {
+    if(this.props.events) {
+      this.props.events.setPageSize(size);
     }
   }
 
