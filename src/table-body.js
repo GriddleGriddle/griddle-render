@@ -19,6 +19,7 @@ class TableBody extends React.Component {
 
     var rows = this.props.data.map((data, index) =>
       <Row rowData={data}
+        events={this.props.events}
         rowIndex={index}
         rowProperties={this.props.tableProperties.rowProperties}
         tableProperties={this.props.tableProperties}

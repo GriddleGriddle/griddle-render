@@ -11,14 +11,14 @@ class Pagination extends React.Component {
 
   render() {
     return (<div className="pagination">
-      {this.props.hasPrevious ? <button onClick={this.context.getPreviousPage}>Previous</button> : null }
+      {this.props.hasPrevious ? <button onClick={this.props.events.getPreviousPage}>Previous</button> : null }
       {this._getSelect()}
-      {this.props.hasNext ? <button onClick={this.context.getNextPage}>Next</button> : null }
+      {this.props.hasNext ? <button onClick={this.props.events.getNextPage}>Next</button> : null }
     </div>);
   }
 
   _handleChange(e) {
-    this.context.getPage(parseInt(e.target.value));
+    this.props.events.getPage(parseInt(e.target.value));
   }
 
   _getSelect() {
@@ -31,12 +31,6 @@ class Pagination extends React.Component {
 
     return <select onChange={this._handleChange} value={this.props.pageProperties.currentPage}>{options}</select>
   }
-}
-
-Pagination.contextTypes = {
-  getNextPage: React.PropTypes.func,
-  getPreviousPage: React.PropTypes.func,
-  getPage: React.PropTypes.func
 }
 
 export default Pagination;

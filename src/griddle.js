@@ -35,16 +35,9 @@ class Griddle extends React.Component {
 
     this.state = {};
     this.state.showSettings = false;
-    this._nextPage = this._nextPage.bind(this);
-    this._previousPage = this._previousPage.bind(this);
-    this._getPage = this._getPage.bind(this);
-    this._filter = this._filter.bind(this);
-    this._showSettings = this._showSettings.bind(this);
-    this._toggleColumn = this._toggleColumn.bind(this);
-    this._columnHeadingClick = this._columnHeadingClick.bind(this);
   }
 
-  getChildContext() {
+  getEvents() {
     return {
       getNextPage: this._nextPage,
       getPreviousPage: this._previousPage,
@@ -57,96 +50,89 @@ class Griddle extends React.Component {
       headingHover: this._columnHeadingHover,
       headingClick: this._columnHeadingClick,
       toggleColumn: this._toggleColumn,
-      components: this.components
     };
   }
 
+  getComponents = () => {
+    return this.components
+  }
+
   render() {
+    const events = this.getEvents();
+    const components = this.getComponents();
+
     return (
       <div>
-        <this.components.filter />
-        <this.components.settingsToggle showSettings={this._showSettings} />
-        {this.state.showSettings ? <this.components.settings {...this.props} /> : null }
+        {/*TODO: Lets not duplicate these prop defs all over (events/components) */}
+        <this.components.filter {...this.props} components={components} events={events} />
+        <this.components.settingsToggle components={components} events={events} showSettings={this._showSettings} />
+        {this.state.showSettings ? <this.components.settings {...this.props} components={components} events={events} /> : null }
 
         {this.props.data && this.props.data.length > 0 ?
-          <this.components.table {...this.props} /> :
-          <this.components.noResults /> }
+          <this.components.table {...this.props} components={components} events={events} /> :
+          <this.components.noResults components={components} events={events} /> }
 
-        <this.components.pagination {...this.props} />
+        <this.components.pagination {...this.props} components={components} events={events} />
       </div>
     );
   }
 
-  _showSettings(shouldShow) {
+  _showSettings = (shouldShow) => {
     this.setState({showSettings: shouldShow});
   }
 
-  _nextPage() {
+  _nextPage = () => {
     if(this.props.events) {
       this.props.events.getNextPage();
     }
   }
 
-  _previousPage() {
+  _previousPage = () => {
     if(this.props.events) {
       this.props.events.getPreviousPage();
     }
   }
 
-  _getPage(pageNumber) {
+  _getPage = (pageNumber) => {
     if(this.props.events) {
       this.props.events.getPage(pageNumber);
     }
   }
 
-  _filter(query) {
+  _filter = (query) => {
     if(this.props.events) {
       this.props.events.setFilter(query);
     }
   }
 
-  _toggleColumn(columnId) {
+  _toggleColumn = (columnId) => {
     if(this.props.events) {
       this.props.events.toggleColumn(columnId);
     }
   }
 
-  _rowHover(rowData) {
+  _rowHover = (rowData) => {
   }
 
-  _rowSelect(rowData) {
+  _rowSelect = (rowData) => {
   }
 
-  _columnHover(columnId, columnValue, rowIndex, rowData) {
+  _columnHover = (columnId, columnValue, rowIndex, rowData) => {
   }
 
-  _columnClick(columnId, columnValue, rowIndex, rowData) {
+  _columnClick = (columnId, columnValue, rowIndex, rowData) => {
   }
 
-  _columnHeadingClick(columnId) {
+  _columnHeadingClick = (columnId) => {
     if(this.props.events) {
       this.props.events.sort(columnId);
     }
   }
 
-  _columnHeadingHover(columnId) {
+  _columnHeadingHover = (columnId) => {
   }
 }
-// Configure the child context types.
-Griddle.childContextTypes = {
-  getNextPage: React.PropTypes.func,
-  getPreviousPage: React.PropTypes.func,
-  getPage: React.PropTypes.func,
-	setFilter: React.PropTypes.func,
-	columnHover: React.PropTypes.func,
-	columnClick: React.PropTypes.func,
-	rowHover: React.PropTypes.func,
-	rowSelect: React.PropTypes.func,
-  headingHover: React.PropTypes.func,
-  headingClick: React.PropTypes.func,
-  toggleColumn: React.PropTypes.func,
-  components: React.PropTypes.object
-};
+
 // Configure the default props.
 Griddle.defaultProps = {
   currentPage: 0,
