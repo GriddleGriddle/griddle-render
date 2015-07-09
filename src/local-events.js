@@ -7,6 +7,7 @@ const LocalEvents = actions => {
     getPreviousPage: actions.loadPrevious.bind(actions),
     getPage: actions.loadPage.bind(actions),
     setFilter: actions.filterData.bind(actions),
+    setPageSize: actions.setPageSize.bind(actions),
     sort: actions.sort.bind(actions),
     toggleColumn: actions.toggleColumn.bind(actions)
   };

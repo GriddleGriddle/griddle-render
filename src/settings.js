@@ -23,6 +23,23 @@ CheckItem.propTypes = {
   text: React.PropTypes.string
 };
 
+class PageSize extends React.Component {
+  render() {
+    return (
+      <select name="pageSize" onChange={this._handleChange}>
+        {this.props.sizes.map(size => <option value={size}>{size}</option>)}
+      </select>
+    );
+  }
+
+  _handleChange = (e) => {
+    this.props.setPageSize(parseInt(e.target.value));
+  }
+}
+
+PageSize.defaultProps = {
+  sizes: [5, 10, 20, 30, 50, 100]
+}
 class Settings extends React.Component {
   render() {
     const keys = Object.keys(this.props.data[0]);
@@ -39,6 +56,7 @@ class Settings extends React.Component {
     return (
       <div>
         {columns}
+        <PageSize setPageSize={this.props.events.setPageSize}/>
       </div>
     );
   }
