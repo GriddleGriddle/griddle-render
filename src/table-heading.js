@@ -16,13 +16,15 @@ class TableHeading extends React.Component {
   }
 
   render() {
+    let {headingClick, headingHover} = this.props.events;
+
     const headings = this.props.columns.map(column =>{
       let columnProperties = ColumnHelper.getColumnPropertyObject(this.props.columnProperties, column);
       return (
-          <this.context.components.tableHeadingCell
+          <this.props.components.tableHeadingCell
             column={column}
-            headingClick={this.context.headingClick}
-            headingHover={this.context.headingHover}
+            headingClick={headingClick}
+            headingHover={headingHover}
             title={this.props.columnTitles[column] ?
               this.props.columnTitles[column] :
               column}
@@ -37,12 +39,6 @@ class TableHeading extends React.Component {
       </thead>
     ) : null;
   }
-}
-
-TableHeading.contextTypes = {
-  components: React.PropTypes.object,
-  headingClick: React.PropTypes.func,
-  headingHover: React.PropTypes.func
 }
 
 export default TableHeading;

@@ -29,12 +29,9 @@ class TableHeadingCell extends React.Component {
   }
 }
 
-TableHeadingCell.contextTypes = {
-  headingHover: React.PropTypes.func,
-  headingClick: React.PropTypes.func
-};
-
 TableHeadingCell.propTypes = {
+  headingHover: React.PropTypes.func,
+  headingClick: React.PropTypes.func,
   column: React.PropTypes.string,
   headerAlignment: React.PropTypes.oneOf(['left', 'right', 'center']),
   alignment: React.PropTypes.oneOf(['left', 'right', 'center'])
