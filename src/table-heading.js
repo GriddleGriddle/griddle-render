@@ -16,10 +16,12 @@ class TableHeading extends React.Component {
   }
 
   render() {
-    let {headingClick, headingHover} = this.props.events;
+    let { headingClick, headingHover } = this.props.events;
+    const { renderProperties } = this.props;
 
     const headings = this.props.columns.map(column =>{
-      let columnProperties = ColumnHelper.getColumnPropertyObject(this.props.columnProperties, column);
+      let a = renderProperties;
+      let columnProperties = ColumnHelper.getColumnPropertyObject(renderProperties.columnProperties, column);
       return (
           <this.props.components.tableHeadingCell
             column={column}

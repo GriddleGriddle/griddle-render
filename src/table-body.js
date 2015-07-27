@@ -23,7 +23,7 @@ class TableBody extends React.Component {
         rowIndex={index}
         rowProperties={this.props.tableProperties.rowProperties}
         tableProperties={this.props.tableProperties}
-        columnProperties={this.props.columnProperties} key={keyColumn}/>
+        columnProperties={this.props.renderProperties.columnProperties} key={keyColumn}/>
     );
 
     return (

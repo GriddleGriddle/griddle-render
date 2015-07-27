@@ -13,23 +13,24 @@ class Row extends React.Component {
   }
 
   render() {
+    //TODO: refactor -- this whole method is kind of rought
     let columns = [];
+    let { columnProperties, tableProperties, rowData, events, rowIndex} = this.props;
+
     //render just the columns that are contained in the metdata
-    for (var column in this.props.rowData) {
-
+    for (var column in rowData) {
       //get the additional properties defined in the creation of the object
-      let columnProperties = ColumnHelper.getColumnPropertyObject(this.props.columnProperties, column);
-
+      let localColumnProperties = ColumnHelper.getColumnPropertyObject(columnProperties, column);
       //render the column if there are no properties, there are properties and the column is in the collection OR there are properties and no column properties.
-      if(this.props.tableProperties === null || this.props.tableProperties.columnProperties.length === 0 || ColumnHelper.isColumnVisible(this.props.tableProperties.columnProperties, column)) {
+      if(tableProperties === null || tableProperties.columnProperties.length === 0 || ColumnHelper.isColumnVisible(tableProperties.localColumnProperties, column)) {
         columns.push(<Column
-          rowIndex={this.props.rowIndex}
+          rowIndex={rowIndex}
           rowData={this.props.rowData}
-          events={this.props.events}
+          events={events}
           key={column}
           dataKey={column}
-          value={this.props.rowData[column]}
-          {...columnProperties} />);
+          value={rowData[column]}
+          {...localColumnProperties} />);
       }
     }
 

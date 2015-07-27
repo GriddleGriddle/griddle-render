@@ -78,61 +78,66 @@ class Griddle extends React.Component {
     );
   }
 
+  /*TODO: Move to store */
   _showSettings = (shouldShow) => {
     this.setState({showSettings: shouldShow});
   }
 
   _nextPage = () => {
-    if(this.props.events) {
-      this.props.events.getNextPage();
+    if(this.props.loadNext) {
+      this.props.loadNext();
     }
   }
 
   _previousPage = () => {
-    if(this.props.events) {
-      this.props.events.getPreviousPage();
+    if(this.props.loadPrevious) {
+      this.props.loadPrevious();
     }
   }
 
   _getPage = (pageNumber) => {
-    if(this.props.events) {
-      this.props.events.getPage(pageNumber);
+    if(this.props.loadPage) {
+      this.props.loadPage(pageNumber);
     }
   }
 
   _filter = (query) => {
-    if(this.props.events) {
-      this.props.events.setFilter(query);
+    if(this.props.filterData) {
+      this.props.filterData(query);
     }
   }
 
   _setPageSize = (size) => {
-    if(this.props.events) {
-      this.props.events.setPageSize(size);
+    if(this.props.setPageSize) {
+      this.props.setPageSize(size);
     }
   }
 
   _toggleColumn = (columnId) => {
-    if(this.props.events) {
-      this.props.events.toggleColumn(columnId);
+    if(this.props.toggleColumn) {
+      this.props.toggleColumn(columnId);
     }
   }
 
   _rowHover = (rowData) => {
+    //TODO:
   }
 
   _rowSelect = (rowData) => {
+    //TODO:
   }
 
   _columnHover = (columnId, columnValue, rowIndex, rowData) => {
+    //TODO:
   }
 
   _columnClick = (columnId, columnValue, rowIndex, rowData) => {
+    //TODO:
   }
 
   _columnHeadingClick = (columnId) => {
-    if(this.props.events) {
-      this.props.events.sort(columnId);
+    if(this.props.sort) {
+      this.props.sort(columnId);
     }
   }
 

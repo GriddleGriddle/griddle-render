@@ -47,9 +47,9 @@ class Settings extends React.Component {
       <CheckItem
         toggleColumn={this.props.events.toggleColumn}
         name={column}
-        text={this.props.columnProperties.hasOwnProperty(column) &&
-          this.props.columnProperties[column].hasOwnProperty('displayName') ?
-            this.props.columnProperties[column].displayName :
+        text={this.props.renderProperties.columnProperties.hasOwnProperty(column) &&
+          this.props.renderProperties.columnProperties[column].hasOwnProperty('displayName') ?
+            this.props.renderProperties.columnProperties[column].displayName :
             column}
         checked={keys.indexOf(column) > -1} />);
 
