@@ -42,7 +42,7 @@ PageSize.defaultProps = {
 }
 class Settings extends React.Component {
   render() {
-    const keys = Object.keys(this.props.data[0]);
+    const keys = Object.keys(this.props.renderProperties.columnProperties);
     var columns = this.props.allColumns.map(column =>
       <CheckItem
         toggleColumn={this.props.events.toggleColumn}

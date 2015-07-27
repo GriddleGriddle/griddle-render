@@ -61,7 +61,7 @@ class Griddle extends React.Component {
   render() {
     const events = this.getEvents();
     const components = this.getComponents();
-
+console.log(this.props.tableProperties);
     return (
       <div>
         {/*TODO: Lets not duplicate these prop defs all over (events/components) */}

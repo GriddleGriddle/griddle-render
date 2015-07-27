@@ -13,16 +13,19 @@ class Row extends React.Component {
   }
 
   render() {
-    //TODO: refactor -- this whole method is kind of rought
+    //TODO: Refactor this  -- the logic to show / hide columns is kind of rough
+    //      Also, it seems that if we moved this operation to a store, it could be a bit faster
+
     let columns = [];
     let { columnProperties, tableProperties, rowData, events, rowIndex} = this.props;
 
     //render just the columns that are contained in the metdata
     for (var column in rowData) {
       //get the additional properties defined in the creation of the object
-      let localColumnProperties = ColumnHelper.getColumnPropertyObject(columnProperties, column);
+      let columnProperty = ColumnHelper.getColumnPropertyObject(columnProperties, column);
       //render the column if there are no properties, there are properties and the column is in the collection OR there are properties and no column properties.
-      if(tableProperties === null || tableProperties.columnProperties.length === 0 || ColumnHelper.isColumnVisible(tableProperties.localColumnProperties, column)) {
+
+      if(ColumnHelper.isColumnVisible(columnProperties, column)) {
         columns.push(<Column
           rowIndex={rowIndex}
           rowData={this.props.rowData}
@@ -30,7 +33,7 @@ class Row extends React.Component {
           key={column}
           dataKey={column}
           value={rowData[column]}
-          {...localColumnProperties} />);
+          {...columnProperty} />);
       }
     }
 
