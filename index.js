@@ -29,7 +29,10 @@ var CustomHeadingCell = React.createClass({
 
 var Test = React.createClass({
   render() {
-    return <GriddleContainer data={FakeData}/>
+    return <div>
+      <GriddleContainer data={FakeData}/>
+      <GriddleContainer data={FakeData.reverse()}/>
+    </div>
   }
 });
 
