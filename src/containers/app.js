@@ -6,7 +6,7 @@ import { Provider } from 'react-redux';
 
 import {Reducers, States, GriddleReducer} from 'griddle-core';
 import { GriddleActions } from 'griddle-core';
-
+import { GriddleHelpers as Helpers } from 'griddle-core'
 
 export default class App extends Component {
   constructor(props) {
@@ -18,7 +18,9 @@ export default class App extends Component {
       /* griddle default states for local data */
       [States.data, States.local],
       /* griddle default reducers */
-      [Reducers.data, Reducers.local]
+      [Reducers.data, Reducers.local],
+      /* helper methods */
+      [Helpers.data, Helpers.local]
     );
 
     /* set up the redux store */
@@ -29,8 +31,14 @@ export default class App extends Component {
   render() {
     return (
       <Provider store={this.store}>
-        {() => <GriddleContainer data={this.props.data}/>}
+        {() => <GriddleContainer data={this.props.data}>
+          {this.props.children}
+        </GriddleContainer>}
       </Provider>
     )
+  }
+
+  static PropTypes = {
+    data: React.PropTypes.array.isRequired
   }
 }
