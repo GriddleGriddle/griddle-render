@@ -8,7 +8,7 @@ import {Reducers, States, GriddleReducer} from 'griddle-core';
 import { GriddleActions } from 'griddle-core';
 import { GriddleHelpers as Helpers } from 'griddle-core'
 
-export default class App extends Component {
+export default class GriddleRedux extends Component {
   constructor(props) {
     super(props);
 

@@ -1,11 +1,11 @@
 'use strict';
 
 var Griddle = require('./src/griddle');
-var FakeData = require('./src/fake-data');
+var FakeData = require('./src/fake-subgrid-data');
 var React = require('react');
 var RowDefinition = require('./src/row-definition');
 var ColumnDefinition = require('./src/column-definition');
-var GriddleContainer = require('./src/containers/app.js');
+var GriddleContainer = require('./src/containers/griddle-redux.js');
 
 
 var Something = React.createClass({
