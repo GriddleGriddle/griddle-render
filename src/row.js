@@ -17,7 +17,8 @@ class Row extends React.Component {
     //      Also, it seems that if we moved this operation to a store, it could be a bit faster
 
     let columns = [];
-    let { columnProperties, tableProperties, rowData, events, rowIndex} = this.props;
+    const { columnProperties, tableProperties, rowData, events, rowIndex } = this.props;
+    const { griddleKey } = rowData;
 
     //render just the columns that are contained in the metdata
     for (var column in rowData) {
@@ -38,7 +39,7 @@ class Row extends React.Component {
     }
 
     return (
-      <tr onMouseOver={this._handleHover} onClick={this._handleSelect}>
+      <tr onMouseOver={this._handleHover} onClick={this._handleSelect} key={griddleKey} >
         {columns}
       </tr>
     );
