@@ -18,7 +18,7 @@ export default class GriddleRedux extends Component {
       /* griddle default states for local data */
       [States.data, States.local],
       /* griddle default reducers */
-      [Reducers.data, Reducers.local],
+      [Reducers.test, Reducers.data, Reducers.local],
       /* helper methods */
       [Helpers.data, Helpers.local]
     );
