@@ -1,5 +1,6 @@
 'use strict';
 
+//TODO: Why is this even used?
 const ColumnHelper = {
   isColumnVisible(columnProperties, column) {
     if(!columnProperties) { return true; }

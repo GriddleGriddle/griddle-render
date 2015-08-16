@@ -13,28 +13,33 @@ class Row extends React.Component {
   }
 
   render() {
+    //TODO: Refactor this  -- the logic to show / hide columns is kind of rough
+    //      Also, it seems that if we moved this operation to a store, it could be a bit faster
+
     let columns = [];
+    const { columnProperties, tableProperties, rowData, events, rowIndex } = this.props;
+    const { griddleKey } = rowData;
+
     //render just the columns that are contained in the metdata
-    for (var column in this.props.rowData) {
-
+    for (var column in rowData) {
       //get the additional properties defined in the creation of the object
-      let columnProperties = ColumnHelper.getColumnPropertyObject(this.props.columnProperties, column);
-
+      let columnProperty = ColumnHelper.getColumnPropertyObject(columnProperties, column);
       //render the column if there are no properties, there are properties and the column is in the collection OR there are properties and no column properties.
-      if(this.props.tableProperties === null || this.props.tableProperties.columnProperties.length === 0 || ColumnHelper.isColumnVisible(this.props.tableProperties.columnProperties, column)) {
+
+      if(ColumnHelper.isColumnVisible(columnProperties, column)) {
         columns.push(<Column
-          rowIndex={this.props.rowIndex}
+          rowIndex={rowIndex}
           rowData={this.props.rowData}
-          events={this.props.events}
+          events={events}
           key={column}
           dataKey={column}
-          value={this.props.rowData[column]}
-          {...columnProperties} />);
+          value={rowData[column]}
+          {...columnProperty} />);
       }
     }
 
     return (
-      <tr onMouseOver={this._handleHover} onClick={this._handleSelect}>
+      <tr onMouseOver={this._handleHover} onClick={this._handleSelect} key={griddleKey} >
         {columns}
       </tr>
     );

@@ -29,11 +29,4 @@ Table.propTypes = {
   ])
 };
 
-Table.defaultProps = {
-  tableProperties: {
-    rowProperties: {},
-    columnProperties: []
-  }
-};
-
 export default Table;

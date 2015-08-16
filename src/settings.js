@@ -4,7 +4,11 @@ import React from 'react';
 
 class CheckItem extends React.Component {
   render() {
-    return <label onClick={this._handleClick}><input type="checkbox" checked={this.props.checked} name={this.props.name} />{this.props.text}</label>;
+    return (
+      <label onClick={this._handleClick}>
+        <input type="checkbox" checked={this.props.checked} name={this.props.name} />
+        {this.props.text}
+      </label>);
   }
 
   _handleClick = () => {
@@ -42,15 +46,12 @@ PageSize.defaultProps = {
 }
 class Settings extends React.Component {
   render() {
-    const keys = Object.keys(this.props.data[0]);
+    const keys = Object.keys(this.props.renderProperties.columnProperties);
     var columns = this.props.allColumns.map(column =>
       <CheckItem
         toggleColumn={this.props.events.toggleColumn}
         name={column}
-        text={this.props.columnProperties.hasOwnProperty(column) &&
-          this.props.columnProperties[column].hasOwnProperty('displayName') ?
-            this.props.columnProperties[column].displayName :
-            column}
+        text={this._getDisplayName(column)}
         checked={keys.indexOf(column) > -1} />);
 
     return (
@@ -59,6 +60,21 @@ class Settings extends React.Component {
         <PageSize setPageSize={this.props.events.setPageSize}/>
       </div>
     );
+  }
+
+  _getDisplayName = (column) => {
+    const { renderProperties } = this.props;
+    if(renderProperties.columnProperties.hasOwnProperty(column)) {
+      return renderProperties.columnProperties[column].hasOwnProperty('displayName') ?
+        renderProperties.columnProperties[column].displayName :
+        column
+    } else if (renderProperties.hiddenColumnProperties.hasOwnProperty(column)) {
+    return renderProperties.hiddenColumnProperties[column].hasOwnProperty('displayName') ?
+        renderProperties.hiddenColumnProperties[column].displayName :
+        column
+    }
+
+    return column;
   }
 }
 
