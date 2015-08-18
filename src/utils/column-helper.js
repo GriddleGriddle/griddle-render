@@ -9,7 +9,10 @@ const ColumnHelper = {
     Object.getOwnPropertyNames(columnProperties).length === 0);
   },
 
-  //this gets one column property object from the global property object
+  //TODO: Not sure I like this method
+  //      It seems like it could go elsewhere
+
+  //This gets one column property object from the global property object
   getColumnPropertyObject(columnProperties, columnName) {
     return columnProperties.hasOwnProperty(columnName) ?
       columnProperties[columnName] :

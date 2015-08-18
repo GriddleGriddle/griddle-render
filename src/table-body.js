@@ -1,7 +1,6 @@
 'use strict';
 
 import React from 'react';
-import Row from './row';
 
 class TableBody extends React.Component {
   constructor(props, context) {
@@ -13,8 +12,11 @@ class TableBody extends React.Component {
   }
 
   render() {
-    var rows = this.props.data.map((data, index) =>
-      <Row rowData={data}
+    var rows = this.props.data
+    .filter(data => data.visible === undefined || data.visible === true)
+    .map((data, index) =>
+      <this.props.components.row rowData={data}
+        components={this.props.components}
         events={this.props.events}
         rowIndex={index}
         rowProperties={this.props.renderProperties.rowProperties}

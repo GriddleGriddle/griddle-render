@@ -26,10 +26,10 @@ class Column extends React.Component {
   }
 
   _getStyles = () => {
-    return this.props.width || this.props.alignment ? {
+    return this.props.width || this.props.alignment || this.props.styles ? Object.assign({
         width: this.props.width || null,
         textAlign: this.props.alignment
-      } :
+      }, this.props.styles) :
       null;
   }
 
