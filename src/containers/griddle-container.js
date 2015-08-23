@@ -14,6 +14,7 @@ export default class GriddleContainer extends Component {
   constructor(props) {
     super();
     this.state = {};
+
     this.state.actionCreators = bindActionCreators(GriddleActions, props.dispatch);
 
     const properties = PropertyHelper.propertiesToJS(

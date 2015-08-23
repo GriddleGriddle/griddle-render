@@ -34,6 +34,8 @@ class Column extends React.Component {
   }
 
   _handleClick = (e) => {
+    if (this.props.onClick) this.props.onClick(e);
+
     this.props.events.columnClick(this.props.dataKey, this.props.value, this.props.rowIndex, this.props.rowData);
   }
 

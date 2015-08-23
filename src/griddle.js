@@ -52,6 +52,7 @@ class Griddle extends React.Component {
       headingHover: this._columnHeadingHover,
       headingClick: this._columnHeadingClick,
       toggleColumn: this._toggleColumn,
+      expandRow: this._expandRow
     };
   }
 
@@ -117,6 +118,13 @@ class Griddle extends React.Component {
   _toggleColumn = (columnId) => {
     if(this.props.toggleColumn) {
       this.props.toggleColumn(columnId);
+    }
+  }
+
+  _expandRow = (griddleKey) => {
+    debugger;
+    if(this.props.expandRow) {
+      this.props.expandRow(griddleKey)
     }
   }
 
