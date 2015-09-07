@@ -1,5 +1,3 @@
-'use strict';
-
 import React from 'react';
 import ColumnHelper from './utils/column-helper';
 
