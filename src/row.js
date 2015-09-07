@@ -1,7 +1,6 @@
 'use strict';
 
 import React from 'react';
-import Column from './column';
 import ColumnHelper from './utils/column-helper';
 
 class Row extends React.Component {

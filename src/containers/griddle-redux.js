@@ -20,7 +20,7 @@ export default class GriddleRedux extends Component {
       /* griddle default reducers */
       [Reducers.test, Reducers.data, Reducers.local, Reducers.subgrid],
       /* helper methods */
-      [Helpers.data, Helpers.local]
+      [Helpers.data, Helpers.local, Helpers.subgrid]
     );
 
     /* set up the redux store */

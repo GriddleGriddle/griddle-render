@@ -12,7 +12,6 @@ export default ColumnComponent => class extends Component {
   }
 
   _expandRow = () => {
-    debugger;
     this.props.events.expandRow(this.props.rowData.griddleKey)
   }
 };

@@ -17,6 +17,9 @@ var Column = require('./src/column');
 
 var ColumnComponent = SubgridColumn(Column);
 
+var SubgridTableBody = require('./src/plugins/subgrid/table-body');
+
+
 var Something = React.createClass({
   render() {
     return <em>{this.props.data}</em>;
@@ -39,10 +42,10 @@ var CustomHeadingCell = React.createClass({
 var Test = React.createClass({
   render() {
     return <div>
-      <GriddleContainer data={FakeData} components={{row: RowComponent, column: ColumnComponent}}>
+      <GriddleContainer data={FakeData} components={{row: RowComponent, column: ColumnComponent, tableBody: SubgridTableBody}}>
         <RowDefinition keyColumn="id">
-          <ColumnDefinition id="name" displayName="Name" cssClassName="name-class" width="500" headerAlignment="left" alignment="right" />
-          <ColumnDefinition id="state" width="200" alignment="right" customComponent={Something} order={1} />
+          <ColumnDefinition id="name" displayName="Name" cssClassName="name-class" />
+          <ColumnDefinition id="state" order={1} />
         </RowDefinition>
       </GriddleContainer>
     </div>
