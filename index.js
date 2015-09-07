@@ -1,5 +1,3 @@
-'use strict';
-
 var Griddle = require('./src/griddle');
 var FakeData = require('./src/fake-subgrid-data');
 var React = require('react');
@@ -16,9 +14,11 @@ var SubgridColumn = require('./src/plugins/subgrid/column');
 var Column = require('./src/column');
 
 var ColumnComponent = SubgridColumn(Column);
-
 var SubgridTableBody = require('./src/plugins/subgrid/table-body');
 
+var SubgridTableHeading = require('./src/plugins/subgrid/table-heading');
+var TableHeading = require('./src/table-heading');
+var TableHeadingComponent = SubgridTableHeading(TableHeading)
 
 var Something = React.createClass({
   render() {
@@ -42,7 +42,7 @@ var CustomHeadingCell = React.createClass({
 var Test = React.createClass({
   render() {
     return <div>
-      <GriddleContainer data={FakeData} components={{row: RowComponent, column: ColumnComponent, tableBody: SubgridTableBody}}>
+      <GriddleContainer data={FakeData} components={{row: RowComponent, column: ColumnComponent, tableBody: SubgridTableBody, tableHeading: TableHeadingComponent}}>
         <RowDefinition keyColumn="id">
           <ColumnDefinition id="name" displayName="Name" cssClassName="name-class" />
           <ColumnDefinition id="state" order={1} />
