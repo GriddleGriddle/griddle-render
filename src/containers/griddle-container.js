@@ -6,7 +6,6 @@ import { GriddleActions } from 'griddle-core';
 import Griddle from '../griddle.js';
 import PropertyHelper from '../utils/property-helper';
 
-/* UPDATE the props to be ...state.griddle (as JSON) */
 @connect(state => {
   return ({
   state: state.toJSON()
@@ -15,6 +14,7 @@ export default class GriddleContainer extends Component {
   constructor(props) {
     super();
     this.state = {};
+
     this.state.actionCreators = bindActionCreators(GriddleActions, props.dispatch);
 
     const properties = PropertyHelper.propertiesToJS(
@@ -31,10 +31,10 @@ export default class GriddleContainer extends Component {
 
   render() {
     const { state, dispatch } = this.props;
-
     return (
       <Griddle
         {...state}
+        components={this.props.components}
         {...this.state.actionCreators}
         data={state.visibleData} />
     );

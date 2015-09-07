@@ -26,14 +26,16 @@ class Column extends React.Component {
   }
 
   _getStyles = () => {
-    return this.props.width || this.props.alignment ? {
+    return this.props.width || this.props.alignment || this.props.styles ? Object.assign({
         width: this.props.width || null,
         textAlign: this.props.alignment
-      } :
+      }, this.props.styles) :
       null;
   }
 
   _handleClick = (e) => {
+    if (this.props.onClick) this.props.onClick(e);
+
     this.props.events.columnClick(this.props.dataKey, this.props.value, this.props.rowIndex, this.props.rowData);
   }
 

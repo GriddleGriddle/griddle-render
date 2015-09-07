@@ -1,37 +1,13 @@
 'use strict';
 
 import React from 'react';
+import * as defaultModules from './defaultModules.js';
 
-import Column from './column';
-import Filter from './filter';
-import Pagination from './pagination';
-import Row from './row';
-import Table from './table';
-import TableBody from './table-body';
-import TableHeading from './table-heading';
-import SettingsToggle from './settings-toggle';
-import Settings from './settings';
-import NoResults from './no-results';
-import TableHeadingCell from './table-heading-cell';
-
-const defaultComponents = {
-  column: Column,
-  filter: Filter,
-  pagination: Pagination,
-  row: Row,
-  table: Table,
-  tableBody: TableBody,
-  tableHeading: TableHeading,
-  tableHeadingCell: TableHeadingCell,
-  settingsToggle: SettingsToggle,
-  settings: Settings,
-  noResults: NoResults
-};
-
-class Griddle extends React.Component {
+export default class Griddle extends React.Component {
   constructor(props, context) {
     super(props, context);
-    this.components = Object.assign({}, defaultComponents, this.props.components);
+
+    this.components = Object.assign({}, defaultModules, this.props.components);
 
     this.state = {};
     this.state.showSettings = false;
@@ -51,6 +27,7 @@ class Griddle extends React.Component {
       headingHover: this._columnHeadingHover,
       headingClick: this._columnHeadingClick,
       toggleColumn: this._toggleColumn,
+      expandRow: this._expandRow
     };
   }
 
@@ -119,6 +96,12 @@ class Griddle extends React.Component {
     }
   }
 
+  _expandRow = (griddleKey) => {
+    if(this.props.expandRow) {
+      this.props.expandRow(griddleKey)
+    }
+  }
+
   _rowHover = (rowData) => {
     //TODO:
   }
@@ -157,5 +140,3 @@ Griddle.propTypes = {
   data: React.PropTypes.object,
   components: React.PropTypes.object
 };
-
-export default Griddle;

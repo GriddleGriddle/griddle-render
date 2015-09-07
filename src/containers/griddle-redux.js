@@ -18,9 +18,9 @@ export default class GriddleRedux extends Component {
       /* griddle default states for local data */
       [States.data, States.local],
       /* griddle default reducers */
-      [Reducers.test, Reducers.data, Reducers.local],
+      [Reducers.test, Reducers.data, Reducers.local, Reducers.subgrid],
       /* helper methods */
-      [Helpers.data, Helpers.local]
+      [Helpers.data, Helpers.local, Helpers.subgrid]
     );
 
     /* set up the redux store */
@@ -31,7 +31,7 @@ export default class GriddleRedux extends Component {
   render() {
     return (
       <Provider store={this.store}>
-        {() => <GriddleContainer data={this.props.data}>
+        {() => <GriddleContainer {...this.props}>
           {this.props.children}
         </GriddleContainer>}
       </Provider>
