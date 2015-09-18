@@ -16,11 +16,11 @@ export default class GriddleRedux extends Component {
     //      if nothing is specified, it should default to the local one maybe
     const griddleReducer = GriddleReducer(
       /* griddle default states for local data */
-      [States.data, States.local],
+      [States.data, States.local, States.position],
       /* griddle default reducers */
-      [Reducers.test, Reducers.data, Reducers.local, Reducers.subgrid],
+      [Reducers.test, Reducers.data, Reducers.local, Reducers.subgrid, Reducers.position],
       /* helper methods */
-      [Helpers.data, Helpers.local, Helpers.subgrid]
+      [Helpers.data, Helpers.local, Helpers.subgrid, Helpers.position]
     );
 
     /* set up the redux store */

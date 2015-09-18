@@ -27,7 +27,8 @@ export default class Griddle extends React.Component {
       headingHover: this._columnHeadingHover,
       headingClick: this._columnHeadingClick,
       toggleColumn: this._toggleColumn,
-      expandRow: this._expandRow
+      expandRow: this._expandRow,
+      scroll: this._scroll
     };
   }
 
@@ -125,6 +126,12 @@ export default class Griddle extends React.Component {
   }
 
   _columnHeadingHover = (columnId) => {
+  }
+
+  _scroll = (scrollLeft, scrollWidth, scrollTop, scrollHeight) => {
+    if(this.props.scroll) {
+      this.props.scroll(scrollLeft, scrollWidth, scrollTop, scrollHeight);
+    }
   }
 }
 

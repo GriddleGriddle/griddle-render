@@ -1,5 +1,5 @@
 var Griddle = require('./src/griddle');
-var FakeData = require('./src/fake-subgrid-data');
+var FakeData = require('./src/fake-data');
 var React = require('react');
 var RowDefinition = require('./src/row-definition');
 var ColumnDefinition = require('./src/column-definition');
@@ -19,6 +19,12 @@ var SubgridTableBody = require('./src/plugins/subgrid/table-body');
 var SubgridTableHeading = require('./src/plugins/subgrid/table-heading');
 var TableHeading = require('./src/table-heading');
 var TableHeadingComponent = SubgridTableHeading(TableHeading)
+
+var ScrollableTable = require('./src/plugins/position/table');
+var Table = require('./src/table');
+var TableComponent = ScrollableTable(Table);
+var ScrollablePositionTableBody = require('./src/plugins/position/table-body');
+
 
 var Something = React.createClass({
   render() {
@@ -42,7 +48,7 @@ var CustomHeadingCell = React.createClass({
 var Test = React.createClass({
   render() {
     return <div>
-      <GriddleContainer data={FakeData} components={{row: RowComponent, column: ColumnComponent, tableBody: SubgridTableBody, tableHeading: TableHeadingComponent}}>
+      <GriddleContainer data={FakeData} dataKey={'renderedData'} components={{row: RowComponent, column: ColumnComponent, tableBody: ScrollablePositionTableBody, tableHeading: TableHeadingComponent, table: TableComponent}}>
         <RowDefinition keyColumn="id">
           <ColumnDefinition id="name" displayName="Name" cssClassName="name-class" />
           <ColumnDefinition id="state" order={1} />

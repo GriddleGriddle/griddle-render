@@ -7,10 +7,15 @@ import Griddle from '../griddle.js';
 import PropertyHelper from '../utils/property-helper';
 
 @connect(state => {
-  return ({
-  state: state.toJSON()
-})})
+  return {
+    state: state.toJSON()
+  };
+})
 export default class GriddleContainer extends Component {
+  static defaultProps = {
+    dataKey: 'visibleData'
+  }
+
   constructor(props) {
     super();
     this.state = {};
@@ -30,13 +35,14 @@ export default class GriddleContainer extends Component {
   }
 
   render() {
-    const { state, dispatch } = this.props;
+    const { state, dispatch, dataKey } = this.props;
+
     return (
       <Griddle
         {...state}
         components={this.props.components}
         {...this.state.actionCreators}
-        data={state.visibleData} />
+        data={state[dataKey]} />
     );
   }
 }
