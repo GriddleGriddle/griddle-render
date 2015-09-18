@@ -7,24 +7,24 @@ export default PositionTable => class extends Component {
     events: PropTypes.object.isRequired
   }
 
-  scroll(e) {
+  _scroll = () => {
     if (this.refs.scrollable) {
       let scrollableNode = this.refs.scrollable.getDOMNode();
-      this.props.events.scroll(scrollableNode.scrollLeft, scrollableNode.scrollWidth, scrollableNode.scrollTop, scrollableNode.scrollHeight);
+      this.props.events.setScrollPosition(scrollableNode.scrollLeft, scrollableNode.scrollWidth, scrollableNode.scrollTop, scrollableNode.scrollHeight);
     }
   }
 
   render() {
-    const { placement, currentPosition } = this.props;
+    const { currentPosition } = this.props;
 
     const wrapperStyle = {
       'height': currentPosition.tableHeight + 'px',
       'width': currentPosition.tableWidth + 'px',
-      'overflow': 'scroll',
+      'overflow': 'scroll'
     };
 
     return (
-      <div ref="scrollable" onScroll={this.scroll.bind(this)} style={wrapperStyle}>
+      <div ref="scrollable" onScroll={this._scroll} style={wrapperStyle}>
         <PositionTable {...this.props} />
       </div>
     );
