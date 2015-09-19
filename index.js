@@ -5,20 +5,25 @@ var RowDefinition = require('./src/row-definition');
 var ColumnDefinition = require('./src/column-definition');
 var GriddleContainer = require('./src/containers/griddle-redux');
 
-var SubgridRow = require('./src/plugins/subgrid/row');
-var Row = require('./src/row');
-
-var RowComponent = SubgridRow(Row);
-
-var SubgridColumn = require('./src/plugins/subgrid/column');
+var SelectionColumn = require('./src/plugins/selection/column');
 var Column = require('./src/column');
 
-var ColumnComponent = SubgridColumn(Column);
-var SubgridTableBody = require('./src/plugins/subgrid/table-body');
+var ColumnComponent = SelectionColumn(Column);
 
-var SubgridTableHeading = require('./src/plugins/subgrid/table-heading');
-var TableHeading = require('./src/table-heading');
-var TableHeadingComponent = SubgridTableHeading(TableHeading)
+// var SubgridRow = require('./src/plugins/subgrid/row');
+// var Row = require('./src/row');
+
+// var RowComponent = SubgridRow(Row);
+
+// var SubgridColumn = require('./src/plugins/subgrid/column');
+// var Column = require('./src/column');
+
+// var ColumnComponent = SubgridColumn(Column);
+// var SubgridTableBody = require('./src/plugins/subgrid/table-body');
+
+// var SubgridTableHeading = require('./src/plugins/subgrid/table-heading');
+// var TableHeading = require('./src/table-heading');
+// var TableHeadingComponent = SubgridTableHeading(TableHeading)
 
 var Something = React.createClass({
   render() {
@@ -42,7 +47,7 @@ var CustomHeadingCell = React.createClass({
 var Test = React.createClass({
   render() {
     return <div>
-      <GriddleContainer data={FakeData} components={{row: RowComponent, column: ColumnComponent, tableBody: SubgridTableBody, tableHeading: TableHeadingComponent}}>
+      <GriddleContainer data={FakeData} components={{column: ColumnComponent}}>
         <RowDefinition keyColumn="id">
           <ColumnDefinition id="name" displayName="Name" cssClassName="name-class" />
           <ColumnDefinition id="state" order={1} />

@@ -13,6 +13,7 @@ export default class Griddle extends React.Component {
     this.state.showSettings = false;
   }
 
+  //TODO: This is okay-ish for the defaults but lets do something to override for plugins... there is stuff here for subgrid and selection and there shouldn't be.
   getEvents() {
     return {
       getNextPage: this._nextPage,
@@ -27,6 +28,7 @@ export default class Griddle extends React.Component {
       headingHover: this._columnHeadingHover,
       headingClick: this._columnHeadingClick,
       toggleColumn: this._toggleColumn,
+      toggleRowSelection: this._toggleRowSelection,
       expandRow: this._expandRow
     };
   }
@@ -87,6 +89,12 @@ export default class Griddle extends React.Component {
   _setPageSize = (size) => {
     if(this.props.setPageSize) {
       this.props.setPageSize(size);
+    }
+  }
+
+  _toggleRowSelection = (columnId) => {
+    if(this.props.toggleRowSelection) {
+      this.props.toggleRowSelection(columnId);
     }
   }
 
