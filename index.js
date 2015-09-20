@@ -1,14 +1,17 @@
 var Griddle = require('./src/griddle');
-var FakeData = require('./src/fake-subgrid-data');
+var FakeData = require('./src/fake-data');
 var React = require('react');
 var RowDefinition = require('./src/row-definition');
 var ColumnDefinition = require('./src/column-definition');
 var GriddleContainer = require('./src/containers/griddle-redux');
 
 var SelectionColumn = require('./src/plugins/selection/column');
-var Column = require('./src/column');
+var SelectionRow = require('./src/plugins/selection/row');
 
-var ColumnComponent = SelectionColumn(Column);
+var Column = require('./src/column');
+var Row = require('./src/row');
+
+var RowComponent = SelectionRow(Row);
 
 // var SubgridRow = require('./src/plugins/subgrid/row');
 // var Row = require('./src/row');
@@ -47,7 +50,7 @@ var CustomHeadingCell = React.createClass({
 var Test = React.createClass({
   render() {
     return <div>
-      <GriddleContainer data={FakeData} components={{column: ColumnComponent}}>
+      <GriddleContainer data={FakeData} components={{ row: RowComponent}}>
         <RowDefinition keyColumn="id">
           <ColumnDefinition id="name" displayName="Name" cssClassName="name-class" />
           <ColumnDefinition id="state" order={1} />
