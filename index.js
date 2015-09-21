@@ -5,7 +5,6 @@ var RowDefinition = require('./src/row-definition');
 var ColumnDefinition = require('./src/column-definition');
 var GriddleContainer = require('./src/containers/griddle-redux');
 
-var SelectionColumn = require('./src/plugins/selection/column');
 var SelectionRow = require('./src/plugins/selection/row');
 
 var Column = require('./src/column');
