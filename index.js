@@ -1,3 +1,5 @@
+'use strict';
+
 var Griddle = require('./src/griddle');
 var FakeData = require('./src/fake-data');
 var React = require('react');
@@ -7,7 +9,7 @@ var GriddleContainer = require('./src/containers/griddle-redux');
 
 var SelectionRow = require('./src/plugins/selection/row');
 
-var Column = require('./src/column');
+//var Column = require('./src/column');
 var Row = require('./src/row');
 
 var RowComponent = SelectionRow(Row);
@@ -26,6 +28,16 @@ var RowComponent = SelectionRow(Row);
 // var SubgridTableHeading = require('./src/plugins/subgrid/table-heading');
 // var TableHeading = require('./src/table-heading');
 // var TableHeadingComponent = SubgridTableHeading(TableHeading)
+
+var SubgridTableHeading = require('./src/plugins/selection/table-heading');
+var TableHeading = require('./src/table-heading');
+var TableHeadingComponent = SubgridTableHeading(TableHeading);
+
+var ScrollableTable = require('./src/plugins/position/table');
+var Table = require('./src/table');
+var TableComponent = ScrollableTable(Table);
+var ScrollablePositionTableBody = require('./src/plugins/position/table-body');
+
 
 var Something = React.createClass({
   render() {
@@ -49,7 +61,7 @@ var CustomHeadingCell = React.createClass({
 var Test = React.createClass({
   render() {
     return <div>
-      <GriddleContainer data={FakeData} components={{ row: RowComponent}}>
+      <GriddleContainer data={FakeData} dataKey={'renderedData'} components={{row: RowComponent, tableBody: ScrollablePositionTableBody, table: TableComponent, tableHeading: TableHeadingComponent}}>
         <RowDefinition keyColumn="id">
           <ColumnDefinition id="name" displayName="Name" cssClassName="name-class" />
           <ColumnDefinition id="state" order={1} />

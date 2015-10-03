@@ -28,8 +28,9 @@ export default class Griddle extends React.Component {
       headingHover: this._columnHeadingHover,
       headingClick: this._columnHeadingClick,
       toggleColumn: this._toggleColumn,
-      toggleRowSelection: this._toggleRowSelection,
-      expandRow: this._expandRow
+      expandRow: this._expandRow,
+      setScrollPosition: this._setScrollPosition,
+      toggleRowSelection: this._toggleRowSelection
     };
   }
 
@@ -134,6 +135,12 @@ export default class Griddle extends React.Component {
 
   _columnHeadingHover = (columnId) => {
   }
+
+  _setScrollPosition = (scrollLeft, scrollWidth, scrollTop, scrollHeight) => {
+    if(this.props.setScrollPosition) {
+      this.props.setScrollPosition(scrollLeft, scrollWidth, scrollTop, scrollHeight);
+    }
+  }
 }
 
 // Configure the default props.
@@ -145,6 +152,6 @@ Griddle.defaultProps = {
 
 Griddle.propTypes = {
   events: React.PropTypes.object,
-  data: React.PropTypes.object,
+  data: React.PropTypes.array,
   components: React.PropTypes.object
 };

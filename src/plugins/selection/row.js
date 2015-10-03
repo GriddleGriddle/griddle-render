@@ -2,7 +2,10 @@ import React, { Component, PropTypes } from 'react';
 
 class SelectColumn extends Component {
   static propTypes = {
-    griddleKey: PropTypes.string,
+    griddleKey: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.number
+    ]),
     selected: PropTypes.bool,
     events: PropTypes.object
   }
