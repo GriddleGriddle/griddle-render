@@ -23,6 +23,7 @@ class TableHeading extends React.Component {
       let component = null;
       if(showColumn) {
         component = (<this.props.components.tableHeadingCell
+            key={column}
             column={column}
             headingClick={headingClick}
             headingHover={headingHover}
