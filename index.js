@@ -29,6 +29,10 @@ var RowComponent = SelectionRow(Row);
 // var TableHeading = require('./src/table-heading');
 // var TableHeadingComponent = SubgridTableHeading(TableHeading)
 
+var SubgridTableHeading = require('./src/plugins/selection/table-heading');
+var TableHeading = require('./src/table-heading');
+var TableHeadingComponent = SubgridTableHeading(TableHeading);
+
 var ScrollableTable = require('./src/plugins/position/table');
 var Table = require('./src/table');
 var TableComponent = ScrollableTable(Table);
@@ -57,7 +61,7 @@ var CustomHeadingCell = React.createClass({
 var Test = React.createClass({
   render() {
     return <div>
-      <GriddleContainer data={FakeData} dataKey={'renderedData'} components={{row: RowComponent, tableBody: ScrollablePositionTableBody, table: TableComponent}}>
+      <GriddleContainer data={FakeData} dataKey={'renderedData'} components={{row: RowComponent, tableBody: ScrollablePositionTableBody, table: TableComponent, tableHeading: TableHeadingComponent}}>
         <RowDefinition keyColumn="id">
           <ColumnDefinition id="name" displayName="Name" cssClassName="name-class" />
           <ColumnDefinition id="state" order={1} />
