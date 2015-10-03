@@ -5,20 +5,27 @@ var RowDefinition = require('./src/row-definition');
 var ColumnDefinition = require('./src/column-definition');
 var GriddleContainer = require('./src/containers/griddle-redux');
 
-var SubgridRow = require('./src/plugins/subgrid/row');
+var SelectionRow = require('./src/plugins/selection/row');
+
+var Column = require('./src/column');
 var Row = require('./src/row');
 
-var RowComponent = SubgridRow(Row);
+var RowComponent = SelectionRow(Row);
 
-var SubgridColumn = require('./src/plugins/subgrid/column');
-var Column = require('./src/column');
+// var SubgridRow = require('./src/plugins/subgrid/row');
+// var Row = require('./src/row');
 
-var ColumnComponent = SubgridColumn(Column);
-var SubgridTableBody = require('./src/plugins/subgrid/table-body');
+// var RowComponent = SubgridRow(Row);
 
-var SubgridTableHeading = require('./src/plugins/subgrid/table-heading');
-var TableHeading = require('./src/table-heading');
-var TableHeadingComponent = SubgridTableHeading(TableHeading)
+// var SubgridColumn = require('./src/plugins/subgrid/column');
+// var Column = require('./src/column');
+
+// var ColumnComponent = SubgridColumn(Column);
+// var SubgridTableBody = require('./src/plugins/subgrid/table-body');
+
+// var SubgridTableHeading = require('./src/plugins/subgrid/table-heading');
+// var TableHeading = require('./src/table-heading');
+// var TableHeadingComponent = SubgridTableHeading(TableHeading)
 
 var ScrollableTable = require('./src/plugins/position/table');
 var Table = require('./src/table');

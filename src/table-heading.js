@@ -26,7 +26,7 @@ class TableHeading extends React.Component {
             column={column}
             headingClick={headingClick}
             headingHover={headingHover}
-            title={this.props.columnTitles[column] ?
+            title={this.props.columnTitles[column]  ?
               this.props.columnTitles[column] :
               column}
             {...columnProperty} />);
