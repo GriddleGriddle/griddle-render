@@ -5,7 +5,8 @@ var FakeData = require('./src/fake-data');
 var React = require('react');
 var RowDefinition = require('./src/row-definition');
 var ColumnDefinition = require('./src/column-definition');
-var GriddleContainer = require('./src/containers/griddle-redux');
+var { GriddleRedux } = require('./src/containers/griddle-redux');
+var GriddleComponent = GriddleRedux(Griddle);
 
 var SelectionRow = require('./src/plugins/selection/row');
 
@@ -61,12 +62,12 @@ var CustomHeadingCell = React.createClass({
 var Test = React.createClass({
   render() {
     return <div>
-      <GriddleContainer data={FakeData} dataKey={'renderedData'} components={{row: RowComponent, tableBody: ScrollablePositionTableBody, table: TableComponent, tableHeading: TableHeadingComponent}}>
+      <GriddleComponent data={FakeData} dataKey={'renderedData'} components={{row: RowComponent, tableBody: ScrollablePositionTableBody, table: TableComponent, tableHeading: TableHeadingComponent}}>
         <RowDefinition keyColumn="id">
           <ColumnDefinition id="name" displayName="Name" cssClassName="name-class" />
           <ColumnDefinition id="state" order={1} />
         </RowDefinition>
-      </GriddleContainer>
+      </GriddleComponent>
     </div>
   }
 });
