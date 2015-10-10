@@ -39,6 +39,8 @@
     "object-assign": "~2.0.0",
     "react": "^0.13.3",
     "react-redux": "^0.2.1",
-    "redux": "^1.0.0-rc"
+    "redux": "^1.0.0-rc",
+    "redux-thunk": "^1.0.0",
+    "superagent": "^1.4.0"
   }
 }

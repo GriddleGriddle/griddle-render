@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import GriddleContainer from './griddle-container';
 
-import { createStore, combineReducers } from 'redux';
+import { createStore, combineReducers, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
+import thunk from 'redux-thunk';
 
 import {Reducers, States, GriddleReducer} from 'griddle-core';
 import { GriddleActions } from 'griddle-core';
@@ -23,9 +24,10 @@ export default class GriddleRedux extends Component {
       [Helpers.data, Helpers.local, Helpers.position]
     );
 
-    /* set up the redux store */
-    const combinedReducer = combineReducers(griddleReducer);
-    this.store = createStore(griddleReducer);
+    // Use the thunk middleware to allow for multiple dispatches in a single action.
+    const createStoreWithMiddleware = applyMiddleware(thunk)(createStore);
+
+    this.store = createStoreWithMiddleware(griddleReducer);
   }
 
   render() {
@@ -35,7 +37,7 @@ export default class GriddleRedux extends Component {
           {this.props.children}
         </GriddleContainer>}
       </Provider>
-    )
+    );
   }
 
   static PropTypes = {
