@@ -5,11 +5,11 @@
   "main": "index.js",
   "scripts": {
     "test": "karma start --browsers PhantomJS",
-    "start": "node server.js",
+    "start": "./node_modules/.bin/webpack --config webpack.config.js --watch",
     "test-debug": "karma start --browsers Chrome",
     "lint": "./node_modules/.bin/eslint js"
   },
-  "author": "Ryan Lanciaux && Joel Lanciaux",
+  "author": "Griddle",
   "license": "MIT",
   "devDependencies": {
     "babel": "^5.5.8",
@@ -29,18 +29,12 @@
     "karma-webpack": "^1.5.0",
     "phantomjs": "^1.9.16",
     "phantomjs-polyfill": "0.0.1",
-    "react-draggable": "^0.6.0",
     "react-hot-loader": "~1.2.7",
     "webpack": "~1.9.11",
     "webpack-dev-server": "~1.9.0"
   },
   "dependencies": {
-    "griddle-core": "file:..\\griddle-core",
     "object-assign": "~2.0.0",
-    "react": "^0.13.3",
-    "react-redux": "^0.2.1",
-    "redux": "^1.0.0-rc",
-    "redux-thunk": "^1.0.0",
-    "superagent": "^1.4.0"
+    "react": "^0.14.0"
   }
 }

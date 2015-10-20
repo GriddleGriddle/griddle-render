@@ -22,6 +22,7 @@ class Pagination extends React.Component {
   }
 
   _getSelect() {
+    if( !this.props.pageProperties || !this.props.pageProperties.maxPage ) { return; }
     //Make this nicer
     var options = [];
 
