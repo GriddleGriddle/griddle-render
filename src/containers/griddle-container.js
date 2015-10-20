@@ -3,7 +3,6 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 import { GriddleActions } from 'griddle-core';
-import Griddle from '../griddle.js';
 import PropertyHelper from '../utils/property-helper';
 
 @connect(state => {
@@ -11,7 +10,8 @@ import PropertyHelper from '../utils/property-helper';
     state: state.toJSON()
   };
 })
-export default class GriddleContainer extends Component {
+
+export var GriddleContainer = ComposedComponent => class extends Component {
   static defaultProps = {
     dataKey: 'visibleData'
   }
@@ -38,7 +38,7 @@ export default class GriddleContainer extends Component {
     const { state, dispatch, dataKey } = this.props;
 
     return (
-      <Griddle
+      <ComposedComponent
         {...state}
         components={this.props.components}
         {...this.state.actionCreators}
