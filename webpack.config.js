@@ -1,27 +1,34 @@
 var webpack = require('webpack');
 
+var reactExternal = {
+  root: 'React',
+  commonjs2: 'react',
+  commonjs: 'react',
+  amd: 'react'
+};
+
 module.exports = {
-  devtool: 'source-map',
-  entry: [
-    'webpack-dev-server/client?http://localhost:3000',
-    'webpack/hot/only-dev-server',
-    './index'
-  ],
+  devtool: 'eval',
+  entry: './index',
   output: {
     path: __dirname + '/build/',
-    filename: 'griddle.js',
-    publicPath: '/build/'
+    filename: 'griddle-render.js',
+    publicPath: '/build/',
+    libraryTarget: 'commonjs2'
   },
   plugins: [
-    new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoErrorsPlugin()
   ],
   resolve: {
     extensions: ['', '.js', '.jsx']
   },
+  externals: {
+    'react': reactExternal
+  },
   module: {
-    loaders: [
-      { test: /\.jsx?$/, loaders: ['react-hot', 'babel?{"plugins":["babel-plugin-object-assign"]}'], exclude: /node_modules/ }
-    ]
+    loaders: [{
+      test: /\.js$/,
+      loaders: ['babel'],
+      exclude: /node_modules/,
+    } ]
   }
 };

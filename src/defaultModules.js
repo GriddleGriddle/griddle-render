@@ -1,3 +1,4 @@
+import ColumnDefinition from './column-definition';
 import Column from './column';
 import Filter from './filter';
 import Pagination from './pagination';
@@ -11,6 +12,7 @@ import NoResults from './no-results';
 import TableHeadingCell from './table-heading-cell';
 import Icons from './icons';
 
+export { ColumnDefinition as columnDefinition }
 export { Column as column }
 export { Filter as filter }
 export { Pagination as pagination }
