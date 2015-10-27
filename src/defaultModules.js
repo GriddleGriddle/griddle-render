@@ -1,27 +1,29 @@
 import ColumnDefinition from './column-definition';
 import Column from './column';
 import Filter from './filter';
+import Icons from './icons';
+import NoResults from './no-results';
 import Pagination from './pagination';
+import RowDefinition from './row-definition';
 import Row from './row';
-import Table from './table';
-import TableBody from './table-body';
-import TableHeading from './table-heading';
 import SettingsToggle from './settings-toggle';
 import Settings from './settings';
-import NoResults from './no-results';
+import TableBody from './table-body';
+import TableHeading from './table-heading';
 import TableHeadingCell from './table-heading-cell';
-import Icons from './icons';
+import Table from './table';
 
-export { ColumnDefinition as columnDefinition }
-export { Column as column }
-export { Filter as filter }
-export { Pagination as pagination }
-export { Row as row }
-export { Table as table }
-export { TableBody as tableBody }
-export { TableHeading as tableHeading }
-export { SettingsToggle as settingsToggle }
-export { Settings as settings }
-export { NoResults as noResults }
-export { TableHeadingCell as tableHeadingCell }
-export { Icons as icons }
+export { ColumnDefinition as ColumnDefinition }
+export { Column as Column }
+export { Filter as Filter }
+export { Icons as Icons }
+export { NoResults as NoResults }
+export { Pagination as Pagination }
+export { RowDefinition as RowDefinition}
+export { Row as Row }
+export { SettingsToggle as SettingsToggle }
+export { Settings as Settings }
+export { TableBody as TableBody }
+export { TableHeading as TableHeading }
+export { TableHeadingCell as TableHeadingCell }
+export { Table as Table }

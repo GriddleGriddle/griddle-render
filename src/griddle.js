@@ -45,15 +45,15 @@ export default class Griddle extends React.Component {
     return (
       <div>
         {/*TODO: Lets not duplicate these prop defs all over (events/components) */}
-        <this.components.filter {...this.props} components={components} events={events} />
-        <this.components.settingsToggle components={components} events={events} showSettings={this._showSettings} />
-        {this.state.showSettings ? <this.components.settings {...this.props} components={components} events={events} /> : null }
+        <this.components.Filter {...this.props} components={components} events={events} />
+        <this.components.SettingsToggle components={components} events={events} showSettings={this._showSettings} />
+        {this.state.showSettings ? <this.components.Settings {...this.props} components={components} events={events} /> : null }
 
         {this.props.data && this.props.data.length > 0 ?
-          <this.components.table {...this.props} components={components} events={events} /> :
-          <this.components.noResults components={components} events={events} /> }
+          <this.components.Table {...this.props} components={components} events={events} /> :
+          <this.components.NoResults components={components} events={events} /> }
 
-        <this.components.pagination {...this.props} components={components} events={events} />
+        <this.components.Pagination {...this.props} components={components} events={events} />
       </div>
     );
   }
