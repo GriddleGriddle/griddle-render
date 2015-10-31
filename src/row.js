@@ -20,7 +20,7 @@ class Row extends React.Component {
       let columnProperty = ColumnHelper.getColumnPropertyObject(columnProperties, column);
       //render the column if there are no properties, there are properties and the column is in the collection OR there are properties and no column properties.
 
-      if(ColumnHelper.isColumnVisible(columnProperties, ignoredColumns, column)) {
+      if(ColumnHelper.isColumnVisible(column, {columnProperties, ignoredColumns})) {
         columns.push(<this.props.components.Column
           {...this.props}
           key={column}
