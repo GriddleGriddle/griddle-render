@@ -12,15 +12,15 @@ class Row extends React.Component {
     //TODO: Refactor this  -- the logic to show / hide columns is kind of rough
     //      Also, it seems that if we moved this operation to a store, it could be a bit faster
     let columns = [];
-    const { columnProperties, tableProperties, rowData, events, rowIndex } = this.props;
+    const { columnProperties, ignoredColumns, tableProperties, rowData, events, rowIndex } = this.props;
     const { griddleKey } = rowData;
-
     //render just the columns that are contained in the metdata
     for (var column in rowData) {
       //get the additional properties defined in the creation of the object
       let columnProperty = ColumnHelper.getColumnPropertyObject(columnProperties, column);
       //render the column if there are no properties, there are properties and the column is in the collection OR there are properties and no column properties.
-      if(ColumnHelper.isColumnVisible(columnProperties, column)) {
+
+      if(ColumnHelper.isColumnVisible(columnProperties, ignoredColumns, column)) {
         columns.push(<this.props.components.Column
           {...this.props}
           key={column}
@@ -29,7 +29,6 @@ class Row extends React.Component {
           {...columnProperty} />);
       }
     }
-
     return (
       <tr onMouseOver={this._handleHover} onClick={this._handleSelect} key={griddleKey} >
         {columns}

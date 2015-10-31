@@ -21,6 +21,7 @@ class TableBody extends React.Component {
         rowIndex={index}
         rowProperties={this.props.renderProperties.rowProperties}
         tableProperties={this.props.tableProperties}
+        ignoredColumns={this.props.renderProperties.ignoredColumns}
         columnProperties={this.props.renderProperties.columnProperties} />
     );
 

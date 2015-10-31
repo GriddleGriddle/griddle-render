@@ -19,7 +19,7 @@
 
     const headings = this.props.columns.map(column =>{
       let columnProperty = ColumnHelper.getColumnPropertyObject(renderProperties.columnProperties, column);
-      const showColumn = ColumnHelper.isColumnVisible(renderProperties.columnProperties, column);
+      const showColumn = ColumnHelper.isColumnVisible(renderProperties.columnProperties, renderProperties.ignoredColumns, column);
       let component = null;
       if(showColumn) {
         component = (<this.props.components.TableHeadingCell
