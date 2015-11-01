@@ -1,7 +1,7 @@
-import React from 'react';
-import ColumnHelper from './utils/column-helper';
+  import React from 'react';
+  import ColumnHelper from './utils/column-helper';
 
-class TableHeading extends React.Component {
+  class TableHeading extends React.Component {
   constructor(props, context) {
     super(props, context);
 
@@ -19,10 +19,10 @@ class TableHeading extends React.Component {
 
     const headings = this.props.columns.map(column =>{
       let columnProperty = ColumnHelper.getColumnPropertyObject(renderProperties.columnProperties, column);
-      const showColumn = ColumnHelper.isColumnVisible(renderProperties.columnProperties, column);
+      const showColumn = ColumnHelper.isColumnVisible(renderProperties.columnProperties, renderProperties.ignoredColumns, column);
       let component = null;
       if(showColumn) {
-        component = (<this.props.components.tableHeadingCell
+        component = (<this.props.components.TableHeadingCell
             key={column}
             column={column}
             headingClick={headingClick}
@@ -34,7 +34,7 @@ class TableHeading extends React.Component {
       }
 
       return component;
-      });
+    });
 
     return this.props.columns.length > 0 ? (
       <thead>
@@ -46,4 +46,4 @@ class TableHeading extends React.Component {
   }
 }
 
-export default TableHeading;
+  export default TableHeading;
