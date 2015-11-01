@@ -4,7 +4,7 @@
 //      Could probalby set something up in the reducers to send the visible columns based on the properties.
 //      At the very least, make the signature (column, { columnProperties, ignoredColumns })
 const ColumnHelper = {
-  isColumnVisible(columnProperties,ignoredColumns, column) {
+  isColumnVisible(column, {columnProperties,ignoredColumns}) {
     if(!columnProperties && !ignoredColumns) { return true; }
 
     if(!columnProperties) {
