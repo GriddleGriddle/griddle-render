@@ -32,7 +32,7 @@
             sortAscending={sortAscending}
             headingClick={headingClick}
             headingHover={headingHover}
-            icons={this.props.components.icons}
+            icons={this.props.styles.icons}
             title={this.props.columnTitles[column]  ?
               this.props.columnTitles[column] :
               column}

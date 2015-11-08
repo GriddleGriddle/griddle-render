@@ -1,7 +1,6 @@
 import ColumnDefinition from './column-definition';
 import Column from './column';
 import Filter from './filter';
-import Icons from './icons';
 import NoResults from './no-results';
 import Pagination from './pagination';
 import RowDefinition from './row-definition';
@@ -16,7 +15,6 @@ import Table from './table';
 export { ColumnDefinition as ColumnDefinition }
 export { Column as Column }
 export { Filter as Filter }
-export { Icons as icons }
 export { NoResults as NoResults }
 export { Pagination as Pagination }
 export { RowDefinition as RowDefinition}
