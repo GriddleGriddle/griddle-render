@@ -16,7 +16,7 @@ import Table from './table';
 export { ColumnDefinition as ColumnDefinition }
 export { Column as Column }
 export { Filter as Filter }
-export { Icons as Icons }
+export { Icons as icons }
 export { NoResults as NoResults }
 export { Pagination as Pagination }
 export { RowDefinition as RowDefinition}

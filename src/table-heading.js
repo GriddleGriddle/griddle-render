@@ -20,14 +20,20 @@
     const headings = this.props.columns.map(column =>{
       let columnProperty = ColumnHelper.getColumnPropertyObject(renderProperties.columnProperties, column);
       const showColumn = ColumnHelper.isColumnVisible(column, { columnProperties: renderProperties.columnProperties, ignoredColumns: renderProperties.ignoredColumns });
+      const sortAscending = this.props.sortProperties && this.props.sortProperties.sortAscending;
+      const sorted = this.props.sortProperties && this.props.sortProperties.sortColumns.indexOf(column) > -1
+
       let component = null;
       if(showColumn) {
         component = (<this.props.components.TableHeadingCell
             key={column}
             column={column}
+            sorted={sorted}
+            sortAscending={sortAscending}
             headingClick={headingClick}
             headingHover={headingHover}
-            title={this.props.columnTitles[column] ?
+            icons={this.props.components.icons}
+            title={this.props.columnTitles[column]  ?
               this.props.columnTitles[column] :
               column}
             {...columnProperty}

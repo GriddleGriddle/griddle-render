@@ -8,16 +8,24 @@ class TableHeadingCell extends React.Component {
     this._handleHover = this._handleHover.bind(this);
   }
 
+  getSortIcon() {
+    const { sorted, sortAscending, icons } = this.props;
+
+    if (sorted) {
+      return sortAscending ? icons.sortAscending : icons.sortDescending;
+    }
+  }
+
   render() {
     //TODO: merge this instead of setting it here
-    const style = this.props.alignment || this.props.headerAlignment ? {
-      textAlign: this.props.headerAlignment || this.props.alignment,
-      ...this.props.style
-    } : this.props.style;
+    const style = this.props.alignment || this.props.headerAlignment ?
+      {textAlign: this.props.headerAlignment || this.props.alignment} :
+      null;
+    const { sorted } = this.props;
 
     return (
       <th key={this.props.column} style={style} onMouseOver={this._handleHover} onClick={this._handleClick}>
-        {this.props.title}
+        {this.props.title} { this.getSortIcon() }
       </th>);
   }
 
@@ -35,7 +43,9 @@ TableHeadingCell.propTypes = {
   headingClick: React.PropTypes.func,
   column: React.PropTypes.string,
   headerAlignment: React.PropTypes.oneOf(['left', 'right', 'center']),
-  alignment: React.PropTypes.oneOf(['left', 'right', 'center'])
+  alignment: React.PropTypes.oneOf(['left', 'right', 'center']),
+  sortAscending: React.PropTypes.bool,
+  sorted: React.PropTypes.bool
 };
 
 export default TableHeadingCell;
