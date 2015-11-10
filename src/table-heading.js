@@ -27,10 +27,11 @@
             column={column}
             headingClick={headingClick}
             headingHover={headingHover}
-            title={this.props.columnTitles[column]  ?
+            title={this.props.columnTitles[column] ?
               this.props.columnTitles[column] :
               column}
-            {...columnProperty} />);
+            {...columnProperty}
+            {...this.props}/>);
       }
 
       return component;

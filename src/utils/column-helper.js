@@ -14,7 +14,7 @@ const ColumnHelper = {
     return (
       ((columnProperties.hasOwnProperty(column) && !columnProperties[column].hidden) ||
       Object.getOwnPropertyNames(columnProperties).length === 0) &&
-      ignoredColumns.indexOf(column) < 0
+      (ignoredColumns && ignoredColumns.indexOf(column) < 0)
     );
   },
 

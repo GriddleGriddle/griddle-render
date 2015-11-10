@@ -10,9 +10,10 @@ class TableHeadingCell extends React.Component {
 
   render() {
     //TODO: merge this instead of setting it here
-    const style = this.props.alignment || this.props.headerAlignment ?
-      {textAlign: this.props.headerAlignment || this.props.alignment} :
-      null;
+    const style = this.props.alignment || this.props.headerAlignment ? {
+      textAlign: this.props.headerAlignment || this.props.alignment,
+      ...this.props.style
+    } : this.props.style;
 
     return (
       <th key={this.props.column} style={style} onMouseOver={this._handleHover} onClick={this._handleClick}>
