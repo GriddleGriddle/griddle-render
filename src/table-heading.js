@@ -30,6 +30,8 @@
             column={column}
             sorted={sorted}
             sortAscending={sortAscending}
+            settings={this.props.settings}
+            styles={this.props.styles}
             headingClick={headingClick}
             headingHover={headingHover}
             icons={this.props.styles.icons}

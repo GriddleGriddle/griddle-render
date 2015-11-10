@@ -1,5 +1,19 @@
+//This is a method that the individual components will use to interact with the inline styles
+//
+// styleName: the name of the inline style
+// styles: the inline styles object
+// useStyles: whether or not the inline styles should be used
+// mergeStyles: styles to apply in addition to the inline styling. This is usually applied with some logic in the front-end
+export function getStyle({styleName, styles, useStyles, mergeStyles = null}) {
+  if (useStyles && styles.hasOwnProperty(styleName)) {
+    return Object.assign({}, styles[styleName], mergeStyles);
+  }
+
+  return mergeStyles || null;
+}
+
 export const inlineStyles = {
-  settingsButton: { 
+  settingsToggle: {
     background: 'none',
     border: 'none',
     padding: 0,
@@ -26,8 +40,7 @@ export const inlineStyles = {
 
   column: {
     margin: '0',
-    padding: that.props.paddingHeight + 'px 5px ' + that.props.paddingHeight + 'px 5px',
-    height: that.props.rowHeight? this.props.rowHeight - that.props.paddingHeight * 2 + 'px' : null,
+    padding: '5px 5px 5px 5px',
     backgroundColor: '#FFF',
     borderTopColor: '#DDD',
     color: '#222'

@@ -17,10 +17,15 @@ class TableHeadingCell extends React.Component {
   }
 
   render() {
-    //TODO: merge this instead of setting it here
-    const style = this.props.alignment || this.props.headerAlignment ?
-      {textAlign: this.props.headerAlignment || this.props.alignment} :
-      null;
+    const style = this.props.styles.getStyle({
+      useStyles: this.props.settings.useGriddleStyles,
+      styles: this.props.styles.inlineStyles,
+      styleName: 'columnTitle',
+      mergeStyles: this.props.alignment || this.props.headerAlignment ?
+        {textAlign: this.props.headerAlignment || this.props.alignment} :
+        null
+    });
+
     const { sorted } = this.props;
 
     return (
