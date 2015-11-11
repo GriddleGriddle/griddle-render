@@ -8,10 +8,14 @@ class Filter extends React.Component {
   }
 
   render() {
+    const style = this.props.styles.getStyle({
+      useStyles: this.props.settings.useGriddleStyles,
+      styles: this.props.styles.inlineStyles,
+      styleName: 'filter'
+    });
+
     return (
-      <div>
-        <input type="text" name="filter" placeholder="filter" onChange={this._handleChange} />
-      </div>
+      <input type="text" name="filter" style={style} placeholder="filter" onChange={this._handleChange} />
     );
   }
 

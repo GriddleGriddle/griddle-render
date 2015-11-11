@@ -12,8 +12,14 @@ class SettingsToggle extends React.Component {
   }
 
   render() {
+    const style = this.props.styles.getStyle({
+      useStyles: this.props.settings.useGriddleStyles,
+      styles: this.props.styles.inlineStyles,
+      styleName: 'settingsToggle'
+    });
+
     //TODO: these class names are awful -- use the global style object instead
-    return <button className={this.state.toggled ? 'toggled' : 'not-toggled'} onClick={this._handleButton}>Settings</button>;
+    return <button className={this.state.toggled ? 'toggled' : 'not-toggled'} style={style} onClick={this._handleButton}>Settings</button>;
   }
 
   //this should keep track locally if it's toggled

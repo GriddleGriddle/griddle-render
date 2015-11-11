@@ -1,7 +1,9 @@
 'use strict';
 
 import React from 'react';
-import * as defaultModules from './defaultModules.js';
+import * as defaultModules from './defaultModules';
+import { getAssignedStyles } from './defaultStyles';
+import * as defaultSettings from './defaultSettings';
 
 export default class Griddle extends React.Component {
   constructor(props, context) {
@@ -9,8 +11,9 @@ export default class Griddle extends React.Component {
 
     this.components = Object.assign({}, defaultModules, this.props.components);
 
-    this.state = {};
-    this.state.showSettings = false;
+    this.styles = getAssignedStyles(this.props.style);
+    this.settings = Object.assign({}, defaultSettings, this.props.settings);
+    this.state = { showSettings: false };
   }
 
   //TODO: This is okay-ish for the defaults but lets do something to override for plugins... there is stuff here for subgrid and selection and there shouldn't be.
@@ -41,19 +44,20 @@ export default class Griddle extends React.Component {
   render() {
     const events = this.getEvents();
     const components = this.getComponents();
+    const { styles, settings } = this;
 
     return (
       <div>
         {/*TODO: Lets not duplicate these prop defs all over (events/components) */}
-        <this.components.Filter {...this.props} components={components} events={events} />
-        <this.components.SettingsToggle components={components} events={events} showSettings={this._showSettings} />
-        {this.state.showSettings ? <this.components.Settings {...this.props} components={components} events={events} /> : null }
+        <this.components.Filter {...this.props} components={components} styles={styles} settings={settings} events={events} />
+        <this.components.SettingsToggle components={components} styles={styles} events={events} settings={settings} showSettings={this._showSettings} />
+        {this.state.showSettings ? <this.components.Settings {...this.props} components={components} styles={styles} settings={settings} events={events} /> : null }
 
         {this.props.data && this.props.data.length > 0 ?
-          <this.components.Table {...this.props} components={components} events={events} /> :
-          <this.components.NoResults components={components} events={events} /> }
+          <this.components.Table {...this.props} components={components} styles={styles} settings={settings} events={events} /> :
+          <this.components.NoResults components={components} styles={styles} settings={settings} events={events} /> }
 
-        <this.components.Pagination {...this.props} components={components} events={events} />
+        <this.components.Pagination {...this.props} components={components} styles={styles} settings={settings} events={events} />
       </div>
     );
   }

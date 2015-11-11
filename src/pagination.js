@@ -10,7 +10,13 @@ class Pagination extends React.Component {
   }
 
   render() {
-    return (<div className="pagination">
+    const style = this.props.styles.getStyle({
+      useStyles: this.props.settings.useGriddleStyles,
+      styles: this.props.styles.inlineStyles,
+      styleName: 'pagination'
+    });
+
+    return (<div className="pagination" style={style}>
       {this.props.hasPrevious ? <button onClick={this.props.events.getPreviousPage}>Previous</button> : null }
       {this._getSelect()}
       {this.props.hasNext ? <button onClick={this.props.events.getNextPage}>Next</button> : null }

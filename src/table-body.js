@@ -20,6 +20,8 @@ class TableBody extends React.Component {
         events={this.props.events}
         rowIndex={index}
         rowProperties={this.props.renderProperties.rowProperties}
+        styles={this.props.styles}
+        settings={this.props.settings}
         tableProperties={this.props.tableProperties}
         ignoredColumns={this.props.renderProperties.ignoredColumns}
         columnProperties={this.props.renderProperties.columnProperties} />
