@@ -48,8 +48,9 @@ export const inlineStyles = {
   },
 
   pagination: {
-    'padding' : '0',
+    'padding' : 5,
     border: '0',
+    backgroundColor: '#EDEDED',
     color: '#222',
     width: '100%',
     textAlign: 'center'
@@ -86,3 +87,27 @@ export const icons = {
   sortDescending: '▼',
   sortAscending: '▲'
 };
+
+export function getAssignedStyles(extension) {
+  let styles = {
+    inlineStyles,
+    classNames,
+    icons,
+    getStyle
+  };
+
+  if (extension.hasOwnProperty('inlineStyles')) {
+    styles.inlineStyles = Object.assign({}, inlineStyles, extension.inlineStyles);
+  }
+
+  if (extension.hasOwnProperty('inlineStyles')) {
+    styles.classNames = Object.assign({}, classNames, extension.classNames);
+  }
+
+  if (extension.hasOwnProperty('icons')) {
+    styles.icons = Object.assign({}, icons, extension.icons);
+  }
+
+  return styles;
+}
+
