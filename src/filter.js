@@ -15,9 +15,7 @@ class Filter extends React.Component {
     });
 
     return (
-      <div>
-        <input type="text" name="filter" style={style} placeholder="filter" onChange={this._handleChange} />
-      </div>
+      <input type="text" name="filter" style={style} placeholder="filter" onChange={this._handleChange} />
     );
   }
 

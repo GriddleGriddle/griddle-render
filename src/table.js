@@ -11,10 +11,22 @@ class Table extends React.Component {
   }
 
   render() {
+    const { settings, styles } = this.props;
+    const style = styles.getStyle({
+      useStyles: settings.useGriddleStyles,
+      styles: styles.inlineStyles,
+      styleName: 'table',
+      mergeStyles: settings.useFixedTable && styles.getStyle({
+        useStyles: settings.useGriddleStyles,
+        styles: styles.inlineStyles,
+        styleName: 'fixedTable',
+      })
+    });
+
     //translate the definition object to props for Heading / Body
     return this.props.data.length > 0 ?
       (
-        <table>
+        <table style={settings.useFixedTable && style}>
           <this.props.components.TableHeading columns={Object.keys(this.props.data[0])} {...this.props} />
           <this.props.components.TableBody {...this.props} />
         </table>

@@ -18,11 +18,12 @@ export const inlineStyles = {
     border: 'none',
     padding: 0,
     margin: 0,
-    fontSize: 14
+    fontSize: 14,
+    width: '50%',
+    textAlign: 'right'
   },
 
   filter: {
-    'float': 'left',
     width: '50%',
     textAlign: 'left',
     color: '#222',
@@ -46,15 +47,20 @@ export const inlineStyles = {
     color: '#222'
   },
 
-  paging: {
+  pagination: {
     'padding' : '0',
-    backgroundColor: '#EDEDED',
     border: '0',
-    color: '#222'
+    color: '#222',
+    width: '100%',
+    textAlign: 'center'
   },
 
-  tableFixed: {
-    tableLayout: 'fixed'
+  table: {
+    width: '100%'
+  },
+
+  fixedTable: {
+    tableLayout: 'fixed',
   }
 }
 
