@@ -16,6 +16,7 @@ class TableBody extends React.Component {
     .filter(data => data.visible === undefined || data.visible === true)
     .map((data, index) =>
       <this.props.components.Row rowData={data}
+        key={index}
         components={this.props.components}
         events={this.props.events}
         rowIndex={index}
