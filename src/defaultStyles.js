@@ -96,16 +96,18 @@ export function getAssignedStyles(extension) {
     getStyle
   };
 
-  if (extension.hasOwnProperty('inlineStyles')) {
-    styles.inlineStyles = Object.assign({}, inlineStyles, extension.inlineStyles);
-  }
+  if (extension) {
+    if (extension.hasOwnProperty('inlineStyles')) {
+      styles.inlineStyles = Object.assign({}, inlineStyles, extension.inlineStyles);
+    }
 
-  if (extension.hasOwnProperty('inlineStyles')) {
-    styles.classNames = Object.assign({}, classNames, extension.classNames);
-  }
+    if (extension.hasOwnProperty('inlineStyles')) {
+      styles.classNames = Object.assign({}, classNames, extension.classNames);
+    }
 
-  if (extension.hasOwnProperty('icons')) {
-    styles.icons = Object.assign({}, icons, extension.icons);
+    if (extension.hasOwnProperty('icons')) {
+      styles.icons = Object.assign({}, icons, extension.icons);
+    }
   }
 
   return styles;
