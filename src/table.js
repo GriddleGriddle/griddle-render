@@ -1,7 +1,6 @@
-'use strict';
-
 import React from 'react';
 import RowDefinition from './row-definition';
+import { getStyleProperties } from './utils/styleHelper';
 
 class Table extends React.Component {
   constructor(props, context) {
@@ -23,10 +22,14 @@ class Table extends React.Component {
       })
     });
 
+    const { className } = getStyleProperties(this.props, 'table');
     //translate the definition object to props for Heading / Body
     return this.props.data.length > 0 ?
       (
-        <table style={settings.useFixedTable && style}>
+        <table
+          className={className}
+          style={settings.useFixedTable && style}
+        >
           <this.props.components.TableHeading columns={Object.keys(this.props.data[0])} {...this.props} />
           <this.props.components.TableBody {...this.props} />
         </table>

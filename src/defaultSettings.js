@@ -1,4 +1,5 @@
 export default {
-  useGriddleStyles: true,
+  useGriddleStyles: false,
+  useGriddleClassNames: true,
   useFixedTable: true
 }

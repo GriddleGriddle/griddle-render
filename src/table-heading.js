@@ -1,5 +1,6 @@
-  import React from 'react';
-  import ColumnHelper from './utils/column-helper';
+import React from 'react';
+import ColumnHelper from './utils/column-helper';
+import { getStyleProperties } from './utils/styleHelper';
 
   class TableHeading extends React.Component {
   constructor(props, context) {
@@ -16,6 +17,7 @@
   render() {
     let { headingClick, headingHover } = this.props.events;
     const { renderProperties } = this.props;
+    const { style, className } = getStyleProperties(this.props, 'tableHeading');
 
     const headings = this.props.columns.map(column =>{
       let columnProperty = ColumnHelper.getColumnPropertyObject(renderProperties.columnProperties, column);
@@ -46,7 +48,7 @@
     });
 
     return this.props.columns.length > 0 ? (
-      <thead>
+      <thead style={style} className={className}>
         <tr>
           {headings}
         </tr>

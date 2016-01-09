@@ -1,6 +1,5 @@
-'use strict';
-
 import React from 'react';
+import { getStyleProperties } from './utils/styleHelper';
 
 class Column extends React.Component {
   constructor(props, context) {
@@ -9,7 +8,10 @@ class Column extends React.Component {
 
   render() {
     //TODO: this is temporary -- we'll need to merge styles or something
+    //  why not use the getStyle from defaultStyles?
     const styles = this._getStyles();
+
+    const { className } = getStyleProperties(this.props, 'column');
 
     return (
       <td
@@ -17,7 +19,7 @@ class Column extends React.Component {
         key={this.props.dataKey}
         onClick={this._handleClick}
         onMouseOver={this._handleHover}
-        className={this.props.cssClassName||null}>
+        className={className}>
           {this.props.hasOwnProperty('customComponent') ?
             <this.props.customComponent data={this.props.value} rowData={this.props.rowData} /> :
             this.props.value}
@@ -25,7 +27,10 @@ class Column extends React.Component {
     );
   }
 
+  //TODO: Figure out a way to get this hooked up with the normal styles methods
+  //maybe a merge styles property or something along those lines
   _getStyles = () => {
+    if (this.props.settings.useGriddleStyles === false) { return null; }
     const style = this.props.styles.getStyle({
       useStyles: this.props.settings.useGriddleStyles,
       styles: this.props.styles.inlineStyles,
@@ -34,11 +39,11 @@ class Column extends React.Component {
       mergeStyles: this.props.width || this.props.alignment || this.props.styles ? Object.assign({
         width: this.props.width || null,
         textAlign: this.props.alignment
-      }, this.props.styles) :
+      }, this.props.styles.inlineStyles) :
       null
     });
 
-    return style;
+    return style.column;
   }
 
   _handleClick = (e) => {

@@ -12,6 +12,14 @@ export function getStyle({styleName, styles, useStyles, mergeStyles = null}) {
   return mergeStyles || null;
 }
 
+export function getClassName({section, classNames, useClassNames}) {
+  if(useClassNames && classNames.hasOwnProperty(section)) {
+    return classNames[section];
+  }
+
+  return null;
+}
+
 export const inlineStyles = {
   settingsToggle: {
     background: 'none',
@@ -93,7 +101,8 @@ export function getAssignedStyles(extension) {
     inlineStyles,
     classNames,
     icons,
-    getStyle
+    getStyle,
+    getClassName
   };
 
   if (extension) {

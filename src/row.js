@@ -1,7 +1,6 @@
-'use strict';
-
 import React from 'react';
 import ColumnHelper from './utils/column-helper';
+import { getStyleProperties } from './utils/styleHelper';
 
 class Row extends React.Component {
   constructor(props, context) {
@@ -29,8 +28,16 @@ class Row extends React.Component {
           {...columnProperty} />);
       }
     }
+
+    const { style, className } = getStyleProperties(this.props, 'row');
     return (
-      <tr onMouseOver={this._handleHover} onClick={this._handleSelect} key={griddleKey} >
+      <tr
+        style={style}
+        className={className}
+        onMouseOver={this._handleHover}
+        onClick={this._handleSelect}
+        key={griddleKey}
+      >
         {columns}
       </tr>
     );

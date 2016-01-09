@@ -1,6 +1,5 @@
-"use strict";
-
 import React from 'react'
+import { getStyleProperties } from './utils/styleHelper';
 
 class Pagination extends React.Component {
   constructor(props, context) {
@@ -10,13 +9,9 @@ class Pagination extends React.Component {
   }
 
   render() {
-    const style = this.props.styles.getStyle({
-      useStyles: this.props.settings.useGriddleStyles,
-      styles: this.props.styles.inlineStyles,
-      styleName: 'pagination'
-    });
+    const {style, className } = getStyleProperties(this.props, 'pagination');
 
-    return (<div className="pagination" style={style}>
+    return (<div className={className} style={style}>
       {this.props.hasPrevious ? <button onClick={this.props.events.getPreviousPage}>Previous</button> : null }
       {this._getSelect()}
       {this.props.hasNext ? <button onClick={this.props.events.getNextPage}>Next</button> : null }
