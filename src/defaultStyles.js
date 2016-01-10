@@ -110,7 +110,7 @@ export function getAssignedStyles(extension) {
       styles.inlineStyles = Object.assign({}, inlineStyles, extension.inlineStyles);
     }
 
-    if (extension.hasOwnProperty('inlineStyles')) {
+    if (extension.hasOwnProperty('classNames')) {
       styles.classNames = Object.assign({}, classNames, extension.classNames);
     }
 
