@@ -1,5 +1,6 @@
 export default {
   useGriddleStyles: false,
   useGriddleClassNames: true,
-  useFixedTable: true
+  useFixedTable: true,
+  pageSize: 10
 }

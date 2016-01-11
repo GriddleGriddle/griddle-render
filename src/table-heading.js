@@ -14,6 +14,16 @@ import { getStyleProperties } from './utils/styleHelper';
     return this.props.columns !== nextProps.columns;
   }
 
+  getColumnTitle(column) {
+    const initial = this.props.columnTitles[column]  ?
+              this.props.columnTitles[column] :
+              column;
+
+    return this.props.renderProperties.columnProperties[column].hasOwnProperty('displayName') ?
+        this.props.renderProperties.columnProperties[column].displayName :
+        initial
+  }
+
   render() {
     let { headingClick, headingHover } = this.props.events;
     const { renderProperties } = this.props;
@@ -25,6 +35,7 @@ import { getStyleProperties } from './utils/styleHelper';
       const sortAscending = this.props.sortProperties && this.props.sortProperties.sortAscending;
       const sorted = this.props.sortProperties && this.props.sortProperties.sortColumns.indexOf(column) > -1
 
+      const title = this.getColumnTitle(column);
       let component = null;
       if(showColumn) {
         component = (<this.props.components.TableHeadingCell
@@ -37,9 +48,7 @@ import { getStyleProperties } from './utils/styleHelper';
             headingClick={headingClick}
             headingHover={headingHover}
             icons={this.props.styles.icons}
-            title={this.props.columnTitles[column]  ?
-              this.props.columnTitles[column] :
-              column}
+            title={title}
             {...columnProperty}
             {...this.props}/>);
       }
