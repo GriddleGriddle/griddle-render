@@ -6,7 +6,7 @@
 const ColumnHelper = {
   isColumnVisible(column, {columnProperties,ignoredColumns}) {
     if(!ignoredColumns) { return true; }
-    return !(ignoredColumns.indexOf(column) > 0);
+    return !(ignoredColumns.indexOf(column) >= 0);
   },
 
   //TODO: Not sure I like this method
