@@ -37,11 +37,13 @@ class Table extends React.Component {
   }
 }
 
+//TODO: enabled the propTypes again
+/*
 Table.propTypes = {
   children: React.PropTypes.oneOfType([
     React.PropTypes.instanceOf(RowDefinition)
     // React.PropTypes.arrayOf(React.PropTypes.instanceOf(ColumnDefinition))
   ])
-};
+}; */
 
 export default Table;
