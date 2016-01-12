@@ -5,6 +5,8 @@
 //      At the very least, make the signature (column, { columnProperties, ignoredColumns })
 const ColumnHelper = {
   isColumnVisible(column, {columnProperties,ignoredColumns}) {
+    if(column === "__metadata") { return false; }
+
     if(!ignoredColumns) { return true; }
     return !(ignoredColumns.indexOf(column) >= 0);
   },

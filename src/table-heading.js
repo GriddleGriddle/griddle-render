@@ -19,7 +19,7 @@ import { getStyleProperties } from './utils/styleHelper';
               this.props.columnTitles[column] :
               column;
 
-    return this.props.renderProperties.columnProperties[column].hasOwnProperty('displayName') ?
+    return this.props.renderProperties.columnProperties[column] && this.props.renderProperties.columnProperties[column].hasOwnProperty('displayName') ?
         this.props.renderProperties.columnProperties[column].displayName :
         initial
   }
