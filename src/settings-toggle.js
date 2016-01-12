@@ -1,6 +1,6 @@
-'use strict';
-
 import React from 'react';
+import { getStyleProperties } from './utils/styleHelper';
+import classnames from 'classnames';
 
 class SettingsToggle extends React.Component {
   constructor() {
@@ -12,14 +12,10 @@ class SettingsToggle extends React.Component {
   }
 
   render() {
-    const style = this.props.styles.getStyle({
-      useStyles: this.props.settings.useGriddleStyles,
-      styles: this.props.styles.inlineStyles,
-      styleName: 'settingsToggle'
-    });
+    const { style, className } = getStyleProperties(this.props, 'settingsToggle');
+    const toggleClass = classnames(this.state.toggled ? 'toggled' : 'not-toggled', className);
 
-    //TODO: these class names are awful -- use the global style object instead
-    return <button className={this.state.toggled ? 'toggled' : 'not-toggled'} style={style} onClick={this._handleButton}>Settings</button>;
+    return <button className={toggleClass} style={style} onClick={this._handleButton}>Settings</button>;
   }
 
   //this should keep track locally if it's toggled

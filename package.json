@@ -1,6 +1,6 @@
 {
   "name": "griddle-render",
-  "version": "0.0.6",
+  "version": "0.0.13",
   "description": "The rendered component code used in the griddle-react grid. ",
   "main": "build/griddle-render.js",
   "scripts": {
@@ -36,6 +36,7 @@
     "webpack-dev-server": "~1.9.0"
   },
   "dependencies": {
+    "classnames": "^2.2.3",
     "object-assign": "*",
     "react": "^0.14.0"
   }

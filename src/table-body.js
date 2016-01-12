@@ -1,6 +1,5 @@
-'use strict';
-
 import React from 'react';
+import { getStyleProperties } from './utils/styleHelper';
 
 class TableBody extends React.Component {
   constructor(props, context) {
@@ -28,8 +27,10 @@ class TableBody extends React.Component {
         columnProperties={this.props.renderProperties.columnProperties} />
     );
 
+    const { style, className } = getStyleProperties(this.props, 'tableBody');
+
     return (
-      <tbody>
+      <tbody style={style} className={className}>
         {rows}
       </tbody>
     );

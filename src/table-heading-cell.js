@@ -1,4 +1,5 @@
 import React from 'react';
+import { getStyleProperties } from './utils/styleHelper';
 
 class TableHeadingCell extends React.Component {
   constructor(props, context) {
@@ -26,10 +27,17 @@ class TableHeadingCell extends React.Component {
         null
     });
 
+    const { className } = getStyleProperties(this.props, 'tableHeadingCell');
     const { sorted } = this.props;
 
     return (
-      <th key={this.props.column} style={style} onMouseOver={this._handleHover} onClick={this._handleClick}>
+      <th
+        key={this.props.column}
+        style={style}
+        onMouseOver={this._handleHover}
+        onClick={this._handleClick}
+        className={className}
+      >
         {this.props.title} { this.getSortIcon() }
       </th>);
   }

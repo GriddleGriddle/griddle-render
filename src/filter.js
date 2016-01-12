@@ -1,4 +1,5 @@
 import React from 'react';
+import { getStyleProperties }  from './utils/styleHelper';
 
 class Filter extends React.Component {
   constructor(props, context) {
@@ -8,14 +9,16 @@ class Filter extends React.Component {
   }
 
   render() {
-    const style = this.props.styles.getStyle({
-      useStyles: this.props.settings.useGriddleStyles,
-      styles: this.props.styles.inlineStyles,
-      styleName: 'filter'
-    });
+    const {style, className } = getStyleProperties(this.props, 'filter');
 
     return (
-      <input type="text" name="filter" style={style} placeholder="filter" onChange={this._handleChange} />
+      <input
+        type="text"
+        name="filter"
+        className={className}
+        style={style}
+        placeholder="filter"
+        onChange={this._handleChange} />
     );
   }
 

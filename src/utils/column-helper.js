@@ -5,17 +5,8 @@
 //      At the very least, make the signature (column, { columnProperties, ignoredColumns })
 const ColumnHelper = {
   isColumnVisible(column, {columnProperties,ignoredColumns}) {
-    if(!columnProperties && !ignoredColumns) { return true; }
-
-    if(!columnProperties) {
-      return !ignoredColumns.indexOf(column) > 0
-    }
-
-    return (
-      ((columnProperties.hasOwnProperty(column) && !columnProperties[column].hidden) ||
-      Object.getOwnPropertyNames(columnProperties).length === 0) &&
-      (ignoredColumns && ignoredColumns.indexOf(column) < 0)
-    );
+    if(!ignoredColumns) { return true; }
+    return !(ignoredColumns.indexOf(column) >= 0);
   },
 
   //TODO: Not sure I like this method

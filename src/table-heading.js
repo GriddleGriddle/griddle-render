@@ -1,5 +1,6 @@
-  import React from 'react';
-  import ColumnHelper from './utils/column-helper';
+import React from 'react';
+import ColumnHelper from './utils/column-helper';
+import { getStyleProperties } from './utils/styleHelper';
 
   class TableHeading extends React.Component {
   constructor(props, context) {
@@ -13,9 +14,20 @@
     return this.props.columns !== nextProps.columns;
   }
 
+  getColumnTitle(column) {
+    const initial = this.props.columnTitles[column]  ?
+              this.props.columnTitles[column] :
+              column;
+
+    return this.props.renderProperties.columnProperties[column].hasOwnProperty('displayName') ?
+        this.props.renderProperties.columnProperties[column].displayName :
+        initial
+  }
+
   render() {
     let { headingClick, headingHover } = this.props.events;
     const { renderProperties } = this.props;
+    const { style, className } = getStyleProperties(this.props, 'tableHeading');
 
     const headings = this.props.columns.map(column =>{
       let columnProperty = ColumnHelper.getColumnPropertyObject(renderProperties.columnProperties, column);
@@ -23,6 +35,7 @@
       const sortAscending = this.props.pageProperties && this.props.pageProperties.sortAscending;
       const sorted = this.props.pageProperties && this.props.pageProperties.sortColumns.indexOf(column) > -1
 
+      const title = this.getColumnTitle(column);
       let component = null;
       if(showColumn) {
         component = (<this.props.components.TableHeadingCell
@@ -35,9 +48,7 @@
             headingClick={headingClick}
             headingHover={headingHover}
             icons={this.props.styles.icons}
-            title={this.props.columnTitles[column]  ?
-              this.props.columnTitles[column] :
-              column}
+            title={title}
             {...columnProperty}
             {...this.props}/>);
       }
@@ -46,7 +57,7 @@
     });
 
     return this.props.columns.length > 0 ? (
-      <thead>
+      <thead style={style} className={className}>
         <tr>
           {headings}
         </tr>
