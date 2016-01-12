@@ -30,7 +30,7 @@ class Table extends React.Component {
           className={className}
           style={settings.useFixedTable && style}
         >
-          <this.props.components.TableHeading columns={Object.keys(this.props.data[0]).filter(k => k === "__metadata")} {...this.props} />
+          <this.props.components.TableHeading columns={Object.keys(this.props.data[0])} {...this.props} />
           <this.props.components.TableBody {...this.props} />
         </table>
       ) : null;
