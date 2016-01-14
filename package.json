@@ -20,6 +20,7 @@
     "eslint": "^0.23",
     "eslint-plugin-react": "^2.2.0",
     "jasmine-core": "^2.2.0",
+    "jsx-loader": "~0.12.2",
     "karma": "^0.12.31",
     "karma-babel-preprocessor": "^5.0.1",
     "karma-chrome-launcher": "^0.1.8",
@@ -29,7 +30,7 @@
     "node-libs-browser": "^0.5.3",
     "phantomjs": "^1.9.16",
     "phantomjs-polyfill": "0.0.1",
-    "react-draggable": "^0.6.0",
+    "react-hot-loader": "~1.2.7",
     "webpack": "~1.9.11",
     "webpack-dev-server": "~1.9.0"
   },
