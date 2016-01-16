@@ -20,7 +20,6 @@
     "eslint": "^0.23",
     "eslint-plugin-react": "^2.2.0",
     "jasmine-core": "^2.2.0",
-    "jsx-loader": "~0.12.2",
     "karma": "^0.12.31",
     "karma-babel-preprocessor": "^5.0.1",
     "karma-chrome-launcher": "^0.1.8",
