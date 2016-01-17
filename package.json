@@ -1,6 +1,6 @@
 {
   "name": "griddle-render",
-  "version": "0.0.17",
+  "version": "0.0.18",
   "description": "The rendered component code used in the griddle-react grid. ",
   "main": "build/griddle-render.js",
   "scripts": {
