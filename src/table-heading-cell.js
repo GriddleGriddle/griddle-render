@@ -18,17 +18,17 @@ class TableHeadingCell extends React.Component {
   }
 
   render() {
-    const style = this.props.styles.getStyle({
-      useStyles: this.props.settings.useGriddleStyles,
-      styles: this.props.styles.inlineStyles,
+    const { styles, settings, alignment, headerAlignment } = this.props;
+    const style = styles.getStyle({
+      useStyles: settings.useGriddleStyles,
+      styles: styles.inlineStyles,
       styleName: 'columnTitle',
-      mergeStyles: this.props.alignment || this.props.headerAlignment ?
-        {textAlign: this.props.headerAlignment || this.props.alignment} :
+      mergeStyles: alignment || headerAlignment ?
+        {textAlign: headerAlignment || alignment} :
         null
     });
 
     const { className } = getStyleProperties(this.props, 'tableHeadingCell');
-    const { sorted } = this.props;
 
     return (
       <th

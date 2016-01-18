@@ -47,13 +47,17 @@ class Column extends React.Component {
   }
 
   _handleClick = (e) => {
-    if (this.props.onClick) this.props.onClick(e);
+    const { onClick, events, dataKey, value, rowIndex, rowData } = this.props;
 
-    this.props.events.columnClick(this.props.dataKey, this.props.value, this.props.rowIndex, this.props.rowData);
+    if (onClick) onClick(e);
+
+    events.columnClick(dataKey, value, rowIndex, rowData);
   }
 
   _handleHover = (e) => {
-    this.props.events.columnHover(this.props.dataKey, this.props.value, this.props.rowIndex, this.props.rowData);
+    const { events, dataKey, value, rowIndex, rowData } = this.props;
+
+    events.columnHover(dataKey, value, rowIndex, rowData);
   }
 }
 
