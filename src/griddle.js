@@ -42,21 +42,27 @@ export default class Griddle extends React.Component {
   }
 
   render() {
-    const events = this.getEvents();
     const components = this.getComponents();
-    const { styles, settings } = this;
+    const { Filter, SettingsToggle, Settings, Table, NoResults, Pagination } = components;
+    const childProps = {
+      ...this.props,
+      components,
+      styles: this.styles,
+      settings: this.settings,
+      events: this.getEvents()
+    };
+    
     return (
       <div>
-        {/*TODO: Lets not duplicate these prop defs all over (events/components) */}
-        <this.components.Filter {...this.props} components={components} styles={styles} settings={settings} events={events} />
-        <this.components.SettingsToggle components={components} styles={styles} events={events} settings={settings} showSettings={this._showSettings} />
-        {this.state.showSettings ? <this.components.Settings {...this.props} components={components} styles={styles} settings={settings} events={events} /> : null }
+        <Filter {...childProps} />
+        <SettingsToggle {...childProps} showSettings={this._showSettings} />
+        {this.state.showSettings ? <Settings {...childProps} /> : null}
 
         {this.props.data && this.props.data.length > 0 ?
-          <this.components.Table {...this.props} components={components} styles={styles} settings={settings} events={events} /> :
-          <this.components.NoResults components={components} styles={styles} settings={settings} events={events} /> }
+          <Table {...childProps} /> :
+          <NoResults {...childProps} />}
 
-        <this.components.Pagination {...this.props} components={components} styles={styles} settings={settings} events={events} />
+        <Pagination {...childProps}/>
       </div>
     );
   }

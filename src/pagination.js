@@ -9,12 +9,14 @@ class Pagination extends React.Component {
   }
 
   render() {
-    const {style, className } = getStyleProperties(this.props, 'pagination');
+    const { style, className } = getStyleProperties(this.props, 'pagination');
+    const { hasPrevious, hasNext, events } = this.props;
+    const { getPreviousPage, getNextPage } = events;
 
     return (<div className={className} style={style}>
-      {this.props.hasPrevious ? <button onClick={this.props.events.getPreviousPage}>Previous</button> : null }
+      {hasPrevious ? <button onClick={getPreviousPage}>Previous</button> : null }
       {this._getSelect()}
-      {this.props.hasNext ? <button onClick={this.props.events.getNextPage}>Next</button> : null }
+      {hasNext ? <button onClick={getNextPage}>Next</button> : null }
     </div>);
   }
 

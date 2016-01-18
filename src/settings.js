@@ -47,10 +47,11 @@ class Settings extends React.Component {
   render() {
     const keys = Object.keys(this.props.renderProperties.columnProperties);
     const { style, className } = getStyleProperties(this.props, 'settings');
+    const { toggleColumn, setPageSize } = this.props.events;
 
     var columns = this.props.allColumns.map(column =>
       <CheckItem
-        toggleColumn={this.props.events.toggleColumn}
+        toggleColumn={toggleColumn}
         name={column}
         text={this._getDisplayName(column)}
         checked={keys.indexOf(column) > -1} />);
@@ -58,21 +59,25 @@ class Settings extends React.Component {
     return (
       <div style={style} className={className}>
         {columns}
-        <PageSize setPageSize={this.props.events.setPageSize}/>
+        <PageSize setPageSize={setPageSize}/>
       </div>
     );
   }
 
   _getDisplayName = (column) => {
     const { renderProperties } = this.props;
-    if(renderProperties.columnProperties.hasOwnProperty(column)) {
-      return renderProperties.columnProperties[column].hasOwnProperty('displayName') ?
-        renderProperties.columnProperties[column].displayName :
-        column
-    } else if (renderProperties.hiddenColumnProperties.hasOwnProperty(column)) {
-    return renderProperties.hiddenColumnProperties[column].hasOwnProperty('displayName') ?
-        renderProperties.hiddenColumnProperties[column].displayName :
-        column
+    const { columnProperties, hiddenColumnProperties } = renderProperties;
+
+    if(columnProperties.hasOwnProperty(column) &&
+      columnProperties[column].hasOwnProperty('displayName')) {
+
+      return columnProperties[column].displayName;
+
+    } else if (hiddenColumnProperties.hasOwnProperty(column) &&
+      hiddenColumnProperties[column].hasOwnProperty('displayName')) {
+
+      return hiddenColumnProperties[column].displayName;
+
     }
 
     return column;

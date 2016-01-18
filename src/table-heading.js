@@ -15,30 +15,36 @@ import { getStyleProperties } from './utils/styleHelper';
   }
 
   getColumnTitle(column) {
-    const initial = this.props.columnTitles[column]  ?
-              this.props.columnTitles[column] :
-              column;
+    const { columnTitles, renderProperties } = this.props;
+    const { columnProperties } = renderProperties;
+    const initial = columnTitles[column] || column;
 
-    return this.props.renderProperties.columnProperties[column] && this.props.renderProperties.columnProperties[column].hasOwnProperty('displayName') ?
-        this.props.renderProperties.columnProperties[column].displayName :
-        initial
+    if(columnProperties[column] && columnProperties[column].hasOwnProperty('displayName')) {
+      return columnProperties[column];
+    }
+
+    return initial;
   }
 
   render() {
     let { headingClick, headingHover } = this.props.events;
-    const { renderProperties } = this.props;
+    const { TableHeadingCell, renderProperties, columns, pageProperties } = this.props;
+    const { columnProperties, ignoredColumns } = renderProperties;
     const { style, className } = getStyleProperties(this.props, 'tableHeading');
 
-    const headings = this.props.columns.map(column =>{
-      let columnProperty = ColumnHelper.getColumnPropertyObject(renderProperties.columnProperties, column);
-      const showColumn = ColumnHelper.isColumnVisible(column, { columnProperties: renderProperties.columnProperties, ignoredColumns: renderProperties.ignoredColumns });
-      const sortAscending = this.props.pageProperties && this.props.pageProperties.sortAscending;
-      const sorted = this.props.pageProperties && this.props.pageProperties.sortColumns.indexOf(column) > -1
-
+    const headings = columns.map(column => {
+      let columnProperty = ColumnHelper.getColumnPropertyObject(columnProperties, column);
+      const showColumn = ColumnHelper.isColumnVisible(column, {
+        columnProperties: columnProperties,
+        ignoredColumns: ignoredColumns
+      });
+      const sortAscending = pageProperties && pageProperties.sortAscending;
+      const sorted = pageProperties && pageProperties.sortColumns.indexOf(column) > -1;
       const title = this.getColumnTitle(column);
       let component = null;
+
       if(showColumn) {
-        component = (<this.props.components.TableHeadingCell
+        component = (<TableHeadingCell
             key={column}
             column={column}
             sorted={sorted}
