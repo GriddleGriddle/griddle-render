@@ -32,8 +32,8 @@ import { getStyleProperties } from './utils/styleHelper';
     const headings = this.props.columns.map(column =>{
       let columnProperty = ColumnHelper.getColumnPropertyObject(renderProperties.columnProperties, column);
       const showColumn = ColumnHelper.isColumnVisible(column, { columnProperties: renderProperties.columnProperties, ignoredColumns: renderProperties.ignoredColumns });
-      const sortAscending = this.props.sortProperties && this.props.sortProperties.sortAscending;
-      const sorted = this.props.sortProperties && this.props.sortProperties.sortColumns.indexOf(column) > -1
+      const sortAscending = this.props.pageProperties && this.props.pageProperties.sortAscending;
+      const sorted = this.props.pageProperties && this.props.pageProperties.sortColumns.indexOf(column) > -1
 
       const title = this.getColumnTitle(column);
       let component = null;
