@@ -36,11 +36,11 @@ class Column extends React.Component {
       styles: this.props.styles.inlineStyles,
       styleName: 'column',
       //todo: make this nicer
-      mergeStyles: this.props.width || this.props.alignment || this.props.styles ? Object.assign({
-        width: this.props.width || null,
-        textAlign: this.props.alignment
-      }, this.props.styles.inlineStyles) :
-      null
+      mergeStyles: {
+          ...(this.props.width || this.props.alignment || this.props.styles ? 
+            Object.assign({ width: this.props.width || null, textAlign: this.props.alignment }, this.props.styles.inlineStyles) : {}),
+          ...this.props.style
+      }
     });
 
     return style.column;
