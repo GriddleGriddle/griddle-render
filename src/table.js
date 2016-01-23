@@ -12,11 +12,9 @@ class Table extends React.Component {
   render() {
     const { settings, styles } = this.props;
     const style = styles.getStyle({
-      useStyles: settings.useGriddleStyles,
       styles: styles.inlineStyles,
       styleName: 'table',
       mergeStyles: settings.useFixedTable && styles.getStyle({
-        useStyles: settings.useGriddleStyles,
         styles: styles.inlineStyles,
         styleName: 'fixedTable',
       })

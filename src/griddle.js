@@ -9,11 +9,14 @@ export default class Griddle extends React.Component {
   constructor(props, context) {
     super(props, context);
 
-    this.components = Object.assign({}, defaultModules, this.props.components);
-
-    this.styles = getAssignedStyles(this.props.style);
-    this.settings = Object.assign({}, defaultSettings, this.props.settings);
+    this.wireUpSettings(props);
     this.state = { showSettings: false };
+  }
+
+  wireUpSettings = (props) => {
+    this.settings = Object.assign({}, defaultSettings, props.settings);
+    this.components = Object.assign({}, defaultModules, props.components);
+    this.styles = getAssignedStyles(props.style, this.settings.useGriddleStyles);
   }
 
   //TODO: This is okay-ish for the defaults but lets do something to override for plugins... there is stuff here for subgrid and selection and there shouldn't be.

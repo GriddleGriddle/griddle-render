@@ -6,7 +6,6 @@ export function getStyleProperties(props, sectionName) {
   });
 
   const style = props.styles.getStyle({
-    useStyles: props.settings.useGriddleStyles,
     styles: props.styles.inlineStyles,
     styleName: sectionName,
     ...props.style

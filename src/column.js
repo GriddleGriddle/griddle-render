@@ -30,14 +30,12 @@ class Column extends React.Component {
   //TODO: Figure out a way to get this hooked up with the normal styles methods
   //maybe a merge styles property or something along those lines
   _getStyles = () => {
-    if (this.props.settings.useGriddleStyles === false) { return null; }
     const style = this.props.styles.getStyle({
-      useStyles: this.props.settings.useGriddleStyles,
       styles: this.props.styles.inlineStyles,
       styleName: 'column',
       //todo: make this nicer
       mergeStyles: {
-          ...(this.props.width || this.props.alignment || this.props.styles ? 
+          ...(this.props.width || this.props.alignment || this.props.styles ?
             Object.assign({ width: this.props.width || null, textAlign: this.props.alignment }, this.props.styles.inlineStyles) : {}),
           ...this.props.style
       }

@@ -19,7 +19,6 @@ class TableHeadingCell extends React.Component {
 
   render() {
     const style = this.props.styles.getStyle({
-        useStyles: this.props.settings.useGriddleStyles,
         styles: this.props.styles.inlineStyles,
         styleName: 'columnTitle',
         mergeStyles: {

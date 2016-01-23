@@ -4,8 +4,8 @@
 // styles: the inline styles object
 // useStyles: whether or not the inline styles should be used
 // mergeStyles: styles to apply in addition to the inline styling. This is usually applied with some logic in the front-end
-export function getStyle({styleName, styles, useStyles, mergeStyles = null}) {
-  if (useStyles && styles.hasOwnProperty(styleName)) {
+export function getStyle({styleName, styles, mergeStyles = null}) {
+  if (styles.hasOwnProperty(styleName)) {
     return Object.assign({}, styles[styleName], mergeStyles);
   }
 
@@ -21,6 +21,16 @@ export function getClassName({section, classNames, useClassNames}) {
 }
 
 export const inlineStyles = {
+  settingsToggle: {},
+  filter: {},
+  columnTitle: {},
+  column: {},
+  pagination: {},
+  table: {},
+  fixedTable: {}
+}
+
+export const griddleStyles = {
   settingsToggle: {
     background: 'none',
     border: 'none',
@@ -96,9 +106,9 @@ export const icons = {
   sortAscending: '▲'
 };
 
-export function getAssignedStyles(extension) {
+export function getAssignedStyles(extension, useGriddleStyles) {
   let styles = {
-    inlineStyles,
+    inlineStyles: useGriddleStyles ? Object.assign({}, inlineStyles, griddleStyles) : inlineStyles,
     classNames,
     icons,
     getStyle,
@@ -107,11 +117,11 @@ export function getAssignedStyles(extension) {
 
   if (extension) {
     if (extension.hasOwnProperty('inlineStyles')) {
-      styles.inlineStyles = Object.assign({}, inlineStyles, extension.inlineStyles);
+      styles.inlineStyles = Object.assign({}, styles.inlineStyles, extension.inlineStyles);
     }
 
     if (extension.hasOwnProperty('classNames')) {
-      styles.classNames = Object.assign({}, classNames, extension.classNames);
+      styles.classNames = Object.assign({}, styles.classNames, extension.classNames);
     }
 
     if (extension.hasOwnProperty('icons')) {
