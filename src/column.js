@@ -10,7 +10,6 @@ class Column extends React.Component {
     //TODO: this is temporary -- we'll need to merge styles or something
     //  why not use the getStyle from defaultStyles?
     const styles = this._getStyles();
-
     const { className } = getStyleProperties(this.props, 'column');
 
     return (
@@ -35,13 +34,13 @@ class Column extends React.Component {
       styleName: 'column',
       //todo: make this nicer
       mergeStyles: {
-          ...(this.props.width || this.props.alignment || this.props.styles ?
-            Object.assign({ width: this.props.width || null, textAlign: this.props.alignment }, this.props.styles.inlineStyles) : {}),
+          ...((this.props.width || this.props.alignment || this.props.styles) ?
+            Object.assign({ width: this.props.width || null, textAlign: this.props.alignment }) : {}),
           ...this.props.style
       }
     });
 
-    return style.column;
+    return style;
   }
 
   _handleClick = (e) => {
