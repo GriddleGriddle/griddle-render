@@ -87,6 +87,7 @@ export const classNames = {
   column: 'griddle-column',
   filter: 'griddle-filter',
   noResults: 'griddle-noResults',
+  loading: 'griddle-loadingResults',
   pagination: 'griddle-pagination',
   rowDefinition: 'griddle-row-definition',
   row: 'griddle-row',

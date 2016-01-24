@@ -55,7 +55,9 @@ export default class Griddle extends React.Component {
         <this.components.SettingsToggle components={components} styles={styles} events={events} settings={settings} showSettings={this._showSettings} />
         {this.state.showSettings ? <this.components.Settings {...this.props} components={components} styles={styles} settings={settings} events={events} /> : null }
 
-        {this.props.data && this.props.data.length > 0 ?
+        {this.props.loading ? 
+          <this.components.Loading components={components} styles={styles} settings={settings} events={events} />
+        : this.props.data && this.props.data.length > 0 ?
           <this.components.Table {...this.props} components={components} styles={styles} settings={settings} events={events} /> :
           <this.components.NoResults components={components} styles={styles} settings={settings} events={events} /> }
 
@@ -143,8 +145,9 @@ export default class Griddle extends React.Component {
   }
 
   _setScrollPosition = (scrollLeft, scrollWidth, scrollTop, scrollHeight) => {
-    if(this.props.setScrollPosition) {
-      this.props.setScrollPosition(scrollLeft, scrollWidth, scrollTop, scrollHeight);
+    const { setScrollPosition, positionConfig, loadNext} = this.props;
+    if(setScrollPosition) {
+      setScrollPosition(scrollLeft, scrollWidth, scrollTop, scrollHeight);
     }
   }
 }
