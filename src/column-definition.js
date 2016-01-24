@@ -21,7 +21,9 @@ ColumnDefinition.PropTypes = {
   //The display name for the column. This is used when the name in the column heading and settings should be different from the data passed in to the Griddle component.
   displayName: React.PropTypes.string,
   //The component that should be rendered instead of the standard column data. This component will still be rendered inside of a TD element.
-  customComponent: React.PropTypes.object
+  customComponent: React.PropTypes.object,
+  //Can this column be sorted
+  sortable: React.PropTypes.bool
 };
 
 export default ColumnDefinition;

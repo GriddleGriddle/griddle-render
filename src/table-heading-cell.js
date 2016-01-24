@@ -17,6 +17,18 @@ class TableHeadingCell extends React.Component {
     }
   }
 
+  isSortable() {
+    const { column, renderProperties } = this.props;
+    const columnProperties = renderProperties.columnProperties[column];
+
+    if(columnProperties && columnProperties.hasOwnProperty('sortable') && columnProperties.sortable === false) {
+      return false;
+    }
+
+    return true;
+  }
+
+
   render() {
     const style = this.props.styles.getStyle({
         styles: this.props.styles.inlineStyles,
@@ -29,13 +41,14 @@ class TableHeadingCell extends React.Component {
 
     const { className } = getStyleProperties(this.props, 'tableHeadingCell');
     const { sorted } = this.props;
+    const clickEvent = this.isSortable() ? this._handleClick : null;
 
     return (
       <th
         key={this.props.column}
         style={style}
         onMouseOver={this._handleHover}
-        onClick={this._handleClick}
+        onClick={clickEvent}
         className={className}
       >
         {this.props.title} { this.getSortIcon() }
