@@ -11,9 +11,9 @@ class TableBody extends React.Component {
   }
 
   render() {
-    const { renderedData, loading, components, styles, settings, events, renderProperties, tableProperties } = this.props;
+    const { data, loading, components, styles, settings, events, renderProperties, tableProperties } = this.props;
     const rows = loading ? <components.Loading components={components} styles={styles} settings={settings} events={events} />
-        : this.props.renderedData
+        : data
           .filter(data => data.visible === undefined || data.visible === true)
           .map((data, index) =>
             <this.props.components.Row rowData={data}
