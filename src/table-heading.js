@@ -11,7 +11,10 @@ import { getStyleProperties } from './utils/styleHelper';
 
   shouldComponentUpdate(nextProps) {
     //TODO: Verify that this is correct
-    return this.props.columns !== nextProps.columns;
+    return this.props.columns !== nextProps.columns ||
+      ((this.props.pageProperties && nextProps.pageProperties) &&
+      (this.props.pageProperties.sortColumns !== nextProps.pageProperties.sortColumns ||
+      this.props.pageProperties.sortAscending !== nextProps.pageProperties.sortAscending));
   }
 
   getColumnTitle(column) {
