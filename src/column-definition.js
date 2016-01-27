@@ -23,7 +23,9 @@ ColumnDefinition.PropTypes = {
   //The component that should be rendered instead of the standard column data. This component will still be rendered inside of a TD element.
   customComponent: React.PropTypes.object,
   //Can this column be sorted
-  sortable: React.PropTypes.bool
+  sortable: React.PropTypes.bool,
+  //What sort type this column uses - magic string :shame:
+  sortType: React.PropTypes.string
 };
 
 export default ColumnDefinition;
