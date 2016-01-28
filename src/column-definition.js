@@ -27,7 +27,9 @@ ColumnDefinition.PropTypes = {
   //Can this column be sorted
   sortable: React.PropTypes.bool,
   //What sort type this column uses - magic string :shame:
-  sortType: React.PropTypes.string
+  sortType: React.PropTypes.string,
+  //Any extra data that should be passed to each instance of this column
+  extraData: React.PropTypes.object
 };
 
 export default ColumnDefinition;

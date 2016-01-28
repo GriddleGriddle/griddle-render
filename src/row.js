@@ -24,7 +24,7 @@ class Row extends React.Component {
           key={column}
           dataKey={column}
           value={rowData[column]}
-          columnProperty={columnProperty}
+          {...columnProperty}
            />);
       }
     }

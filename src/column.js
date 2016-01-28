@@ -15,7 +15,8 @@ class Column extends React.Component {
 
     const { className } = getStyleProperties(this.props, 'column');
 
-    const classNames = classnames(className, this.props.columnProperty.cssClassName);
+    const classNames = classnames(className, this.props.cssClassName);
+
     return (
       <td
         style={styles}
@@ -24,7 +25,7 @@ class Column extends React.Component {
         onMouseOver={this._handleHover}
         className={classNames}>
           {this.props.hasOwnProperty('customComponent') ?
-            <this.props.customComponent data={this.props.value} rowData={this.props.rowData} /> :
+            <this.props.customComponent data={this.props.value} rowData={this.props.rowData} extraData={this.props.extraData} /> :
             this.props.value}
       </td>
     );
