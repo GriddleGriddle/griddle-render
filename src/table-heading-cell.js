@@ -1,6 +1,7 @@
 import React from 'react';
-import { getStyleProperties } from './utils/styleHelper';
+import classnames from 'classnames';
 
+import { getStyleProperties } from './utils/styleHelper';
 class TableHeadingCell extends React.Component {
   constructor(props, context) {
     super(props, context);
@@ -40,6 +41,7 @@ class TableHeadingCell extends React.Component {
       });
 
     const { className } = getStyleProperties(this.props, 'tableHeadingCell');
+    const classNames = classnames(className, this.props.columnProperty ? this.props.columnProperty.headerCssClassName : null)
     const { sorted } = this.props;
     const clickEvent = this.isSortable() ? this._handleClick : null;
 
@@ -49,7 +51,7 @@ class TableHeadingCell extends React.Component {
         style={style}
         onMouseOver={this._handleHover}
         onClick={clickEvent}
-        className={className}
+        className={classNames}
       >
         {this.props.title} { this.getSortIcon() }
       </th>);

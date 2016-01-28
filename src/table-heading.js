@@ -52,6 +52,7 @@ import { getStyleProperties } from './utils/styleHelper';
             headingHover={headingHover}
             icons={this.props.styles.icons}
             title={title}
+            columnProperty={columnProperty}
             {...columnProperty}
             {...this.props}/>);
       }
