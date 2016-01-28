@@ -18,14 +18,14 @@ class Row extends React.Component {
       //get the additional properties defined in the creation of the object
       let columnProperty = ColumnHelper.getColumnPropertyObject(columnProperties, column);
       //render the column if there are no properties, there are properties and the column is in the collection OR there are properties and no column properties.
-
       if(ColumnHelper.isColumnVisible(column, {columnProperties, ignoredColumns: ignoredColumns || []})) {
         columns.push(<this.props.components.Column
           {...this.props}
           key={column}
           dataKey={column}
           value={rowData[column]}
-          {...columnProperty} />);
+          columnProperty={columnProperty}
+           />);
       }
     }
 

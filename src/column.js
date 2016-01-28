@@ -1,4 +1,6 @@
 import React from 'react';
+import classnames from 'classnames';
+
 import { getStyleProperties } from './utils/styleHelper';
 
 class Column extends React.Component {
@@ -10,15 +12,17 @@ class Column extends React.Component {
     //TODO: this is temporary -- we'll need to merge styles or something
     //  why not use the getStyle from defaultStyles?
     const styles = this._getStyles();
+
     const { className } = getStyleProperties(this.props, 'column');
 
+    const classNames = classnames(className, this.props.columnProperty.cssClassName);
     return (
       <td
         style={styles}
         key={this.props.dataKey}
         onClick={this._handleClick}
         onMouseOver={this._handleHover}
-        className={className}>
+        className={classNames}>
           {this.props.hasOwnProperty('customComponent') ?
             <this.props.customComponent data={this.props.value} rowData={this.props.rowData} /> :
             this.props.value}
