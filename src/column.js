@@ -21,11 +21,18 @@ class Column extends React.Component {
       <td
         style={styles}
         key={this.props.dataKey}
+        rowIndex={this.props.rowIndex}
         onClick={this._handleClick}
         onMouseOver={this._handleHover}
         className={classNames}>
           {this.props.hasOwnProperty('customComponent') ?
-            <this.props.customComponent data={this.props.value} rowData={this.props.rowData} extraData={this.props.extraData} /> :
+            <this.props.customComponent
+              data={this.props.value}
+              rowData={this.props.rowData}
+              originalData={this.props.originalRowData}
+              rowIndex={this.props.rowIndex}
+              absoluteRowIndex={this.props.absoluteRowIndex}
+              extraData={this.props.extraData} /> :
             this.props.value}
       </td>
     );

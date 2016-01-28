@@ -11,7 +11,14 @@ class Row extends React.Component {
     //TODO: Refactor this  -- the logic to show / hide columns is kind of rough
     //      Also, it seems that if we moved this operation to a store, it could be a bit faster
     let columns = [];
-    const { columnProperties, ignoredColumns, tableProperties, rowData, events, rowIndex } = this.props;
+    const { columnProperties,
+      ignoredColumns,
+      tableProperties,
+      rowData,
+      events,
+      originalRowData,
+      rowIndex,
+      absoluteRowIndex } = this.props;
     const { griddleKey } = rowData;
     //render just the columns that are contained in the metdata
     for (var column in rowData) {
@@ -22,6 +29,8 @@ class Row extends React.Component {
         columns.push(<this.props.components.Column
           {...this.props}
           key={column}
+          originalRowData={originalRowData}
+          absoluteRowIndex={absoluteRowIndex}
           dataKey={column}
           value={rowData[column]}
           {...columnProperty}
