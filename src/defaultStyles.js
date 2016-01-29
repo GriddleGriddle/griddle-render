@@ -12,8 +12,8 @@ export function getStyle({styleName, styles, mergeStyles = null}) {
   return mergeStyles || null;
 }
 
-export function getClassName({section, classNames, useClassNames}) {
-  if(useClassNames && classNames.hasOwnProperty(section)) {
+export function getClassName({section, classNames}) {
+  if(classNames.hasOwnProperty(section)) {
     return classNames[section];
   }
 
@@ -27,7 +27,9 @@ export const inlineStyles = {
   column: {},
   pagination: {},
   table: {},
-  fixedTable: {}
+  fixedTable: {
+    tableLayout: 'fixed',
+  }
 }
 
 export const griddleStyles = {
@@ -83,7 +85,7 @@ export const griddleStyles = {
   }
 }
 
-export const classNames = {
+export const griddleClassNames = {
   column: 'griddle-column',
   filter: 'griddle-filter',
   noResults: 'griddle-noResults',
@@ -97,6 +99,22 @@ export const classNames = {
   tableHeading: 'griddle-table-heading',
   tableHeadingCell: 'griddle-table-heading-cell',
   table: 'griddle-table'
+}
+
+export const classNames = {
+  column: null,
+  filter: null,
+  noResults: null,
+  loading: null,
+  pagination: null,
+  rowDefinition: null,
+  row: null,
+  settingsToggle: null,
+  settings: null,
+  tableBody: null,
+  tableHeading: null,
+  tableHeadingCell: null,
+  table: null
 }
 
 export const icons = {
