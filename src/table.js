@@ -26,7 +26,7 @@ class Table extends React.Component {
       (
         <table
           className={className}
-          style={settings.useFixedTable && style}
+          style={style}
         >
           <this.props.components.TableHeading columns={Object.keys(this.props.data[0])} {...this.props} />
           <this.props.components.TableBody {...this.props} />

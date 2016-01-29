@@ -14,7 +14,6 @@ class Column extends React.Component {
     const styles = this._getStyles();
 
     const { className } = getStyleProperties(this.props, 'column');
-
     const classNames = classnames(className, this.props.cssClassName);
 
     return (

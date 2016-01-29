@@ -29,7 +29,9 @@ ColumnDefinition.PropTypes = {
   //What sort type this column uses - magic string :shame:
   sortType: React.PropTypes.string,
   //Any extra data that should be passed to each instance of this column
-  extraData: React.PropTypes.object
+  extraData: React.PropTypes.object,
+  //The width of this column -- this is string so things like % can be specified
+  width: React.PropTypes.string
 };
 
 export default ColumnDefinition;

@@ -35,6 +35,7 @@ class TableHeadingCell extends React.Component {
         styles: this.props.styles.inlineStyles,
         styleName: 'columnTitle',
         mergeStyles: {
+          width: this.props.columnProperty.width,
           ...(this.props.alignment || this.props.headerAlignment ? {textAlign: this.props.headerAlignment || this.props.alignment} : {}),
           ...this.props.style
         }
