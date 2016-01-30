@@ -19,7 +19,8 @@ class Row extends React.Component {
       originalRowData,
       rowIndex,
       absoluteRowIndex } = this.props;
-    const { griddleKey } = rowData;
+    const { griddleKey } = rowData.__metadata;
+
     //render just the columns that are contained in the metdata
     for (var column in rowData) {
       //get the additional properties defined in the creation of the object
