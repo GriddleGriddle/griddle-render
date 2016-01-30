@@ -8,6 +8,14 @@ class Column extends React.Component {
     super(props, context);
   }
 
+  shouldComponentUpdate(nextProps) {
+    if(this.props.value === nextProps.value) {
+      return false;
+    }
+
+    return true;
+  }
+
   render() {
     //TODO: this is temporary -- we'll need to merge styles or something
     //  why not use the getStyle from defaultStyles?
