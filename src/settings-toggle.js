@@ -11,6 +11,10 @@ class SettingsToggle extends React.Component {
     this._handleButton = this._handleButton.bind(this);
   }
 
+  shouldComponentUpdate() {
+    return false;
+  }
+
   render() {
     const { style, className } = getStyleProperties(this.props, 'settingsToggle');
     const toggleClass = classnames(this.state.toggled ? 'toggled' : 'not-toggled', className);

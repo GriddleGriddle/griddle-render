@@ -8,6 +8,10 @@ class Filter extends React.Component {
     this._handleChange = this._handleChange.bind(this);
   }
 
+  shouldComponentUpdate(props) {
+    return false;
+  }
+
   render() {
     const {style, className } = getStyleProperties(this.props, 'filter');
 

@@ -4,6 +4,7 @@ import React from 'react';
 import * as defaultModules from './defaultModules';
 import { getAssignedStyles } from './defaultStyles';
 import * as defaultSettings from './defaultSettings';
+import { arraysEqual } from './utils/arrayHelper';
 
 export default class Griddle extends React.Component {
   constructor(props, context) {
@@ -44,6 +45,9 @@ export default class Griddle extends React.Component {
     return this.components
   }
 
+  shouldComponentUpdate(nextProps) {
+    return !arraysEqual(nextProps.data, this.props.data);
+  }
   render() {
     const events = this.getEvents();
     const components = this.getComponents();

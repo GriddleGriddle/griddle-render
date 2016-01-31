@@ -1,6 +1,7 @@
 import React from 'react';
 import ColumnHelper from './utils/column-helper';
 import { getStyleProperties } from './utils/styleHelper';
+import { arraysEqual } from './utils/arrayHelper';;
 
   class TableHeading extends React.Component {
   constructor(props, context) {
@@ -25,6 +26,10 @@ import { getStyleProperties } from './utils/styleHelper';
     return this.props.renderProperties.columnProperties[column] && this.props.renderProperties.columnProperties[column].hasOwnProperty('displayName') ?
         this.props.renderProperties.columnProperties[column].displayName :
         initial
+  }
+
+  shouldComponentUpdate(nextProps) {
+    return !arraysEqual(nextProps.columns, this.props.columns);
   }
 
   render() {
