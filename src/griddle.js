@@ -45,9 +45,6 @@ export default class Griddle extends React.Component {
     return this.components
   }
 
-  shouldComponentUpdate(nextProps) {
-    return !arraysEqual(nextProps.data, this.props.data);
-  }
   render() {
     const events = this.getEvents();
     const components = this.getComponents();
