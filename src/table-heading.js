@@ -11,11 +11,13 @@ import { arraysEqual } from './utils/arrayHelper';;
   }
 
   shouldComponentUpdate(nextProps) {
-    //TODO: Verify that this is correct
-    return this.props.columns !== nextProps.columns ||
+    //TODO: Make this nicer - shouldn't be reminiscent of clojure level paran usage
+    return (!arraysEqual(this.props.columns, nextProps.columns) ||
       ((this.props.pageProperties && nextProps.pageProperties) &&
-      (this.props.pageProperties.sortColumns !== nextProps.pageProperties.sortColumns ||
-      this.props.pageProperties.sortAscending !== nextProps.pageProperties.sortAscending));
+        (!arraysEqual(this.props.pageProperties.sortColumns, nextProps.pageProperties.sortColumns) ||
+        this.props.pageProperties.sortAscending !== nextProps.pageProperties.sortAscending)
+      )
+    );
   }
 
   getColumnTitle(column) {
@@ -26,10 +28,6 @@ import { arraysEqual } from './utils/arrayHelper';;
     return this.props.renderProperties.columnProperties[column] && this.props.renderProperties.columnProperties[column].hasOwnProperty('displayName') ?
         this.props.renderProperties.columnProperties[column].displayName :
         initial
-  }
-
-  shouldComponentUpdate(nextProps) {
-    return !arraysEqual(nextProps.columns, this.props.columns);
   }
 
   render() {
