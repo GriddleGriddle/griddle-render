@@ -29,6 +29,7 @@ export default class Griddle extends React.Component {
       setFilter: this._filter,
       setPageSize: this._setPageSize,
       rowHover: this._rowHover,
+      rowClick: this._rowClick,
       rowSelect: this._rowSelect,
       columnHover: this._columnHover,
       columnClick: this._columnClick,
@@ -115,6 +116,13 @@ export default class Griddle extends React.Component {
   _expandRow = (griddleKey) => {
     if(this.props.expandRow) {
       this.props.expandRow(griddleKey)
+    }
+  }
+
+  _rowClick = (rowData, originalRowData) => {
+    //TODO: lets make a function for getting these chains of 'does this property exist?'
+    if(this.props.renderProperties && this.props.renderProperties.rowProperties && this.props.renderProperties.rowProperties.onClick) {
+      this.props.renderProperties.rowProperties.onClick(rowData, originalRowData);
     }
   }
 

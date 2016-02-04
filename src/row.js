@@ -45,7 +45,7 @@ class Row extends React.Component {
         style={style}
         className={className}
         onMouseOver={this._handleHover}
-        onClick={this._handleSelect}
+        onClick={this._onClick}
         key={griddleKey}
       >
         {columns}
@@ -53,12 +53,18 @@ class Row extends React.Component {
     );
   }
 
+  //TODO: this can go -- double confirm that nothing is using it
   _handleHover = (e) => {
     this.props.events.rowHover(this.props.rowIndex, this.props.rowData);
   }
 
+  //TODO: this can go -- double confirm that nothing is using it
   _handleSelect = (e) => {
     this.props.events.rowSelect(this.props.rowIndex, this.props.rowData);
+  }
+
+  _onClick = () => {
+    this.props.events.rowClick(this.props.rowData, this.props.originalRowData)
   }
 }
 
