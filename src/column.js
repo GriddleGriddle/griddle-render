@@ -9,6 +9,7 @@ class Column extends React.Component {
   }
 
   shouldComponentUpdate(nextProps) {
+    if(this.props.forceUpdate) { return true; }
     if(this.props.value === nextProps.value) {
       return false;
     }
