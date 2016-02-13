@@ -6,6 +6,7 @@ import { getAssignedStyles } from './defaultStyles';
 import * as defaultSettings from './defaultSettings';
 import { arraysEqual } from './utils/arrayHelper';
 import { getStyleProperties } from './utils/styleHelper';
+import ColumnHelper from './utils/column-helper';
 
 export default class Griddle extends React.Component {
   static childContextTypes = {
@@ -22,7 +23,9 @@ export default class Griddle extends React.Component {
   getChildContext() {
     return {
       utils: {
-        getStyleProperties
+        getStyleProperties,
+        isColumnVisible: ColumnHelper.isColumnVisible,
+        getColumnPropertyObject: ColumnHelper.getColumnPropertyObject
       }
     };
   }
