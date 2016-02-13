@@ -1,89 +1,68 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import classnames from 'classnames';
+import { compose, shouldUpdate, getContext, mapProps } from 'recompose';
 
 import { getStyleProperties } from './utils/styleHelper';
 
-class Column extends React.Component {
-  constructor(props, context) {
-    super(props, context);
-  }
 
-  shouldComponentUpdate(nextProps) {
-    if(this.props.forceUpdate) { return true; }
-    if(this.props.value === nextProps.value) {
-      return false;
-    }
+const Column = compose(
+  //Only update if forceUpdate is true or the values don't match
+  shouldUpdate(({ value }, nextProps) => (nextProps.value !== value || nextProps.forceUpdate)),
 
-    return true;
-  }
+  //We are using the following contexts:
+  getContext({ yo: PropTypes.string}),
 
-  render() {
-    //TODO: this is temporary -- we'll need to merge styles or something
-    //  why not use the getStyle from defaultStyles?
-    const styles = this._getStyles();
+  //Build new props in addition to the ones that are passed in
+  mapProps( props => ({
+    classNames: classnames(getStyleProperties(props, 'column'), props.cssClassName),
 
-    const { className } = getStyleProperties(this.props, 'column');
-    const classNames = classnames(className, this.props.cssClassName);
-
-    return (
-      <td
-        style={styles}
-        key={this.props.dataKey}
-        rowIndex={this.props.rowIndex}
-        onClick={this._handleClick}
-        onMouseOver={this._handleHover}
-        className={classNames}>
-          {this.props.hasOwnProperty('customComponent') ?
-            <this.props.customComponent
-              data={this.props.value}
-              rowData={this.props.rowData}
-              originalData={this.props.originalRowData}
-              rowIndex={this.props.rowIndex}
-              absoluteRowIndex={this.props.absoluteRowIndex}
-              extraData={this.props.extraData} /> :
-            this.props.value}
-      </td>
-    );
-  }
-
-  //TODO: Figure out a way to get this hooked up with the normal styles methods
-  //maybe a merge styles property or something along those lines
-  _getStyles = () => {
-    const style = this.props.styles.getStyle({
-      styles: this.props.styles.inlineStyles,
+    //This is the inline styles object to use
+    columnStyles: props.styles.getStyle({
+      styles: props.styles.inlineStyles,
       styleName: 'column',
-      //todo: make this nicer
       mergeStyles: {
-          ...((this.props.width || this.props.alignment || this.props.styles) ?
-            Object.assign({ width: this.props.width || null, textAlign: this.props.alignment }) : {}),
-          ...this.props.style
+        ...((props.width || props.alignment || props.styles) ?
+          Object.assign({ width: props.width || null,
+            textAlign: props.alignment }) : {})
       }
-    });
+    }),
 
-    return style;
-  }
+    //Click callback
+    handleClick: (e) => {
+      if (props.onClick) { props.onClick(e) };
 
-  _handleClick = (e) => {
-    if (this.props.onClick) this.props.onClick(e);
+      props.events.columnClick(props.dataKey, props.value, props.rowIndex, props.rowData);
+    },
 
-    this.props.events.columnClick(this.props.dataKey, this.props.value, this.props.rowIndex, this.props.rowData);
-  }
+    //hover callback
+    handleHover: (e) => {
+      props.events.columnHover(props.dataKey, props.value, props.rowIndex, props.rowData);
+    },
 
-  _handleHover = (e) => {
-    this.props.events.columnHover(this.props.dataKey, this.props.value, this.props.rowIndex, this.props.rowData);
-  }
-}
+    columnValue: (props.hasOwnProperty('customComponent') ?
+            <props.customComponent
+              data={props.value}
+              rowData={props.rowData}
+              originalData={props.originalRowData}
+              rowIndex={props.rowIndex}
+              absoluteRowIndex={props.absoluteRowIndex}
+              extraData={props.extraData} /> :
+            props.value),
 
-Column.defaultProps = {
-  columnProperties: {
-    cssClassName: ''
-  }
-};
+    //Return all the props
+    ...props
+  }))
+)(({ columnValue, handleHover, handleClick, classNames, columnStyles, dataKey, rowIndex }) => (
+      <td
+        style={columnStyles}
+        key={dataKey}
+        rowIndex={rowIndex}
+        onClick={handleClick}
+        onMouseOver={handleHover}
+        className={classNames}>
+      {columnValue}
+      </td>
 
-Column.propTypes = {
-  alignment: React.PropTypes.oneOf(['left', 'right', 'center']),
-  columnHover: React.PropTypes.func,
-  columnClick: React.PropTypes.func
-};
+))
 
 export default Column;

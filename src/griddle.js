@@ -7,11 +7,19 @@ import * as defaultSettings from './defaultSettings';
 import { arraysEqual } from './utils/arrayHelper';
 
 export default class Griddle extends React.Component {
+  static childContextTypes = {
+    yo: React.PropTypes.string
+  }
+
   constructor(props, context) {
     super(props, context);
 
     this.wireUpSettings(props);
     this.state = { showSettings: false };
+  }
+
+  getChildContext() {
+    return { yo: "hi" };
   }
 
   wireUpSettings = (props) => {
