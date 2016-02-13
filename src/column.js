@@ -2,19 +2,16 @@ import React, { PropTypes } from 'react';
 import classnames from 'classnames';
 import { compose, shouldUpdate, getContext, mapProps } from 'recompose';
 
-import { getStyleProperties } from './utils/styleHelper';
-
-
 const Column = compose(
   //Only update if forceUpdate is true or the values don't match
   shouldUpdate(({ value }, nextProps) => (nextProps.value !== value || nextProps.forceUpdate)),
 
   //We are using the following contexts:
-  getContext({ yo: PropTypes.string}),
+  getContext({ utils: PropTypes.object }),
 
   //Build new props in addition to the ones that are passed in
   mapProps( props => ({
-    classNames: classnames(getStyleProperties(props, 'column'), props.cssClassName),
+    classNames: classnames(props.utils.getStyleProperties(props, 'column'), props.cssClassName),
 
     //This is the inline styles object to use
     columnStyles: props.styles.getStyle({

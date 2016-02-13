@@ -5,10 +5,11 @@ import * as defaultModules from './defaultModules';
 import { getAssignedStyles } from './defaultStyles';
 import * as defaultSettings from './defaultSettings';
 import { arraysEqual } from './utils/arrayHelper';
+import { getStyleProperties } from './utils/styleHelper';
 
 export default class Griddle extends React.Component {
   static childContextTypes = {
-    yo: React.PropTypes.string
+    utils: React.PropTypes.object
   }
 
   constructor(props, context) {
@@ -19,7 +20,11 @@ export default class Griddle extends React.Component {
   }
 
   getChildContext() {
-    return { yo: "hi" };
+    return {
+      utils: {
+        getStyleProperties
+      }
+    };
   }
 
   wireUpSettings = (props) => {
