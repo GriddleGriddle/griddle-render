@@ -5,7 +5,6 @@ import { getStyleProperties } from './utils/styleHelper';
 class TableHeadingCell extends React.Component {
   constructor(props, context) {
     super(props, context);
-
     this._handleClick = this._handleClick.bind(this);
     this._handleHover = this._handleHover.bind(this);
   }

@@ -25,7 +25,8 @@ export default class Griddle extends React.Component {
       utils: {
         getStyleProperties,
         isColumnVisible: ColumnHelper.isColumnVisible,
-        getColumnPropertyObject: ColumnHelper.getColumnPropertyObject
+        getColumnPropertyObject: ColumnHelper.getColumnPropertyObject,
+        arraysEqual: arraysEqual
       }
     };
   }

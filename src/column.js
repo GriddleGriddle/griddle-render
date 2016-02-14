@@ -4,13 +4,13 @@ import { compose, shouldUpdate, getContext, mapProps } from 'recompose';
 
 const Column = compose(
   //Only update if forceUpdate is true or the values don't match
-  shouldUpdate(({ value }, nextProps) => (nextProps.value !== value || nextProps.forceUpdate)),
+  shouldUpdate(({ value }, nextProps) => (nextProps.value !== value || nextProps.forceUpdate === true )),
 
   //We are using the following contexts:
   getContext({ utils: PropTypes.object }),
 
   //Build new props in addition to the ones that are passed in
-  mapProps( props => ({
+  mapProps(props => ({
     classNames: classnames(props.utils.getStyleProperties(props, 'column'), props.cssClassName),
 
     //This is the inline styles object to use
