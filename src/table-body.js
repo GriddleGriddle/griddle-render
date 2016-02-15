@@ -1,46 +1,60 @@
-import React from 'react';
-import { getStyleProperties } from './utils/styleHelper';
+import React, { PropTypes } from 'react';
+import { compose, shouldUpdate, mapProps, getContext } from 'recompose';
 
-class TableBody extends React.Component {
-  constructor(props, context) {
-    super(props, context);
-  }
+export function getRowsData(props, utils) {
+  const { data, loading, components, styles, settings, events, renderProperties, tableProperties } = props;
 
-  shouldComponentUpdate(nextProps) {
-    return this.props.data !== nextProps.data;
-  }
 
-  render() {
-    const { data, loading, components, styles, settings, events, renderProperties, tableProperties } = this.props;
+  return loading ?
+    <components.Loading
+      components={components}
+      styles={styles}
+      settings={settings}
+      events={events} /> :
+    data
+      .filter(data => data.visible === undefined || data.visible === true)
+      .map((data, index) => {
+        const metadata = utils.getMetadata(index);
 
-    const rows = loading ? <components.Loading components={components} styles={styles} settings={settings} events={events} />
-        : data
-          .filter(data => data.visible === undefined || data.visible === true)
-          .map((data, index) =>
-            <this.props.components.Row rowData={data}
-              absoluteRowIndex={data.__metadata.index}
-              key={data.__metadata.griddleKey}
-              components={components}
-              events={events}
-              rowIndex={index}
-              rowProperties={renderProperties.rowProperties}
-              originalRowData={this.props.state.data[data.__metadata.index]}
-              styles={styles}
-              settings={settings}
-              tableProperties={tableProperties}
-              ignoredColumns={renderProperties.ignoredColumns}
-              columnProperties={renderProperties.columnProperties}
-              />
-          );
-
-    const { style, className } = getStyleProperties(this.props, 'tableBody');
-
-    return (
-      <tbody style={style} className={className}>
-        {rows}
-      </tbody>
-    );
-  }
+        return <props.components.Row
+          rowData={data}
+          absoluteRowIndex={metadata.index}
+          key={metadata.griddleKey}
+          components={components}
+          events={events}
+          rowIndex={index}
+          rowProperties={renderProperties.rowProperties}
+          originalRowData={utils.getOriginalRowData(index)}
+          styles={styles}
+          settings={settings}
+          tableProperties={tableProperties}
+          ignoredColumns={renderProperties.ignoredColumns}
+          columnProperties={renderProperties.columnProperties}
+          />
+      });
 }
+
+const TableBody = compose(
+  getContext({
+    utils: PropTypes.object,
+  }),
+
+  shouldUpdate((props, nextProps) => ( props.data !== nextProps.data )),
+
+  mapProps(props => ({
+    styleProperties: props.utils.getStyleProperties(props, 'tableBody'),
+    ...props
+  })),
+
+  mapProps(props => ({
+    rows: getRowsData(props, props.utils),
+    style: props.styleProperties.style,
+    className: props.styleProperties.className
+  }))
+)(({ style, className, rows }) => (
+  <tbody style={style} className={className}>
+    {rows}
+  </tbody>
+));
 
 export default TableBody;

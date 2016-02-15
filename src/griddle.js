@@ -26,7 +26,14 @@ export default class Griddle extends React.Component {
         getStyleProperties,
         isColumnVisible: ColumnHelper.isColumnVisible,
         getColumnPropertyObject: ColumnHelper.getColumnPropertyObject,
-        arraysEqual: arraysEqual
+        arraysEqual: arraysEqual,
+        getOriginalRowData: (rowIndex) => {
+          return this.props.state.data[rowIndex]
+        },
+        getMetadata: (rowIndex) => {
+          const row = this.props.data[rowIndex];
+          return row ? row.__metadata : {}
+        }
       }
     };
   }
