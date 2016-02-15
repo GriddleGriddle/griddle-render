@@ -1,47 +1,40 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import RowDefinition from './row-definition';
-import { getStyleProperties } from './utils/styleHelper';
+import { compose, getContext, mapProps } from 'recompose';
 
-class Table extends React.Component {
-  constructor(props, context) {
-    super(props, context);
+const Table = compose(
+  getContext({ utils: PropTypes.object }),
 
-    this.state = {};
-  }
-
-  render() {
-    const { settings, styles } = this.props;
-    const style = styles.getStyle({
-      styles: styles.inlineStyles,
+  mapProps(props => ({
+    style: props.styles.getStyle({
+      styles: props.styles.inlineStyles,
       styleName: 'table',
-      mergeStyles: settings.useFixedTable && styles.getStyle({
-        styles: styles.inlineStyles,
+      mergeStyles: props.settings.useFixedTable && props.styles.getStyle({
+        styles: props.styles.inlineStyles,
         styleName: 'fixedTable',
       })
-    });
+    }),
 
-    const { className } = getStyleProperties(this.props, 'table');
-    //translate the definition object to props for Heading / Body
-    return this.props.data.length > 0 ?
-      (
-        <table
-          className={className}
-          style={style}
-        >
-          <this.props.components.TableHeading columns={Object.keys(this.props.data[0])} {...this.props} />
-          <this.props.components.TableBody {...this.props} />
-        </table>
-      ) : null;
-  }
-}
+    className: props.utils.getStyleProperties(props, 'table').className,
 
-//TODO: enabled the propTypes again
-/*
-Table.propTypes = {
-  children: React.PropTypes.oneOfType([
-    React.PropTypes.instanceOf(RowDefinition)
-    // React.PropTypes.arrayOf(React.PropTypes.instanceOf(ColumnDefinition))
-  ])
-}; */
+    useFixedTable: props.settings.useFixedTable,
+    columns: props.data.length > 0 ? Object.keys(props.data[0]) : [],
+    TableHeading: props.components.TableHeading,
+    TableBody: props.components.TableBody,
+    data: props.data,
+    props: props,
+  }))
+)(({data, className, style, columns, props, TableHeading, TableBody }) => (
+  data.length > 0 ?
+    (
+      <table
+        className={className}
+        style={style}
+      >
+        <TableHeading columns={columns} {...props} />
+        <TableBody {...props} />
+      </table>
+    ) : <span />
+))
 
 export default Table;
