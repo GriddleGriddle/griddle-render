@@ -1,7 +1,23 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { getStyleProperties } from './utils/styleHelper';
 
 import { compose, getContext, mapProps, shouldUpdate } from 'recompose';
+
+function getColumnDisplayName(props, column) {
+  const { renderProperties } = props;
+
+  if(renderProperties.columnProperties.hasOwnProperty(column)) {
+    return renderProperties.columnProperties[column].hasOwnProperty('displayName') ?
+      renderProperties.columnProperties[column].displayName :
+      column
+  } else if (renderProperties.hiddenColumnProperties.hasOwnProperty(column)) {
+    return renderProperties.hiddenColumnProperties[column].hasOwnProperty('displayName') ?
+      renderProperties.hiddenColumnProperties[column].displayName :
+      column
+  }
+
+  return column;
+}
 
 const CheckItem = mapProps(props => ({
   shouldUpdate: (() => false),
@@ -31,46 +47,32 @@ const PageSize = compose(
   </select>
 ));
 
-class Settings extends React.Component {
-  render() {
+const Settings = compose(
+  getContext({ utils: PropTypes.object }),
 
-    const keys = Object.keys(this.props.renderProperties.columnProperties);
-    const { style, className } = getStyleProperties(this.props, 'settings');
+  mapProps(props => ({
+    styleProperties: props.utils.getStyleProperties(props, 'settings'),
+    keys: Object.keys(props.renderProperties.columnProperties),
+    ...props
+  })),
 
-    var columns = this.props.allColumns.map(column =>
+  mapProps(props => ({
+    style: props.styleProperties.style,
+    className: props.styleProperties.className,
+    columns: props.allColumns.map(column =>
       <CheckItem
-        toggleColumn={this.props.events.toggleColumn}
+        toggleColumn={props.events.toggleColumn}
         name={column}
-        text={this._getDisplayName(column)}
-        checked={keys.indexOf(column) > -1} />);
-
-    return (
-      <div style={style} className={className}>
-        {columns}
-        <PageSize setPageSize={this.props.events.setPageSize}/>
-      </div>
-    );
-  }
-
-  _getDisplayName = (column) => {
-    const { renderProperties } = this.props;
-    if(renderProperties.columnProperties.hasOwnProperty(column)) {
-      return renderProperties.columnProperties[column].hasOwnProperty('displayName') ?
-        renderProperties.columnProperties[column].displayName :
-        column
-    } else if (renderProperties.hiddenColumnProperties.hasOwnProperty(column)) {
-    return renderProperties.hiddenColumnProperties[column].hasOwnProperty('displayName') ?
-        renderProperties.hiddenColumnProperties[column].displayName :
-        column
-    }
-
-    return column;
-  }
-}
-
-Settings.propTypes = {
-  allColumns: React.PropTypes.arrayOf(React.PropTypes.string),
-  visibleColumns: React.PropTypes.arrayOf(React.PropTypes.node)
-};
+        text={getColumnDisplayName(props, column)}
+        checked={props.keys.indexOf(column) > -1} />
+    ),
+    setPageSize: props.events.setPageSize
+  }))
+)(({ style, className, columns, setPageSize}) => (
+  <div style={style} className={className}>
+    {columns}
+    <PageSize setPageSize={setPageSize}/>
+  </div>
+));
 
 export default Settings;
