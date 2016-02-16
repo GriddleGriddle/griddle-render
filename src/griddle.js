@@ -5,13 +5,37 @@ import * as defaultModules from './defaultModules';
 import { getAssignedStyles } from './defaultStyles';
 import * as defaultSettings from './defaultSettings';
 import { arraysEqual } from './utils/arrayHelper';
+import { getStyleProperties } from './utils/styleHelper';
+import ColumnHelper from './utils/column-helper';
 
 export default class Griddle extends React.Component {
+  static childContextTypes = {
+    utils: React.PropTypes.object
+  }
+
   constructor(props, context) {
     super(props, context);
 
     this.wireUpSettings(props);
     this.state = { showSettings: false };
+  }
+
+  getChildContext() {
+    return {
+      utils: {
+        getStyleProperties,
+        isColumnVisible: ColumnHelper.isColumnVisible,
+        getColumnPropertyObject: ColumnHelper.getColumnPropertyObject,
+        arraysEqual: arraysEqual,
+        getOriginalRowData: (rowIndex) => {
+          return this.props.state.data[rowIndex]
+        },
+        getMetadata: (rowIndex) => {
+          const row = this.props.data[rowIndex];
+          return row ? row.__metadata : {}
+        }
+      }
+    };
   }
 
   wireUpSettings = (props) => {

@@ -1,80 +1,65 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import classnames from 'classnames';
 
-import { getStyleProperties } from './utils/styleHelper';
-class TableHeadingCell extends React.Component {
-  constructor(props, context) {
-    super(props, context);
+import { compose, getContext, mapProps } from 'recompose';
 
-    this._handleClick = this._handleClick.bind(this);
-    this._handleHover = this._handleHover.bind(this);
+function isSortable(props) {
+  const { column, renderProperties } = props;
+  const columnProperties = renderProperties.columnProperties[column];
+
+  if(columnProperties &&
+    columnProperties.hasOwnProperty('sortable') &&
+    columnProperties.sortable === false) {
+
+    return false;
   }
 
-  getSortIcon() {
-    const { sorted, sortAscending, icons } = this.props;
-
-    if (sorted) {
-      return sortAscending ? icons.sortAscending : icons.sortDescending;
-    }
-  }
-
-  isSortable() {
-    const { column, renderProperties } = this.props;
-    const columnProperties = renderProperties.columnProperties[column];
-
-    if(columnProperties && columnProperties.hasOwnProperty('sortable') && columnProperties.sortable === false) {
-      return false;
-    }
-
-    return true;
-  }
-
-
-  render() {
-    const style = this.props.styles.getStyle({
-        styles: this.props.styles.inlineStyles,
-        styleName: 'columnTitle',
-        mergeStyles: {
-          width: this.props.columnProperty.width,
-          ...(this.props.alignment || this.props.headerAlignment ? {textAlign: this.props.headerAlignment || this.props.alignment} : {}),
-          ...this.props.style
-        }
-      });
-
-    const { className } = getStyleProperties(this.props, 'tableHeadingCell');
-    const classNames = classnames(className, this.props.columnProperty ? this.props.columnProperty.headerCssClassName : null)
-    const { sorted } = this.props;
-    const clickEvent = this.isSortable() ? this._handleClick : null;
-
-    return (
-      <th
-        key={this.props.column}
-        style={style}
-        onMouseOver={this._handleHover}
-        onClick={clickEvent}
-        className={classNames}
-      >
-        {this.props.title} { this.getSortIcon() }
-      </th>);
-  }
-
-  _handleHover() {
-    this.props.headingHover(this.props.column);
-  }
-
-  _handleClick() {
-    this.props.headingClick(this.props.column);
-  }
+  return true;
 }
 
-TableHeadingCell.propTypes = {
-  headingHover: React.PropTypes.func,
-  headingClick: React.PropTypes.func,
-  column: React.PropTypes.string,
-  headerAlignment: React.PropTypes.oneOf(['left', 'right', 'center']),
-  alignment: React.PropTypes.oneOf(['left', 'right', 'center']),
-  sortAscending: React.PropTypes.bool,
-  sorted: React.PropTypes.bool
-};
+const TableHeadingCell = compose(
+  getContext({ utils: PropTypes.object }),
+
+  mapProps(props => ({
+    sortable: isSortable(props),
+    ...props
+  })),
+
+  mapProps(props => ({
+    handleClick: (props.sortable ? (() => props.headingClick(props.column)) : null),
+
+    handleHover: props.events.headingHover(props.column),
+
+    sortIcon: props.sorted ?
+      (props.sortAscending ? props.icons.sortAscending : props.icons.sortDescending) :
+      null,
+
+    style: props.styles.getStyle({
+        styles: props.styles.inlineStyles,
+        styleName: 'columnTitle',
+        mergeStyles: {
+          width: props.columnProperty.width,
+          ...(props.alignment || props.headerAlignment ? {textAlign: props.headerAlignment || props.alignment} : {}),
+          ...props.style
+        }
+      }),
+
+    className: classnames(
+      props.utils.getStyleProperties(props, 'tableHeadingCell'),
+      props.columnProperty ? props.columnProperty.headerCssClassName : null),
+
+    ...props
+  }))
+)(({ column, style, handleHover, handleClick, title, sortIcon, className}) => (
+  <th
+    key={column}
+    style={style}
+    onMouseOver={handleHover}
+    onClick={handleClick}
+    className={className}
+  >
+    { title } { sortIcon }
+  </th>
+))
 
 export default TableHeadingCell;

@@ -1,34 +1,33 @@
-import React from 'react';
-import { getStyleProperties } from './utils/styleHelper';
+import React, { PropTypes } from 'react';
 import classnames from 'classnames';
+import { compose, shouldUpdate, getContext, mapProps, withState } from 'recompose';
 
-class SettingsToggle extends React.Component {
-  constructor() {
-    super();
-    this.state = {};
-    this.state.toggled = false;
+const SettingsToggle = compose(
+  getContext({ utils: PropTypes.object }),
 
-    this._handleButton = this._handleButton.bind(this);
-  }
+  shouldUpdate(() => (false)),
 
-  shouldComponentUpdate() {
-    return false;
-  }
+  withState('toggled', 'setToggled', false),
 
-  render() {
-    const { style, className } = getStyleProperties(this.props, 'settingsToggle');
-    const toggleClass = classnames(this.state.toggled ? 'toggled' : 'not-toggled', className);
+  mapProps(props => ({
+    styleProperties: props.utils.getStyleProperties(props, 'settingsToggle'),
+    ...props
+  })),
 
-    return <button className={toggleClass} style={style} onClick={this._handleButton}>Settings</button>;
-  }
-
-  //this should keep track locally if it's toggled
-  //and just send whether or not settings should be shown
-  _handleButton() {
-    const toggled = !this.state.toggled;
-    this.props.showSettings(toggled);
-    this.setState({toggled: toggled});
-  }
-}
+  mapProps(props => ({
+    toggleSettings: () => {
+      const showSettings = !props.toggled;
+      props.setToggled(showSettings);
+      props.showSettings(showSettings);
+    },
+    style: props.styleProperties.style,
+    className: classnames(props.toggled ? 'toggled' : 'not-toggled', props.styleProperties.className),
+    ...props
+  }))
+)(( { style, toggleSettings, className }) => (
+  <button className={className} style={style} onClick={toggleSettings}>
+    Settings
+  </button>
+))
 
 export default SettingsToggle;
