@@ -18,13 +18,13 @@ class TableBody extends React.Component {
           .filter(data => data.visible === undefined || data.visible === true)
           .map((data, index) =>
             <this.props.components.Row rowData={data}
-              absoluteRowIndex={data.__metadata.griddleKey}
+              absoluteRowIndex={data.__metadata.index}
               key={data.__metadata.griddleKey}
               components={components}
               events={events}
               rowIndex={index}
               rowProperties={renderProperties.rowProperties}
-              originalRowData={this.props.state.data[data.__metadata.griddleKey]}
+              originalRowData={this.props.state.data[data.__metadata.index]}
               styles={styles}
               settings={settings}
               tableProperties={tableProperties}
