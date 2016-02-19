@@ -143,10 +143,10 @@ export default class Griddle extends React.Component {
   _columnHeadingHover = (columnId) => {
   }
 
-  _setScrollPosition = (scrollLeft, scrollWidth, scrollTop, scrollHeight) => {
+  _setScrollPosition = (scrollLeft, scrollWidth, visibleWidth, scrollTop, scrollHeight, visibleHeight) => {
     const { setScrollPosition, positionConfig, loadNext} = this.props;
     if(setScrollPosition) {
-      setScrollPosition(scrollLeft, scrollWidth, scrollTop, scrollHeight);
+      setScrollPosition(scrollLeft, scrollWidth, visibleWidth, scrollTop, scrollHeight, visibleHeight);
     }
   }
 }
