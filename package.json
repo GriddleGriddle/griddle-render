@@ -1,6 +1,6 @@
 {
   "name": "griddle-render",
-  "version": "0.0.29",
+  "version": "0.0.30",
   "description": "The rendered component code used in the griddle-react grid. ",
   "main": "build/griddle-render.js",
   "scripts": {
@@ -29,13 +29,16 @@
     "node-libs-browser": "^0.5.3",
     "phantomjs": "^1.9.16",
     "phantomjs-polyfill": "0.0.1",
+    "react": "^0.14.0",
     "react-hot-loader": "~1.2.7",
     "webpack": "~1.9.11",
     "webpack-dev-server": "~1.9.0"
   },
   "dependencies": {
     "classnames": "^2.2.3",
-    "object-assign": "*",
+    "object-assign": "*"
+  },
+  "peerDependencies": {
     "react": "^0.14.0"
   }
 }
