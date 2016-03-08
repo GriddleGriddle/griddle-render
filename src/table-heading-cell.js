@@ -43,7 +43,7 @@ class TableHeadingCell extends React.Component {
 
     const { className } = getStyleProperties(this.props, 'tableHeadingCell');
     const classNames = classnames(className, this.props.columnProperty ? this.props.columnProperty.headerCssClassName : null)
-    const { sorted } = this.props;
+    const { sorted, state, title, sortAscending } = this.props;
     const clickEvent = this.isSortable() ? this._handleClick : null;
 
     return (
@@ -54,8 +54,16 @@ class TableHeadingCell extends React.Component {
         onClick={clickEvent}
         className={classNames}
       >
-        {this.props.title} { this.getSortIcon() }
-      </th>);
+        {this.props.hasOwnProperty('customHeadingComponent') ?
+          <this.props.customHeadingComponent
+            state={state}
+            title={title}
+            sorted={sorted}
+            sortAscending={sortAscending}
+            sortIcon={this.getSortIcon()} /> :
+          [this.props.title, this.getSortIcon()]}
+      </th>
+    );
   }
 
   _handleHover() {
