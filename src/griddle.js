@@ -27,6 +27,7 @@ export default class Griddle extends React.Component {
       getPreviousPage: this._previousPage,
       getPage: this._getPage,
       setFilter: this._filter,
+      setFilterByColumn: this._filterByColumn,
       setPageSize: this._setPageSize,
       rowHover: this._rowHover,
       rowClick: this._rowClick,
@@ -92,6 +93,12 @@ export default class Griddle extends React.Component {
   _filter = (query) => {
     if(this.props.filterData) {
       this.props.filterData(query);
+    }
+  }
+
+  _filterByColumn = (filter, column) => {
+    if(this.props.filterDataByColumn) {
+      this.props.filterDataByColumn(filter, column)
     }
   }
 
