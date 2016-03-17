@@ -27,6 +27,7 @@ export default class Griddle extends React.Component {
       getPreviousPage: this._previousPage,
       getPage: this._getPage,
       setFilter: this._filter,
+      setFilterByColumn: this._filterByColumn,
       setPageSize: this._setPageSize,
       rowHover: this._rowHover,
       rowClick: this._rowClick,
@@ -50,6 +51,7 @@ export default class Griddle extends React.Component {
     const events = this.getEvents();
     const components = this.getComponents();
     const { styles, settings } = this;
+
     return (
       <div>
         {/*TODO: Lets not duplicate these prop defs all over (events/components) */}
@@ -57,7 +59,7 @@ export default class Griddle extends React.Component {
         <this.components.SettingsToggle components={components} styles={styles} events={events} settings={settings} showSettings={this._showSettings} />
         {this.state.showSettings ? <this.components.Settings {...this.props} components={components} styles={styles} settings={settings} events={events} /> : null }
 
-        {this.props.data && this.props.data.length > 0 ?
+        {(this.props.data && this.props.data.length > 0) || this.props.columnFilters.length > 0 ?
           <this.components.Table {...this.props} components={components} styles={styles} settings={settings} events={events} /> :
           <this.components.NoResults components={components} styles={styles} settings={settings} events={events} /> }
 
@@ -92,6 +94,12 @@ export default class Griddle extends React.Component {
   _filter = (query) => {
     if(this.props.filterData) {
       this.props.filterData(query);
+    }
+  }
+
+  _filterByColumn = (filter, column) => {
+    if(this.props.filterDataByColumn) {
+      this.props.filterDataByColumn(filter, column)
     }
   }
 

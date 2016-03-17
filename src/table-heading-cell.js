@@ -54,7 +54,7 @@ class TableHeadingCell extends React.Component {
         onClick={clickEvent}
         className={classNames}
       >
-        {this.props.title} { this.getSortIcon() }
+        {this.props.customHeaderComponent ? <this.props.customHeaderComponent {...this.props} /> : this.props.title } { this.getSortIcon() }
       </th>);
   }
 
