@@ -14,17 +14,18 @@ export function getRowsData(props, utils) {
     data
       .filter(data => data.visible === undefined || data.visible === true)
       .map((data, index) => {
-        const metadata = utils.getMetadata(index);
+        const metadata = props.metadata[index];
+        const currentPageData = props.currentPageData[index];
 
         return <props.components.Row
           rowData={data}
-          absoluteRowIndex={metadata.index}
+          absoluteRowIndex={metadata.griddleKey}
           key={metadata.griddleKey}
           components={components}
           events={events}
           rowIndex={index}
           rowProperties={renderProperties.rowProperties}
-          originalRowData={utils.getOriginalRowData(index)}
+          originalRowData={currentPageData}
           styles={styles}
           settings={settings}
           tableProperties={tableProperties}
