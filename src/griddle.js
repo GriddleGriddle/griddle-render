@@ -74,6 +74,7 @@ export default class Griddle extends React.Component {
     const events = this.getEvents();
     const components = this.getComponents();
     const { styles, settings } = this;
+
     return (
       <div>
         {/*TODO: Lets not duplicate these prop defs all over (events/components) */}

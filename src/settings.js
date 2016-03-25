@@ -59,7 +59,7 @@ const Settings = compose(
   mapProps(props => ({
     style: props.styleProperties.style,
     className: props.styleProperties.className,
-    columns: props.allColumns.map(column =>
+    columns: props.renderableColumns.map(column =>
       <CheckItem
         toggleColumn={props.events.toggleColumn}
         name={column}
