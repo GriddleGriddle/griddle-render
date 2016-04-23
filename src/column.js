@@ -2,38 +2,30 @@ import React, { PropTypes } from 'react';
 import classnames from 'classnames';
 import { compose, shouldUpdate, getContext, mapProps } from 'recompose';
 
+import { getStyleProperties } from './utils/styleHelper';
+import { getStyle } from './defaultStyles';
+
 const Column = compose(
   //Only update if forceUpdate is true or the values don't match
   shouldUpdate(({ value }, nextProps) => (nextProps.value !== value || nextProps.forceUpdate === true )),
 
-  //We are using the following contexts:
-  getContext({ utils: PropTypes.object }),
-
-  //Build new props in addition to the ones that are passed in
   mapProps(props => ({
-    classNames: classnames(props.utils.getStyleProperties(props, 'column'), props.cssClassName),
+    className: props.cssClassName,
 
-    //This is the inline styles object to use
-    columnStyles: props.styles.getStyle({
-      styles: props.styles.inlineStyles,
-      styleName: 'column',
-      mergeStyles: {
-        ...((props.width || props.alignment || props.styles) ?
-          Object.assign({ width: props.width || null,
-            textAlign: props.alignment }) : {})
-      }
-    }),
+    style: props.style,
 
     //Click callback
     handleClick: (e) => {
-      if (props.onClick) { props.onClick(e) };
-
-      props.events.columnClick(props.dataKey, props.value, props.rowIndex, props.rowData);
+      if (props.onClick) {
+        props.onClick(props.dataKey, props.value, props.rowIndex, props.rowData)
+      };
     },
 
     //hover callback
     handleHover: (e) => {
-      props.events.columnHover(props.dataKey, props.value, props.rowIndex, props.rowData);
+      if(props.onHover) {
+        props.onHover(props.dataKey, props.value, props.rowIndex, props.rowData);
+      }
     },
 
     columnValue: (props.hasOwnProperty('customComponent') ?
@@ -49,14 +41,14 @@ const Column = compose(
     //Return all the props
     ...props
   }))
-)(({ columnValue, handleHover, handleClick, classNames, columnStyles, dataKey, rowIndex }) => (
+)(({ columnValue, handleHover, handleClick, className, style, dataKey, rowIndex }) => (
       <td
-        style={columnStyles}
+        style={style}
         key={dataKey}
         rowIndex={rowIndex}
         onClick={handleClick}
         onMouseOver={handleHover}
-        className={classNames}>
+        className={className}>
       {columnValue}
       </td>
 

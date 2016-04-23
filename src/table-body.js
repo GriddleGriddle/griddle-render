@@ -1,8 +1,8 @@
 import React, { PropTypes } from 'react';
-import { compose, shouldUpdate, mapProps, getContext } from 'recompose';
+import { compose, shouldUpdate, mapProps, getContext, setPropTypes } from 'recompose';
 
 export function getRowsData(props, utils) {
-  const { data, loading, components, styles, settings, events, renderProperties, tableProperties } = props;
+  const { data, metadata, originalData, loading, components, styles, settings, events } = props;
 
 
   return loading ?
@@ -12,45 +12,40 @@ export function getRowsData(props, utils) {
       settings={settings}
       events={events} /> :
     data
-      .filter(data => data.visible === undefined || data.visible === true)
       .map((data, index) => {
-        const metadata = props.metadata[index];
-        const currentPageData = props.currentPageData[index];
-
         return <props.components.Row
           rowData={data}
-          absoluteRowIndex={metadata.griddleKey}
-          key={metadata.griddleKey}
+          absoluteRowIndex={metadata[index].griddleKey}
+          key={metadata[index].griddleKey}
           components={components}
           events={events}
           rowIndex={index}
-          rowProperties={renderProperties.rowProperties}
-          originalRowData={currentPageData}
+          originalRowData={originalData[index]}
           styles={styles}
-          settings={settings}
-          tableProperties={tableProperties}
-          ignoredColumns={renderProperties.ignoredColumns}
-          columnProperties={renderProperties.columnProperties}
           />
       });
 }
 
 const TableBody = compose(
-  getContext({
-    utils: PropTypes.object,
+  setPropTypes({
+    components: PropTypes.shape({
+      Loading: PropTypes.node.isRequired,
+      Row: PropTypes.node.isRequired,
+    }).isRequired,
+    data: PropTypes.array.isRequired,
+    originalData: PropTypes.array.isRequired,
+    metadata: PropTypes.arrayOf(
+      PropTypes.shape({
+        griddleKey: PropTypes.number.isRequired
+      }).isRequired).isRequired
   }),
 
   shouldUpdate((props, nextProps) => ( props.data !== nextProps.data )),
 
   mapProps(props => ({
-    styleProperties: props.utils.getStyleProperties(props, 'tableBody'),
-    ...props
-  })),
-
-  mapProps(props => ({
     rows: getRowsData(props, props.utils),
-    style: props.styleProperties.style,
-    className: props.styleProperties.className
+    style: props.style,
+    className: props.className
   }))
 )(({ style, className, rows }) => (
   <tbody style={style} className={className}>

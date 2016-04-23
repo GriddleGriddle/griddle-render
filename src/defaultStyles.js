@@ -5,7 +5,7 @@
 // useStyles: whether or not the inline styles should be used
 // mergeStyles: styles to apply in addition to the inline styling. This is usually applied with some logic in the front-end
 export function getStyle({styleName, styles, mergeStyles = null}) {
-  if (styles.hasOwnProperty(styleName)) {
+  if (styles && styles.hasOwnProperty(styleName)) {
     return Object.assign({}, styles[styleName], mergeStyles);
   }
 

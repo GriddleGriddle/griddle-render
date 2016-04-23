@@ -71,6 +71,7 @@ export default class Griddle extends React.Component {
   }
 
   render() {
+    debugger;
     const events = this.getEvents();
     const components = this.getComponents();
     const { styles, settings } = this;
