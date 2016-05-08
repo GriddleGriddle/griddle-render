@@ -1,9 +1,8 @@
 import React, { PropTypes } from 'react';
-import { compose, shouldUpdate, mapProps, getContext, setPropTypes } from 'recompose';
+import { compose, shouldUpdate, mapProps, getContext, setPropTypes, withContext, defaultProps } from 'recompose';
 
 export function getRowsData(props, utils) {
   const { data, metadata, originalData, loading, components, styles, settings, events } = props;
-
 
   return loading ?
     <components.Loading
@@ -27,6 +26,11 @@ export function getRowsData(props, utils) {
 }
 
 const TableBody = compose(
+  defaultProps({
+    className: null,
+    style: null
+  }),
+
   setPropTypes({
     components: PropTypes.shape({
       Loading: PropTypes.node.isRequired,
@@ -44,10 +48,9 @@ const TableBody = compose(
 
   mapProps(props => ({
     rows: getRowsData(props, props.utils),
-    style: props.style,
-    className: props.className
+    ...props
   }))
-)(({ style, className, rows }) => (
+)(({ rows, className, style }) => (
   <tbody style={style} className={className}>
     {rows}
   </tbody>

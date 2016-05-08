@@ -2,18 +2,23 @@ import React, { PropTypes } from 'react';
 
 import { compose, getContext, mapProps, setPropTypes } from 'recompose';
 
+import ColumnWrapper from './columnWrapper';
+
 const Row = compose(
   setPropTypes({
     components: PropTypes.shape({
       Column: PropTypes.node.isRequired
     }).isRequired,
-    rowData: PropTypes.object.isRequired
+    columns: PropTypes.array.isRequired,
+    griddleKey: PropTypes.object.isRequired,
+    onClick: PropTypes.func,
+    onHover: PropTypes.func
   }),
 
   mapProps(props => ({
     onClick: () => {
       if (props.onClick) {
-        onClick(props.rowData, props.originalRowData);
+        onClick(props.griddleKey, props.originalRowData);
       }
     },
 
@@ -23,29 +28,11 @@ const Row = compose(
       }
     },
 
-
     //this is the set of columns to render. we need to determine if there are
     //any columns that should be treated as metadata and ignore them.
-    columns: (Object.keys(props.rowData)
-      .map(column => {
-      //get the additional column properties
-      return (
-        <props.components.Column
-          {...props}
-          key={column}
-          originalRowData={props.originalRowData}
-          absoluteRowIndex={props.absoluteRowIndex}
-          dataKey={column}
-          value={props.rowData[column]}
-        />
-      );
-    })),
+    columns: columns.map(column => <ColumnWrapper key={column} griddleKey={griddleKey} />),
 
-    style: props.style,
-
-    className: props.className,
-
-    ...props
+    ...props,
   }))
 )(({ className, style, onClick, columns, griddleKey }) => (
       <tr

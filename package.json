@@ -38,6 +38,7 @@
   },
   "dependencies": {
     "classnames": "^2.2.3",
+    "immutable": "^3.8.1",
     "object-assign": "*",
     "react": "^0.14.0",
     "recompose": "^0.15.0"

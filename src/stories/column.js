@@ -9,11 +9,11 @@ storiesOf('Column', module)
       <tbody>
         <tr>
           <Column
-            columnValue="column text"
-            style={{ backgroundColor: "#EDEDED" }}
-            className="hi"
+            value="column text"
             onClick={() => { console.log('clicked')}}
-            onHover={() => { console.log('hovered')}}
+            onMouseOver={() => { console.log('hovered')}}
+            style={{backgroundColor: "#EDEDED"}}
+            className="yes"
           />
         </tr>
       </tbody>

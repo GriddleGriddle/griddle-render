@@ -8,6 +8,13 @@ import { arraysEqual } from './utils/arrayHelper';
 import { getStyleProperties } from './utils/styleHelper';
 import ColumnHelper from './utils/column-helper';
 
+/*
+  withContext(
+    { style: PropTypes.object },
+    () => ({ style })
+  ),
+*/
+
 export default class Griddle extends React.Component {
   static childContextTypes = {
     utils: React.PropTypes.object
