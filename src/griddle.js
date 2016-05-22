@@ -20,6 +20,10 @@ export default class Griddle extends React.Component {
     this.styles = getAssignedStyles(props.style, this.settings.useGriddleStyles);
   }
 
+  componentWillReceiveProps(nextProps) {
+    this.wireUpSettings(nextProps);
+  }
+
   //TODO: This is okay-ish for the defaults but lets do something to override for plugins... there is stuff here for subgrid and selection and there shouldn't be.
   getEvents() {
     return {
