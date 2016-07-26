@@ -58,12 +58,12 @@ class TableHeadingCell extends React.Component {
       </th>);
   }
 
-  _handleHover() {
-    this.props.headingHover(this.props.column);
+  _handleHover(e) {
+    this.props.headingHover(this.props.column, e);
   }
 
-  _handleClick() {
-    this.props.headingClick(this.props.column);
+  _handleClick(e) {
+    this.props.headingClick(this.props.column, e);
   }
 }
 
