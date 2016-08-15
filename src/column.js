@@ -30,6 +30,7 @@ class Column extends React.Component {
         style={styles}
         key={this.props.dataKey}
         rowIndex={this.props.rowIndex}
+        colSpan={this.props.colSpan}
         onClick={this._handleClick}
         onMouseOver={this._handleHover}
         className={classNames}>

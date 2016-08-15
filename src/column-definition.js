@@ -33,7 +33,9 @@ ColumnDefinition.PropTypes = {
   //Any extra data that should be passed to each instance of this column
   extraData: React.PropTypes.object,
   //The width of this column -- this is string so things like % can be specified
-  width: React.PropTypes.string
+  width: React.PropTypes.string,
+  //The number of cells this column should extend. Default is 1.
+  colSpan: React.PropTypes.number
 };
 
 export default ColumnDefinition;
